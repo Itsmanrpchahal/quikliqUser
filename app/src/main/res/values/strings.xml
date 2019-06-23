@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Invalid_email">Please enter a valid email.</string>
+
+    <string name="app_name">Quik Liq User</string>
+    <string name="cancel">Cancel</string>
+    <string name="character_counter_content_description">Character limit exceeded %1$d of %2$d</string>
+    <string name="character_counter_pattern">%1$d / %2$d</string>
+    <string name="txt_Error_required">Required Field</string>
+
+    <string name="no_internet_connectivity">No! Internet Connectivity</string>
+    <string name="close_up">OK</string>
+
+    <string name="pass_same"><![CDATA[New password & confirm password not same]]></string>
+    <string name="error_password">password should be greater than 6 chacters</string>
+</resources>

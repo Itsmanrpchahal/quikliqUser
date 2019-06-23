@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:id="@+id/parent_profile"
+              android:layout_height="match_parent">
+
+
+    <include layout="@layout/toolbar"
+             android:id="@+id/toolbar"/>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                    android:layout_below="@+id/toolbar"
+                    android:id="@+id/user_detail_CV"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="@color/gray"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="5dp">
+
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp">
+
+                    <com.quikliq.quikliquser.utilities.RoundRectCornerImageView
+                            android:id="@+id/user_image_IV"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="5dp"
+                            android:src="@drawable/ic_person_black_24dp"/>
+
+
+                    <TextView
+                            android:id="@+id/userName_profile_TV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="5dp"
+                            android:layout_toLeftOf="@+id/edit_BT"
+                            android:layout_toRightOf="@+id/user_image_IV"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"/>
+
+
+                    <Button
+                            android:id="@+id/edit_BT"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@mipmap/edit"/>
+
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/dimen_margin_20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_detail_CV"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    app:cardBackgroundColor="@color/gray"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="5dp">
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <TextView
+                            android:id="@+id/order_history_TV"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:drawableLeft="@mipmap/order_history"
+                            android:drawablePadding="20dp"
+                            android:padding="5dp"
+                            android:text="Documents"
+                            android:textSize="18sp"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/order_history_TV"
+                            android:background="@color/dark_gray"/>
+
+                    <TextView
+                            android:id="@+id/your_review_Tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/order_history_TV"
+                            android:layout_margin="10dp"
+                            android:drawableLeft="@mipmap/reviews"
+                            android:drawablePadding="20dp"
+                            android:padding="5dp"
+                            android:text="Payment"
+                            android:textSize="18sp"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/your_review_Tv"
+                            android:background="@color/dark_gray"/>
+                    <TextView
+                            android:id="@+id/change_password_TV"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/your_review_Tv"
+                            android:layout_margin="10dp"
+                            android:drawableLeft="@mipmap/change_password"
+                            android:drawablePadding="20dp"
+                            android:padding="5dp"
+                            android:text="Change password"
+                            android:textSize="18sp"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/change_password_TV"
+                            android:background="@color/dark_gray"/>
+
+
+                    <TextView
+                            android:id="@+id/contact_us_TV"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/change_password_TV"
+                            android:layout_margin="10dp"
+                            android:drawableLeft="@mipmap/contact_us"
+                            android:drawablePadding="20dp"
+                            android:padding="5dp"
+                            android:text="Contact us"
+                            android:textSize="18sp"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/contact_us_TV"
+                            android:background="@color/dark_gray"/>
+
+                    <TextView
+                            android:id="@+id/about_Tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/contact_us_TV"
+                            android:layout_margin="10dp"
+                            android:drawableLeft="@mipmap/about"
+                            android:drawablePadding="20dp"
+                            android:padding="5dp"
+                            android:text="About"
+                            android:textSize="18sp"/>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/about_Tv"
+                            android:background="@color/dark_gray"/>
+
+                    <TextView
+                            android:id="@+id/sign_out_Tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/about_Tv"
+                            android:layout_margin="10dp"
+                            android:drawableLeft="@mipmap/sign_out"
+                            android:drawablePadding="20dp"
+                            android:padding="5dp"
+                            android:text="Sign out"
+                            android:textSize="18sp"/>
+
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

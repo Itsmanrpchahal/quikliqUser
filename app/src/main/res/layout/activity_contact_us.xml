@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:id="@+id/parent_contact"
+                android:layout_height="match_parent"
+                >
+
+
+    <include layout="@layout/toolbar"
+             android:id="@+id/toolbar"/>
+
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/toolbar">
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+            <ImageView
+                    android:id="@+id/contact_us_IV"
+                    android:layout_width="100dp"
+                    android:layout_height="90dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/contact_us"/>
+
+            <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="300dp"
+                    android:layout_below="@+id/contact_us_IV">
+
+
+                <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="5dp">
+
+                    <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <EditText
+                                android:id="@+id/email_ET"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:layout_marginLeft="5dp"
+                                android:background="@color/trans"
+                                android:drawableLeft="@mipmap/mail"
+                                android:drawablePadding="20dp"
+                                android:hint="EMAIL"
+                                android:paddingRight="@dimen/padding_5dp"
+                                android:focusable="false"
+                                android:clickable="false"
+                                android:focusableInTouchMode="false"
+                                android:inputType="textEmailAddress"
+                                android:paddingLeft="20dp"/>
+
+                        <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/email_ET"
+                                android:background="#d3d3d3"/>
+
+                        <EditText
+                                android:id="@+id/subject_ET"
+                                android:layout_below="@+id/email_ET"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:paddingRight="@dimen/padding_5dp"
+                                android:background="@color/trans"
+                                android:drawableLeft="@mipmap/lock"
+                                android:drawablePadding="20dp"
+                                android:hint="SUBJECT"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="20dp"/>
+
+                        <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/subject_ET"
+                                android:background="#d3d3d3"/>
+
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/mail"
+                                android:id="@+id/mail_IV"
+                                android:layout_below="@+id/subject_ET"
+                                android:layout_marginTop="14dp"
+                                android:layout_marginLeft="25dp"/>
+
+
+                        <EditText
+                                android:id="@+id/message_ET"
+                                android:layout_below="@+id/subject_ET"
+                                android:layout_width="match_parent"
+                                android:layout_height="90dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/trans"
+                                android:layout_toRightOf="@id/mail_IV"
+                                android:drawablePadding="20dp"
+                                android:hint="Message"
+                                android:maxLines="500"
+                                android:gravity="top"
+                                android:paddingTop="15dp"
+                                android:paddingRight="@dimen/padding_5dp"
+                                android:inputType="textMultiLine"
+                                android:imeOptions="actionDone"
+                                android:paddingLeft="20dp"/>
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <ImageView
+                        android:id="@+id/payment_info_send_btn_IV"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="35dp"
+                        android:layout_alignParentBottom="true"
+                        android:elevation="10dp"
+                        android:src="@drawable/send_btn"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>
+

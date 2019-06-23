@@ -1,0 +1,56 @@
+<resources>
+
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <style name="BottomNavigation">
+        <item name="paddingEnd">3.0dip</item>
+        <item name="paddingStart">3.0dip</item></style>
+    <style name="AppTheme.TranslucentNavigation" parent="AppTheme">
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="setting">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
+
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabBackground">@android:color/white</item>
+        <item name="tabIndicatorColor">@color/colorPrimary</item>
+        <item name="tabSelectedTextColor">@color/colorPrimary</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="tabIndicatorHeight">1dp</item>
+        <item name="tabTextAppearance">@style/text</item>
+    </style>
+
+
+    <style name="text" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+    <style name="Translucent" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:background">#33000000</item> <!-- Or any transparency or color you need -->
+        <item name="android:windowNoTitle">true</item>
+
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+</resources>

@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:id="@+id/parent_payment"
+                android:layout_height="match_parent">
+
+    <ImageView
+            android:id="@+id/logo"
+            android:background="@drawable/img_marijuana"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"/>
+    <TextView
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#ffffffff"
+            android:gravity="center"
+            android:id="@+id/paymentInfoText"
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="15dp"
+            android:text="Add  Documents"
+            android:textAllCaps="true"
+            android:layout_below="@+id/logo"/>
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/paymentInfoText"
+            android:fillViewport="true">
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+            <LinearLayout
+                    android:id="@+id/documentLL"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/margin_20dp"
+                    android:background="@drawable/content_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <RelativeLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/dim_10dp"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:textSize="22sp"
+                            android:textColor="@android:color/black"
+                            android:text="Picture"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+
+                    <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/ic_arrow_forward_black_24dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_margin="@dimen/dim_10dp"/>
+
+                </RelativeLayout>
+                <View
+                        android:background="#ffd3d3d3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"/>
+
+                <RelativeLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/dim_10dp"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:textSize="22sp"
+                            android:textColor="@android:color/black"
+                            android:text="Police verification Certificate"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+
+
+                    <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/ic_arrow_forward_black_24dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_margin="@dimen/dim_10dp"/>
+
+                </RelativeLayout>
+                
+               
+                <View
+                        android:background="#ffd3d3d3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"/>
+
+                <RelativeLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/dim_10dp"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:textSize="22sp"
+                            android:textColor="@android:color/black"
+                            android:text="Driver License"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                    />
+
+
+                    <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/ic_arrow_forward_black_24dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_margin="@dimen/dim_10dp"/>
+
+                </RelativeLayout>
+
+                <View
+                        android:background="#ffd3d3d3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"/>
+                <RelativeLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/dim_10dp"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:textSize="22sp"
+                            android:textColor="@android:color/black"
+                            android:text="Vehicle Insurance"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                    />
+
+
+                    <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/ic_arrow_forward_black_24dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_margin="@dimen/dim_10dp"/>
+
+                </RelativeLayout>
+
+                <View
+                        android:background="#ffd3d3d3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"/>
+
+                <RelativeLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/dim_10dp"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:textSize="22sp"
+                            android:textColor="@android:color/black"
+                            android:text="Vehicle Permit"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                    />
+
+
+                    <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/ic_arrow_forward_black_24dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_margin="@dimen/dim_10dp"/>
+
+                </RelativeLayout>
+
+
+                <View
+                        android:background="#ffd3d3d3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"/>
+
+
+                <RelativeLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/dim_10dp"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:textSize="22sp"
+                            android:textColor="@android:color/black"
+                            android:text="Vehicle Registration"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:background="@android:color/transparent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                    />
+
+
+                    <ImageView
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/ic_arrow_forward_black_24dp"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_margin="@dimen/dim_10dp"/>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
