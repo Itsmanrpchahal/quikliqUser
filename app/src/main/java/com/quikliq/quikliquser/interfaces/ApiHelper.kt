@@ -23,7 +23,7 @@ interface ApiHelper {
 
     @FormUrlEncoded
     @POST(".")
-    fun saveAdditionalDetail(@Field("method") SaveAdditionalDetail: String ,@Field("devicetype") devicetype: String, @Field("firstname") firstname: String, @Field("lastname") lastname: String, @Field("mobile") mobile: String, @Field("email") email: String, @Field("password") password: String, @Field("businessname") businessname: String, @Field("bankname") bankname: String, @Field("accountnumber") accountnumber: String, @Field("ifsc") ifsc: String, @Field("address") address: String, @Field("usertype") usertype: String, @Field("devicetoken") devicetoken: String): Call<JsonObject>
+    fun saveAdditionalDetail(@Field("method") SaveAdditionalDetail: String ,@Field("devicetype") devicetype: String, @Field("firstname") firstname: String, @Field("lastname") lastname: String, @Field("mobile") mobile: String, @Field("email") email: String, @Field("password") password: String, @Field("address") address: String, @Field("usertype") usertype: String, @Field("devicetoken") devicetoken: String): Call<JsonObject>
 
     @FormUrlEncoded
     @POST(".")

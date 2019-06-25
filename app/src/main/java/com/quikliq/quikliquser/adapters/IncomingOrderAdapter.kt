@@ -2,11 +2,14 @@ package com.quikliq.quikliquser.adapters
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.quikliq.quikliquser.R
+import com.quikliq.quikliquser.activities.ProductsActivity
 
 
 class IncomingOrderAdapter(
@@ -21,6 +24,12 @@ class IncomingOrderAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+//        if(position==20-1){
+//            holder.view.visibility = View.INVISIBLE
+//        }
+        holder.parentRL.setOnClickListener {
+            context.startActivity(Intent(context,ProductsActivity::class.java))
+        }
     }
 
 
@@ -30,8 +39,8 @@ class IncomingOrderAdapter(
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        val nameTV: TextView = itemView.findViewById(R.id.nameTV) as TextView
-//        val likesTV: TextView = itemView.findViewById(R.id.likesTV) as TextView
+        val parentRL: RelativeLayout = itemView.findViewById(R.id.parentRL) as RelativeLayout
+//        val view: View = itemView.findViewById(R.id.view) as View
 //        val comentsTV: TextView = itemView.findViewById(R.id.comentsTV) as TextView
     }
 

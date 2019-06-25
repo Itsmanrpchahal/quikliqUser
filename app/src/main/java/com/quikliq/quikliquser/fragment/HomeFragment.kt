@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
         rvHome!!.itemAnimator = DefaultItemAnimator()
         rvHome!!.adapter = IncomingOrderAdapter(activity!!)
         toolbar_title = view.findViewById(R.id.toolbar_title)
-        toolbar_title!!.text = "Orders"
+        toolbar_title!!.text = "Order"
 
         return view
     }

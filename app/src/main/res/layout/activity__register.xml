@@ -21,16 +21,13 @@
             <RelativeLayout
                     android:id="@+id/signUpLayout"
                     android:layout_width="wrap_content"
-                    android:layout_height="310dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
+                    android:background="@drawable/content_background"
                     android:layout_below="@+id/logo">
-                <RelativeLayout
-                        android:background="@drawable/content_background"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
-                    <LinearLayout
+               <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content">
@@ -139,6 +136,39 @@
                                 android:layout_height="70dp">
                             <ImageView
                                     android:layout_gravity="center"
+                                    android:background="@drawable/ic_mail"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_margin="10dp"/>
+                            <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_gravity="center"
+                                    android:id="@+id/input_layout_address"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="45dp">
+                                <EditText
+                                        android:textSize="14dp"
+                                        android:textColor="#ff000000"
+                                        android:textColorHint="#ff696969"
+                                        android:id="@+id/address"
+                                        android:background="@android:color/transparent"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent"
+                                        android:layout_marginLeft="5dp"
+                                        android:hint="ADDRESS"
+                                        android:inputType="textEmailAddress"
+                                        android:imeOptions="actionNext"/>
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+                        <View
+                                android:background="#ffd3d3d3"
+                                android:layout_width="fill_parent"
+                                android:layout_height="1dp"/>
+                        <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="70dp">
+                            <ImageView
+                                    android:layout_gravity="center"
                                     android:background="@drawable/ic_lock"
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
@@ -168,22 +198,23 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="1dp"/>
                     </LinearLayout>
-                </RelativeLayout>
-                <ImageView
-                        android:id="@+id/nextScreen"
-                        android:background="@drawable/send_btn"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentBottom="true"/>
-            </RelativeLayout>
+               </RelativeLayout>
+            <ImageView
+                    android:id="@+id/nextScreen"
+                    android:background="@drawable/send_btn"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="-30dp"
+                    android:layout_below="@+id/signUpLayout"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentRight="true"/>
+
             <LinearLayout
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="30dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="50dp"
                     android:layout_below="@+id/signUpLayout">
                 <TextView
                         android:textSize="16dp"

@@ -34,10 +34,10 @@ class RequestsCall {
         return api.mobile("NewOtp",mobile_number)
     }
 
-    fun saveAdditionalDetail(devicetype: String, firstname: String, lastname : String, mobile : String, email : String, password : String, businessname : String, bankname : String, accountnumber : String, ifsc : String, address : String, usertype : String, devicetoken : String): Call<JsonObject> {
+    fun saveAdditionalDetail(devicetype: String, firstname: String, lastname : String, mobile : String, email : String, password : String, address : String, usertype : String, devicetoken : String): Call<JsonObject> {
         val apiCall = ApiCall()
         val api = apiCall.apiCall().create(ApiHelper::class.java)
-        return api.saveAdditionalDetail("SaveAdditionalDetail",devicetype, firstname, lastname, mobile, email, password, businessname, bankname, accountnumber, ifsc, address,usertype,devicetoken)
+        return api.saveAdditionalDetail("SaveAdditionalDetail",devicetype, firstname, lastname, mobile, email, password, address,usertype,devicetoken)
     }
 
     fun profile(userID: String): Call<JsonObject> {

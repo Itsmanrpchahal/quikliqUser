@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="grey_bg">#DFE0E5</color>
+    <color name="light_grey_bg">#E9E9E9</color>
 
 
 
