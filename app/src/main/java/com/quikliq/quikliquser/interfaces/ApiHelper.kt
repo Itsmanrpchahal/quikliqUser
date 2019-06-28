@@ -11,7 +11,7 @@ interface ApiHelper {
 
     @FormUrlEncoded
     @POST(".")
-    fun login(@Field("method") UserLogin: String ,@Field("mobile") mobile: String, @Field("password") password: String, @Field("devicetype") devicetype: String, @Field("devicetoken") devicetoken: String): Call<JsonObject>
+    fun login(@Field("method") UserLogin: String ,@Field("mobile") mobile: String, @Field("password") password: String, @Field("devicetype") devicetype: String, @Field("devicetoken") devicetoken: String,@Field("usetype") usertype: String): Call<JsonObject>
 
     @FormUrlEncoded
     @POST(".")
@@ -57,15 +57,20 @@ interface ApiHelper {
 
     @FormUrlEncoded
     @POST(".")
-    fun GetAllProduct(@Field("method") GetAllProduct: String ,@Field("userid") userid: String): Call<JsonObject>
+    fun GetAllProviders(@Field("method") GetAllProduct: String ,@Field("userid") userid: String): Call<JsonObject>
 
     @FormUrlEncoded
     @POST(".")
-    fun ProductDetail(@Field("method") ProductDetail: String ,@Field("userid") userid: String, @Field("productid") productid: String): Call<JsonObject>
+    fun GetProviderProduct(@Field("method") GetProviderProduct: String ,@Field("userid") userid: String, @Field("providerid") providerid: String): Call<JsonObject>
 
 
     @FormUrlEncoded
     @POST(".")
     fun DeleteProduct(@Field("method") DeleteProduct: String ,@Field("userid") userid: String, @Field("productyid") productyid: String): Call<JsonObject>
+
+    @FormUrlEncoded
+    @POST(".")
+    fun UpdateLatLong(@Field("method") UpdateLatLong: String ,@Field("userid") userid: String, @Field("latitude") latitude: Double, @Field("longitude") longitude: Double): Call<JsonObject>
+
 
 }

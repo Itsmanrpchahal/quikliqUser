@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:id="@+id/parentRL"
+        android:background="@drawable/textview_selecter"
+        android:layout_marginBottom="@dimen/margin_5dp"
+        android:paddingLeft="@dimen/dim_10dp"
+        android:paddingRight="@dimen/dim_10dp"
+        android:layout_height="wrap_content">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:id="@+id/mainRL"
+                    android:layout_height="wrap_content">
+
+        <ImageView android:id="@+id/food_IV"
+                   android:layout_centerVertical="true"
+                   android:layout_width="@dimen/size_80dp"
+                   android:layout_height="@dimen/size_80dp"
+                   android:scaleType="centerCrop"/>
+
+        <LinearLayout android:gravity="center_vertical"
+                      android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_marginLeft="@dimen/dim_10dp"
+                      android:layout_height="wrap_content"
+                      android:layout_toLeftOf="@+id/ratingTV"
+                      android:layout_toRightOf="@+id/food_IV">
+
+            <TextView android:textSize="13dp"
+                      android:textStyle="bold"
+                      android:textColor="@color/black"
+                      android:id="@+id/shop_name_TV"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Vendor Name"/>
+
+            <TextView android:textSize="@dimen/text_12sp"
+                      android:textColor="@color/black"
+                      android:id="@+id/status_tv"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="5dp"
+                      android:text="Open"/>
+
+            <TextView android:textSize="@dimen/text_12sp"
+                      android:textColor="@color/black"
+                      android:id="@+id/distance_TV"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="5dp"
+                      android:text="200 meters away"/>
+            <TextView android:textSize="@dimen/text_12sp"
+                      android:textColor="@color/black"
+                      android:id="@+id/time_TV"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="5dp"
+                      android:text="40-50 MIN"/>
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content"
+                  android:padding="@dimen/dimen_8dp"
+                  android:text="5.0"
+                  android:textColor="@android:color/white"
+                  android:textSize="@dimen/text_11sp"
+                  android:textStyle="bold"
+                  android:id="@+id/ratingTV"
+                  android:layout_marginTop="@dimen/dim_10dp"
+                  android:layout_alignParentRight="true"
+                  android:background="@drawable/rating_bg"
+                  android:layout_height="wrap_content"
+        />
+
+    </RelativeLayout>
+
+</RelativeLayout>

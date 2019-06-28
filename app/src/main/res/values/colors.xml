@@ -2,8 +2,8 @@
 <resources>
     <color name="grey_bg">#DFE0E5</color>
     <color name="light_grey_bg">#E9E9E9</color>
-
-
+    <color name="green_open">#33a532</color>
+    <color name="red_close">#d70025</color>
 
 
     <color name="abc_input_method_navigation_guard">@android:color/black</color>
@@ -119,9 +119,6 @@
     <color name="bottom_nav_icon_color_selector">@color/colorPrimary</color>
 
 
-
-
-
     <color name="color_tab_1">#455C65</color>
     <color name="color_tab_2">#00886A</color>
     <color name="color_tab_3">#8B6B62</color>
@@ -149,7 +146,6 @@
     <color name="colorBottomNavigationInactiveColored">#50FFFFFF</color>
     <color name="colorBottomNavigationSelectedBackground">#17000000</color>
     <color name="colorBottomNavigationNotification">#F63D2B</color>
-
 
 
     <color name="color_dialog_transparent">#2e000000</color>

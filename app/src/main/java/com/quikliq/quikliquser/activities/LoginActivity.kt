@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             pd!!.show()
             pd!!.setContentView(R.layout.loading)
             val requestsCall = RequestsCall()
-            requestsCall.login(username, password, "1", "tokensbhhdghdghdc").enqueue(object : Callback<JsonObject> {
+            requestsCall.login(username, password, "1",  Prefs.getString(Constant.FCM_TOKEN, ""),"2").enqueue(object : Callback<JsonObject> {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     pd!!.dismiss()

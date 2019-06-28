@@ -171,7 +171,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 password,
                 address.text.toString(),
                 "2",
-                "token"
+                 Prefs.getString(Constant.FCM_TOKEN, "")
             ).enqueue(object : Callback<JsonObject> {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {

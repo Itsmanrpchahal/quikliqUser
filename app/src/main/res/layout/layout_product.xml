@@ -24,7 +24,7 @@
                       android:layout_width="match_parent"
                       android:layout_marginLeft="@dimen/dim_10dp"
                       android:layout_height="wrap_content"
-                      android:layout_toLeftOf="@+id/accept_BT"
+                      android:layout_toLeftOf="@+id/ratingTV"
                       android:layout_toRightOf="@+id/food_IV">
 
             <TextView android:textSize="13dp"
@@ -37,11 +37,11 @@
 
             <TextView android:textSize="12dp"
                       android:textColor="@color/black"
-                      android:id="@+id/category_TV"
+                      android:id="@+id/status_tv"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="5dp"
-                      android:text="category"/>
+                      android:text="Open"/>
             <TextView android:textSize="10dp"
                       android:textColor="@color/black"
                       android:id="@+id/distance_TV"
@@ -64,7 +64,7 @@
                   android:textColor="@android:color/white"
                   android:textSize="@dimen/text_11sp"
                   android:textStyle="bold"
-                  android:id="@+id/accept_BT"
+                  android:id="@+id/ratingTV"
                   android:layout_marginTop="@dimen/dim_10dp"
                   android:layout_alignParentRight="true"
                   android:background="@drawable/rating_bg"

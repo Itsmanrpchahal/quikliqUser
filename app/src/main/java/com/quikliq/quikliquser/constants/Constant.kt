@@ -6,6 +6,7 @@ import java.util.ArrayList
 
 object Constant {
     val BASE_URL = "http://freechatup.website/weed/api/index.php/"    //production
+    val GPS_REQUEST = 101
 
     //*******production********//
     val GIFT_BASE_URL = "https://v2.tamakoshiapp.com/"

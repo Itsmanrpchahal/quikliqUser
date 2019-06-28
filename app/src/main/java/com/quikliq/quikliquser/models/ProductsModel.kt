@@ -9,8 +9,11 @@ class ProductsModel : Serializable {
     var category: String? = null
     var product_name: String? = null
     var description: String? = null
-    var price: Int = 0
-    var quantity: Int = 0
+    var price: String? = null
+    var quantity: String? = null
     var image: String? = null
-    var isactive: Int = 0
+    var isactive: String? = null
+    var category_name: String? = null
+    var business_name: String? = null
+    var business_address: String? = null
 }

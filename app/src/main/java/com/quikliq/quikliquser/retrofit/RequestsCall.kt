@@ -16,10 +16,10 @@ import java.util.ArrayList
 class RequestsCall {
 
 
-    fun login(mobile: String, password: String, device_type : String, device_token : String): Call<JsonObject> {
+    fun login(mobile: String, password: String, device_type : String, device_token : String, usertype : String): Call<JsonObject> {
         val apiCall = ApiCall()
         val api = apiCall.apiCall().create(ApiHelper::class.java)
-        return api.login("UserLogin",mobile, password, device_type, device_token)
+        return api.login("UserLogin",mobile, password, device_type, device_token,usertype)
     }
 
     fun signup(first_name: String, last_name: String, email : String, password : String): Call<JsonObject> {
@@ -45,34 +45,6 @@ class RequestsCall {
         val api = apiCall.apiCall().create(ApiHelper::class.java)
         return api.profile("UserProfile",userID)
     }
-
-    fun AddProduct(
-        context: Context,
-        userid: String,
-        category: String,
-        productname: String,
-        price: String,
-        quantity: String,
-        description: String,
-        image: Uri?
-    ): Call<JsonObject> {
-        val apiCall = ApiCall()
-        val api = apiCall.apiCall().create(ApiHelper::class.java)
-        val imageCompressor = ImageCompressor()
-        val path = imageCompressor.compressImage(context, image.toString())
-        val fbody = RequestBody.create(MediaType.parse("multipart/form-data"), File(path))
-        val body = MultipartBody.Part.createFormData("image",  File(path).name, fbody)
-        val method1 = RequestBody.create(MediaType.parse("text/plain"), "AddProduct")
-        val user_id = RequestBody.create(MediaType.parse("text/plain"), userid)
-        val cat = RequestBody.create(MediaType.parse("text/plain"), category)
-        val product_name = RequestBody.create(MediaType.parse("text/plain"), productname)
-        val cost = RequestBody.create(MediaType.parse("text/plain"), price)
-        val qty = RequestBody.create(MediaType.parse("text/plain"), quantity)
-        val desc = RequestBody.create(MediaType.parse("text/plain"), description)
-
-        return api.AddProduct(method1,user_id,cat,product_name,cost,qty,desc,body)
-    }
-
 
     fun UpdateProfile(
         context: Context,
@@ -123,16 +95,16 @@ class RequestsCall {
         return api.UpdateProfileWithoutImage("UpdateProfile",userid,firstname,lastname,email)
     }
 
-    fun GetAllProduct(userid: String): Call<JsonObject> {
+    fun GetAllProviders(userid: String): Call<JsonObject> {
         val apiCall = ApiCall()
         val api = apiCall.apiCall().create(ApiHelper::class.java)
-        return api.GetAllProduct("GetAllProduct",userid)
+        return api.GetAllProviders("ListProvider",userid)
     }
 
-    fun ProductDetail(userid: String, productid: String): Call<JsonObject> {
+    fun GetProviderProduct(userid: String, providerid: String): Call<JsonObject> {
         val apiCall = ApiCall()
         val api = apiCall.apiCall().create(ApiHelper::class.java)
-        return api.ProductDetail("ProductDetail",userid, productid)
+        return api.GetProviderProduct("GetProviderProduct",userid, providerid)
     }
 
     fun DeleteProduct(userid: String,productyid: String): Call<JsonObject> {
@@ -140,5 +112,9 @@ class RequestsCall {
         val api = apiCall.apiCall().create(ApiHelper::class.java)
         return api.DeleteProduct("DeleteProduct",userid,productyid)
     }
-
+    fun UpdateLatLong(userid: String,latitude: Double,longitude: Double): Call<JsonObject> {
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        return api.UpdateLatLong("UpdateLatLong",userid, latitude, longitude)
+    }
 }
