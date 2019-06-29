@@ -10,6 +10,7 @@ import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
+import retrofit2.http.Field
 import java.io.File
 import java.util.ArrayList
 
@@ -117,4 +118,24 @@ class RequestsCall {
         val api = apiCall.apiCall().create(ApiHelper::class.java)
         return api.UpdateLatLong("UpdateLatLong",userid, latitude, longitude)
     }
+
+    fun AddToCart(userid: String, providerid: String, productid: String, quantity: String, productprice: String): Call<JsonObject> {
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        return api.AddToCart("AddToCart",userid, providerid, productid, quantity, productprice)
+    }
+
+    fun GetCartList(userid: String): Call<JsonObject> {
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        return api.GetCartList("GetCartList",userid)
+    }
+
+    fun ClearCart(userid: String): Call<JsonObject> {
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        return api.ClearCart("ClearCart",userid)
+    }
+
+
 }

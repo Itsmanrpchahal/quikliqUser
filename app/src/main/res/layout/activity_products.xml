@@ -61,7 +61,7 @@
 
             <View android:layout_width="match_parent"
                   android:layout_height="@dimen/height_0.5dp"
-                  android:background="@color/light_grey_bg"
+                  android:background="@color/material_grey_600"
                   android:layout_marginLeft="@dimen/margin_15dp"
                   android:layout_marginRight="@dimen/margin_15dp"
                   android:layout_marginTop="@dimen/margin_5dp"
@@ -75,7 +75,7 @@
                       android:layout_height="wrap_content"/>
             <View android:layout_width="match_parent"
                   android:layout_height="@dimen/height_0.5dp"
-                  android:background="@color/light_grey_bg"
+                  android:background="@color/material_grey_600"
                   android:layout_marginLeft="@dimen/margin_15dp"
                   android:layout_marginRight="@dimen/margin_15dp"
                   android:layout_marginTop="@dimen/margin_5dp"
@@ -94,8 +94,8 @@
 
             <include layout="@layout/layout_no_data"
                      android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_centerInParent="true"/>
+                     android:layout_gravity="center"
+                     android:layout_height="wrap_content"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

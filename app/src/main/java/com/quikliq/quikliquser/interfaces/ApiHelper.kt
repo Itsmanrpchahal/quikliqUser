@@ -72,5 +72,17 @@ interface ApiHelper {
     @POST(".")
     fun UpdateLatLong(@Field("method") UpdateLatLong: String ,@Field("userid") userid: String, @Field("latitude") latitude: Double, @Field("longitude") longitude: Double): Call<JsonObject>
 
+    @FormUrlEncoded
+    @POST(".")
+    fun AddToCart(@Field("method") AddToCart: String ,@Field("userid") userid: String, @Field("providerid") providerid: String, @Field("productid") productid: String, @Field("quantity") quantity: String, @Field("productprice") productprice: String): Call<JsonObject>
+
+    @FormUrlEncoded
+    @POST(".")
+    fun GetCartList(@Field("method") GetCartList: String ,@Field("userid") userid: String): Call<JsonObject>
+
+
+    @FormUrlEncoded
+    @POST(".")
+    fun ClearCart(@Field("method") ClearCart: String ,@Field("userid") userid: String): Call<JsonObject>
 
 }

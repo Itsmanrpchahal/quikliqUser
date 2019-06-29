@@ -1,6 +1,7 @@
 package com.quikliq.quikliquser.fragment
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -11,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.JsonObject
 import com.quikliq.quikliquser.R
+import com.quikliq.quikliquser.activities.CartActivity
 import com.quikliq.quikliquser.adapters.ProvidersAdapter
 import com.quikliq.quikliquser.models.ProviderModel
 import com.quikliq.quikliquser.utilities.Prefs
@@ -39,6 +42,7 @@ class HomeFragment : Fragment() {
     private var parent_f_home: RelativeLayout? = null
     private var providersList: ArrayList<ProviderModel>? = null
     private var no_dataRL: RelativeLayout? = null
+    private var cartIV: ImageView?= null
     private var providersAdapter: ProvidersAdapter? = null
 
     override fun onCreateView(
@@ -59,6 +63,11 @@ class HomeFragment : Fragment() {
         toolbar_title = view.findViewById(R.id.toolbar_title)
         toolbar_title!!.text = "Order"
         parent_f_home = view.findViewById(R.id.parent_f_home)
+        cartIV = view.findViewById(R.id.cartIV)
+        cartIV!!.visibility = View.VISIBLE
+        cartIV!!.setOnClickListener{
+            startActivity(Intent(activity,CartActivity::class.java))
+        }
         providersApiCall()
         return view
     }
