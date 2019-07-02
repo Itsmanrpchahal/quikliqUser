@@ -103,7 +103,7 @@
                     android:id="@+id/cartRL"
                     android:layout_alignParentBottom="true"
                     android:visibility="gone"
-                    android:background="@color/green_open"
+                    android:background="@drawable/green_selecter"
                     android:padding="@dimen/dim_10dp"
                     android:layout_height="@dimen/size_50dp">
 

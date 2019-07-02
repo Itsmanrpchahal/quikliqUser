@@ -138,4 +138,21 @@ class RequestsCall {
     }
 
 
+    fun RemoveCartItems(userid: String, productid: String): Call<JsonObject> {
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        return api.RemoveCartItems("RemoveCartItems",userid,productid)
+    }
+
+    fun UpdateCartQuantity(userid: String, productid: String,productprice: String,quantity: String): Call<JsonObject> {
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        return api.UpdateCartQuantity("UpdateCartQuantity",userid,productprice,productid,quantity)
+    }
+
+    fun PlaceOrder(userid: String, providerid: String,latitude: String,longitude: String,address:String,note:String,paymentstatus:String): Call<JsonObject> {
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        return api.PlaceOrder("PlaceOrder",userid,providerid,latitude,longitude,address,note,paymentstatus)
+    }
 }

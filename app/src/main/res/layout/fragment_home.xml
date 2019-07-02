@@ -3,67 +3,77 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:background="@color/light_grey_bg"
+        android:background="@android:color/white"
         android:id="@+id/parent_f_home"
         android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar"
+    <include layout="@layout/toolbar_home"
              android:id="@+id/toolbar"/>
-    <LinearLayout
-            android:id="@+id/searchLL"
+    <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_5dp"
             android:layout_below="@+id/toolbar"
-            android:background="@color/light_grey_bg">
-
-        <FrameLayout
-                android:id="@+id/frame"
-                android:layout_marginLeft="@dimen/margin_5dp"
-                android:layout_marginRight="@dimen/margin_5dp"
+            android:layout_height="wrap_content">
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <EditText
-                    android:id="@+id/searchET"
+            <LinearLayout
+                    android:id="@+id/searchLL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/padding_5dp"
-                    android:background="@drawable/searchbox_round_rectangle"
-                    android:drawableLeft="@drawable/ic_search_black_24dp"
-                    android:drawablePadding="@dimen/height_3dp"
-                    android:hint="Search"
-                    android:imeOptions="actionDone"
-                    android:paddingLeft="@dimen/padding_5dp"
-                    android:paddingTop="@dimen/margin_5dp"
-                    android:paddingRight="@dimen/margin_15dp"
-                    android:paddingBottom="@dimen/margin_5dp"
-                    android:singleLine="true"
-                    android:textColor="@android:color/black"
-                    android:textColorHint="@android:color/darker_gray"
-                    android:textSize="@dimen/text_16sp" />
+                    android:layout_marginBottom="@dimen/margin_5dp"
+                    android:background="@android:color/white">
+
+                <FrameLayout
+                        android:id="@+id/frame"
+                        android:layout_marginLeft="@dimen/margin_5dp"
+                        android:layout_marginRight="@dimen/margin_5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <EditText
+                            android:id="@+id/searchET"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/padding_5dp"
+                            android:background="@drawable/searchbox_round_rectangle"
+                            android:drawableLeft="@drawable/ic_search_black_24dp"
+                            android:drawablePadding="@dimen/height_3dp"
+                            android:hint="Search for providers"
+                            android:imeOptions="actionDone"
+                            android:paddingLeft="@dimen/padding_5dp"
+                            android:paddingTop="@dimen/margin_5dp"
+                            android:paddingRight="@dimen/margin_15dp"
+                            android:paddingBottom="@dimen/margin_5dp"
+                            android:singleLine="true"
+                            android:textColor="@android:color/black"
+                            android:textColorHint="@android:color/darker_gray"
+                            android:textSize="@dimen/text_16sp"/>
 
 
-            <Button
-                    android:id="@+id/clearBT"
-                    android:layout_width="@dimen/margin_20dp"
-                    android:layout_height="@dimen/margin_20dp"
-                    android:layout_gravity="right|center_vertical"
-                    android:layout_marginRight="@dimen/margin_15dp"
-                    android:background="@drawable/ic_clear_black_24dp" />
+                    <Button
+                            android:id="@+id/clearBT"
+                            android:visibility="gone"
+                            android:layout_width="@dimen/margin_20dp"
+                            android:layout_height="@dimen/margin_20dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="@dimen/margin_15dp"
+                            android:background="@drawable/ic_clear_black_24dp"/>
 
-        </FrameLayout>
+                </FrameLayout>
 
-    </LinearLayout>
+            </LinearLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/providersRV"
-            android:layout_below="@+id/searchLL"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/providersRV"
+                    android:layout_below="@+id/searchLL"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <include layout="@layout/layout_no_data"
              android:layout_width="wrap_content"

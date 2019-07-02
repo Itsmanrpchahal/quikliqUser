@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.gson.JsonObject
@@ -36,11 +37,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private var userName_profile_TV: TextView? = null
     private var user_image_IV: ImageView? = null
     private var order_history_TV: TextView? = null
-    private var your_review_Tv:TextView?= null
+    private var your_review_Tv: TextView? = null
     private var change_password_TV: TextView? = null
     private var contact_us_TV: TextView? = null
     private var toolbar_title: TextView? = null
-    private var sign_out_Tv:TextView? = null
+    private var sign_out_Tv: TextView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
@@ -73,11 +74,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
-            R.id.edit_BT -> startActivity(Intent(activity,EditProfileActivity::class.java))
+            R.id.edit_BT -> startActivity(Intent(activity, EditProfileActivity::class.java))
 //            R.id.order_history_TV -> startActivity(Intent(activity,OrderHistoryActivity::class.java))
 //            R.id.your_review_Tv -> startActivity(Intent(activity,PaymentsActivity::class.java))
-            R.id.change_password_TV -> startActivity(Intent(activity,ChangePasswordActivity::class.java))
-            R.id.contact_us_TV -> startActivity(Intent(activity,ContactUsActivity::class.java))
+            R.id.change_password_TV -> startActivity(Intent(activity, ChangePasswordActivity::class.java))
+            R.id.contact_us_TV -> startActivity(Intent(activity, ContactUsActivity::class.java))
             R.id.about_Tv -> Log.d("about", "about")
             R.id.sign_out_Tv -> logoutApiCall()
         }
@@ -198,8 +199,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                                     getString(R.string.close_up)
                                 )
                                 Prefs.clear()
-                                activity!!.startActivity(Intent(activity, LoginActivity::class.java))
-                                activity!!.finishAffinity()
+                                startActivity(Intent(activity, LoginActivity::class.java))
+                                finishAffinity(activity!!)
                             } else {
                                 utility!!.linear_snackbar(
                                     parent_profile!!,
@@ -210,7 +211,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         } catch (e: JSONException) {
                             e.printStackTrace()
                         }
-                    }else{
+                    } else {
                         utility!!.linear_snackbar(
                             parent_profile!!,
                             response.message(),

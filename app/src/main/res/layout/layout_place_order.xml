@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/orderLL"
+              android:background="@android:color/white"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:padding="@dimen/dim_10dp"
+                    android:id="@+id/locRL"
+                    android:background="@color/light_grey_bg"
+                    android:layout_height="wrap_content">
+        <TextView
+                android:id="@+id/adressTV"
+                android:layout_width="wrap_content"
+                android:textColor="@color/chip_background_selected"
+                android:text="DELIVERING TO"
+                android:textSize="@dimen/text_11sp"
+                android:layout_height="wrap_content"/>
+        <TextView
+                android:id="@+id/locationTV"
+                android:layout_width="wrap_content"
+                android:singleLine="true"
+                android:textSize="@dimen/text_13sp"
+                android:ellipsize="end"
+                android:drawableLeft="@drawable/ic_adress"
+                android:drawablePadding="@dimen/margin_5dp"
+                android:layout_below="@+id/adressTV"
+                android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+        <TextView
+                android:id="@+id/itemsTV"
+                android:textSize="@dimen/text_10sp"
+                android:textColor="@color/chip_background_selected"
+                android:text="Payment Mode"
+                android:paddingLeft="@dimen/dim_10dp"
+                android:layout_marginTop="@dimen/margin_5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:id="@+id/priceTV"
+                android:layout_below="@+id/itemsTV"
+                android:textSize="@dimen/text_12sp"
+                android:textColor="@android:color/black"
+                android:text="Cash On Delivery"
+                android:paddingLeft="@dimen/dim_10dp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        <RelativeLayout
+                android:id="@+id/orderRL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_8dp"
+                android:layout_margin="@dimen/dimen_8dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/green_rounded_selecter">
+            <TextView
+                    android:id="@+id/placeorderTV"
+                    android:textSize="@dimen/text_16sp"
+                    android:textColor="@android:color/white"
+                    android:text="Place Order"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/message"
+                    android:textSize="@dimen/text_11sp"
+                    android:textColor="@android:color/white"
+                    android:text="Add Address at next step"
+                    android:layout_below="@+id/placeorderTV"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_centerVertical="true"
+                       android:background="@drawable/ic_navigate_next_black_24dp"
+                       android:layout_toRightOf="@+id/message"
+                       android:layout_height="wrap_content"
+            />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

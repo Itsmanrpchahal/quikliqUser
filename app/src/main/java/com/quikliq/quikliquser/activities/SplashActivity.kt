@@ -24,6 +24,8 @@ import com.livinglifetechway.quickpermissions_kotlin.util.QuickPermissionsOption
 import com.livinglifetechway.quickpermissions_kotlin.util.QuickPermissionsRequest
 import com.quikliq.quikliquser.R
 import com.quikliq.quikliquser.constants.Constant
+import com.quikliq.quikliquser.constants.Constant.lat
+import com.quikliq.quikliquser.constants.Constant.lng
 import com.quikliq.quikliquser.utilities.GpsUtils
 import com.quikliq.quikliquser.utilities.Prefs
 import org.json.JSONException
@@ -95,7 +97,7 @@ class SplashActivity : AppCompatActivity() {
         options = quickPermissionsOption
     ) {
 
-//        telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
+        //        telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
 //        deviceId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //            telephonyManager!!.imei
 //        } else {
@@ -112,7 +114,6 @@ class SplashActivity : AppCompatActivity() {
             finish()
         }, 3000)
     }
-
 
 
     /**methodRequiresPermissions
@@ -182,6 +183,8 @@ class SplashActivity : AppCompatActivity() {
             override fun onLocationResult(locationResult: LocationResult?) {
                 locationResult ?: return
                 for (location in locationResult.locations) {
+                    lat = location.latitude
+                    lng = location.longitude
                     if (!update)
                         apiLocation(location)
                 }
@@ -193,35 +196,36 @@ class SplashActivity : AppCompatActivity() {
 
     fun apiLocation(location: Location) {
         val requestsCall = RequestsCall()
-        requestsCall.UpdateLatLong(Prefs.getString("userid",""),location.latitude,location.longitude).enqueue(object :
-            Callback<JsonObject> {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+        requestsCall.UpdateLatLong(Prefs.getString("userid", ""), location.latitude, location.longitude)
+            .enqueue(object :
+                Callback<JsonObject> {
+                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
 
-                if (response.isSuccessful) {
-                    Log.d("responsedata",response.body().toString())
-                    val responsedata = response.body().toString()
-                    try {
-                        val jsonObject = JSONObject(responsedata)
+                    if (response.isSuccessful) {
+                        Log.d("responsedata", response.body().toString())
+                        val responsedata = response.body().toString()
+                        try {
+                            val jsonObject = JSONObject(responsedata)
 
-                        if(jsonObject.optBoolean("status")){
-                            update = true
-                        }else{
+                            if (jsonObject.optBoolean("status")) {
+                                update = true
+                            } else {
+                            }
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
                         }
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
 
-                }else{
+                    } else {
+
+                    }
 
                 }
 
-            }
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
 
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-
-            }
-        })
+                }
+            })
     }
 
 }

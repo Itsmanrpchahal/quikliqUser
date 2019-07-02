@@ -73,7 +73,7 @@ public class Utility {
                 .into(imageView);
     }
 
-    public void relative_snackbar(RelativeLayout relativeLayout, String title, String button_text) {
+    public void relative_snackbar(View relativeLayout, String title, String button_text) {
         Snackbar snackbar = Snackbar
                 .make(relativeLayout, title, Snackbar.LENGTH_SHORT).setAction(button_text, new View.OnClickListener() {
                     @Override

@@ -28,11 +28,26 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".activities.CartActivity">
+
+
+        <meta-data
+                android:name="com.google.android.maps.v2.API_KEY"
+                android:value="AIzaSyC-rG_lJg84_f9hf6gNTMuGUs6GULWS6To"/>
+
+        <activity android:name=".activities.ConfirmOrderActivity"
+        android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.ProductsActivity">
+        <activity
+                android:name=".activities.CartActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.SplashActivity">
+        <activity
+                android:name=".activities.ProductsActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".activities.SplashActivity"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

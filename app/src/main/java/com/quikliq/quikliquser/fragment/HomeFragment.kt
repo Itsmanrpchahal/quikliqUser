@@ -4,27 +4,36 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.icu.text.Transliterator
+import android.location.Address
+import android.location.Geocoder
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.JsonObject
 import com.quikliq.quikliquser.R
 import com.quikliq.quikliquser.activities.CartActivity
 import com.quikliq.quikliquser.adapters.ProvidersAdapter
+import com.quikliq.quikliquser.constants.Constant.LOCATION
+import com.quikliq.quikliquser.constants.Constant.lat
+import com.quikliq.quikliquser.constants.Constant.lng
 import com.quikliq.quikliquser.models.ProviderModel
 import com.quikliq.quikliquser.utilities.Prefs
 import com.quikliq.quikliquser.utilities.Utility
+import kotlinx.android.synthetic.main.layout_no_data.*
+import kotlinx.android.synthetic.main.toolbar_home.*
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit.RequestsCall
@@ -36,14 +45,21 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
     private var layout_manager: RecyclerView.LayoutManager? = null
     private var providersRV: RecyclerView? = null
-    private var toolbar_title: TextView? = null
     private var utility: Utility? = null
     private var pd: ProgressDialog? = null
     private var parent_f_home: RelativeLayout? = null
     private var providersList: ArrayList<ProviderModel>? = null
     private var no_dataRL: RelativeLayout? = null
-    private var cartIV: ImageView?= null
+    private var cartIV: ImageView? = null
     private var providersAdapter: ProvidersAdapter? = null
+    private var geocoder: Geocoder? = null
+    private var addressTV: TextView? = null
+    private var addresses: List<Address>? = null
+    private var searchET: EditText? = null
+    private var clearBT: Button? = null
+    private var searchedArraylist: ArrayList<ProviderModel>? = null
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,28 +74,101 @@ class HomeFragment : Fragment() {
         pd!!.window!!.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         pd!!.isIndeterminate = true
         pd!!.setCancelable(false)
+        addressTV = view.findViewById(R.id.addressTV)
         providersRV = view.findViewById(R.id.providersRV)
         no_dataRL = view.findViewById(R.id.no_dataRL)
-        toolbar_title = view.findViewById(R.id.toolbar_title)
-        toolbar_title!!.text = "Order"
         parent_f_home = view.findViewById(R.id.parent_f_home)
         cartIV = view.findViewById(R.id.cartIV)
+        searchET = view.findViewById(R.id.searchET)
         cartIV!!.visibility = View.VISIBLE
-        cartIV!!.setOnClickListener{
-            startActivity(Intent(activity,CartActivity::class.java))
+        cartIV!!.setOnClickListener {
+            startActivity(Intent(activity, CartActivity::class.java))
         }
+        geocoder = Geocoder(activity)
+        addresses = geocoder!!.getFromLocation(
+            lat!!,
+            lng!!,
+            1
+        )
+        clearBT = view.findViewById(R.id.clearBT)
+        LOCATION = addresses!![0].getAddressLine(0)
+        addressTV!!.text = addresses!![0].getAddressLine(0)
         providersApiCall()
+        searchET!!.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (count > 0) {
+                    clearBT!!.visibility = View.VISIBLE
+                    searchByName(s.toString())
+                } else {
+                    clearBT!!.visibility = View.GONE
+                    setDefaultData()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                if (s.isNotEmpty()) {
+                    searchByName(s.toString())
+                } else {
+                    setDefaultData()
+                }
+
+            }
+        })
         return view
     }
 
+    fun setDefaultData() {
+        no_dataRL!!.visibility = View.GONE
+        providersRV!!.visibility = View.VISIBLE
+        if (providersAdapter != null)
+            providersAdapter = null
+        if (providersList != null)
+            if (providersList!!.size > 0) {
+                providersAdapter = ProvidersAdapter(activity!!, providersList!!)
+                val mLayoutManager = LinearLayoutManager(activity!!.applicationContext)
+                providersRV!!.layoutManager = mLayoutManager
+                providersRV!!.adapter = providersAdapter
+                providersAdapter!!.notifyDataSetChanged()
 
-    companion object {
-        var TAG = HomeFragment::class.java.simpleName
-        @JvmStatic
-        fun newInstance(): HomeFragment {
-            val fragment = HomeFragment()
-            return fragment
+            }
+    }
+    fun searchByName(s: String) {
+        searchedArraylist = ArrayList()
+        if (providersList != null && providersList!!.size > 0)
+            for (i in providersList!!.indices) {
+                val providerModel = providersList!![i]
+                if (providerModel.name!!.toLowerCase().contains(s.toLowerCase()))
+                    searchedArraylist!!.add(providerModel)
+            }
+        if (providersAdapter != null)
+            providersAdapter = null
+
+        if (searchedArraylist!!.size > 0) {
+            setSearchedData()
+        } else {
+            noMatchedData()
         }
+    }
+
+
+    private fun setSearchedData() {
+        no_dataRL!!.visibility = View.GONE
+        providersRV!!.visibility = View.VISIBLE
+        providersAdapter = ProvidersAdapter(activity!!, searchedArraylist!!)
+        val mLayoutManager = LinearLayoutManager(activity!!.applicationContext)
+        providersRV!!.layoutManager = mLayoutManager
+        providersRV!!.adapter = providersAdapter
+    }
+
+    private fun noMatchedData() {
+        no_dataRL!!.visibility = View.VISIBLE
+        providersRV!!.visibility = View.GONE
+        sadIV!!.background = ContextCompat.getDrawable(activity!!, R.drawable.ic_search)
+        titleTV!!.text = "No matched Provider"
+        msgTV!!.visibility = View.GONE
     }
 
     private fun providersApiCall() {

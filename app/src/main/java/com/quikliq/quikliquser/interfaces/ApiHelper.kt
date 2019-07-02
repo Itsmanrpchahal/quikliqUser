@@ -85,4 +85,17 @@ interface ApiHelper {
     @POST(".")
     fun ClearCart(@Field("method") ClearCart: String ,@Field("userid") userid: String): Call<JsonObject>
 
+
+    @FormUrlEncoded
+    @POST(".")
+    fun RemoveCartItems(@Field("method") RemoveCartItems: String ,@Field("userid") userid: String,@Field("cartid") productid: String): Call<JsonObject>
+
+    @FormUrlEncoded
+    @POST(".")
+    fun UpdateCartQuantity(@Field("method") UpdateCartQuantity: String ,@Field("userid") userid: String, @Field("productprice") productprice: String,@Field("cartid") productid: String, @Field("quantity") quantity: String): Call<JsonObject>
+
+    @FormUrlEncoded
+    @POST(".")
+    fun PlaceOrder(@Field("method") PlaceOrder: String ,@Field("userid") userid: String, @Field("providerid") providerid: String,@Field("latitude") latitude: String, @Field("longitude") longitude: String, @Field("address") address: String, @Field("note") note: String, @Field("paymentstatus") paymentstatus: String): Call<JsonObject>
+
 }

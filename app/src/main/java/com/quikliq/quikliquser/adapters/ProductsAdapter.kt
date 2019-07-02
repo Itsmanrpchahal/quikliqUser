@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
 import android.view.animation.ScaleAnimation
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -45,7 +46,7 @@ class ProductsAdapter(
         holder.item_price.text = "$" + productModel.price
         utility!!.loadImageWithLoader(
             context,
-            "http://freechatup.website/weed/api/" + productModel.image,
+            "https://professionaler.com/weed/api/" + productModel.image,
             holder.productImage
         )
 
@@ -86,6 +87,9 @@ class ProductsAdapter(
         }
 
         holder.tv_minus.setOnClickListener {
+            if(menuData!!.isEmpty()){
+                ProductsActivity.showcart!!.show(false)
+            }
             counter = java.lang.Double.parseDouble(holder.tv_quantity.text.toString()).toInt()
             if (counter > 1) {
                 counter--
@@ -105,9 +109,7 @@ class ProductsAdapter(
                 holder.tv_quantity.startAnimation(scale)
                 menuData!![productModel.id!!] = OrderProcessing(productModel.id!!, "" + counter, productModel.product_name, productModel.price)
             } else {
-                holder.tv_quantity.visibility = View.INVISIBLE
-                holder.tv_minus.visibility = View.INVISIBLE
-                holder.tv_plus.visibility = View.INVISIBLE
+                 holder.quantLL.visibility = View.INVISIBLE
                 holder.iv_add_to_cart.visibility = View.VISIBLE
                 menuData!!.remove(productModel.id!!)
             }
@@ -137,9 +139,8 @@ class ProductsAdapter(
         holder.iv_add_to_cart.setOnClickListener {
             menuData!![productModel.id!!] = OrderProcessing(productModel.id!!, "1", productModel.product_name, productModel.price)
             holder.iv_add_to_cart.visibility = View.INVISIBLE
-            holder.tv_plus.visibility = View.VISIBLE
-            holder.tv_minus.visibility = View.VISIBLE
-            holder.tv_quantity.visibility = View.VISIBLE
+            holder.quantLL.visibility = View.VISIBLE
+
             ProductsActivity.showcart!!.show(true)
             totalAmt = 0
             order.clear()
@@ -172,6 +173,7 @@ class ProductsAdapter(
         val tv_quantity: TextView = itemView.findViewById(R.id.tv_quantity) as TextView
         val productImage: ImageView = itemView.findViewById(R.id.productImage) as ImageView
         val iv_add_to_cart: TextView = itemView.findViewById(R.id.iv_add_to_cart) as TextView
+        val quantLL : LinearLayout = itemView.findViewById(R.id.quantLL) as LinearLayout
     }
 
 

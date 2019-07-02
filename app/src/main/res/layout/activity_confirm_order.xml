@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/parent_confirm"
+                android:background="@color/light_grey_bg"
+                android:layout_height="match_parent">
+
+    <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_below="@+id/toolbar"
+                  android:orientation="vertical"
+                  android:weightSum="2">
+
+        <fragment
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.2"
+                android:id="@+id/map"
+                android:layout_below="@+id/toolbar"
+                android:name="com.google.android.gms.maps.SupportMapFragment"/>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="0dp"
+                android:layout_weight=".8">
+
+            <RelativeLayout android:layout_width="match_parent"
+                            android:padding="@dimen/dim_10dp"
+                            android:id="@+id/locRL"
+                            android:background="@color/light_grey_bg"
+                            android:layout_height="wrap_content">
+                <TextView
+                        android:id="@+id/adressTV"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/chip_background_selected"
+                        android:text="DELIVERING TO"
+                        android:textSize="@dimen/text_11sp"
+                        android:layout_height="wrap_content"/>
+                <TextView
+                        android:id="@+id/locationTV"
+                        android:layout_width="wrap_content"
+                        android:singleLine="true"
+                        android:textSize="@dimen/text_13sp"
+                        android:ellipsize="end"
+                        android:drawableLeft="@drawable/ic_adress"
+                        android:drawablePadding="@dimen/margin_5dp"
+                        android:layout_below="@+id/adressTV"
+                        android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <EditText
+                    android:textSize="14dp"
+                    android:textColor="#ff000000"
+                    android:textColorHint="#ff696969"
+                    android:layout_below="@+id/locRL"
+                    android:id="@+id/addressET"
+                    android:layout_marginTop="@dimen/margin_5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_8dp"
+                    android:paddingLeft="5dp"
+                    android:maxLines="2"
+                    android:hint="House No, Building Number, Landmark"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"/>
+            <EditText
+                    android:textSize="14dp"
+                    android:textColor="#ff000000"
+                    android:textColorHint="#ff696969"
+                    android:layout_below="@+id/addressET"
+                    android:id="@+id/noteET"
+                    android:layout_marginTop="@dimen/margin_5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_8dp"
+                    android:paddingLeft="5dp"
+                    android:hint="Special Note"
+                    android:maxLines="2"
+                    android:inputType="text"
+                    android:imeOptions="actionDone"/>
+
+
+            <RelativeLayout
+                    android:id="@+id/placeorderRL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dim_10dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/green_selecter">
+                <TextView
+                        android:id="@+id/placeorderTV"
+                        android:textSize="@dimen/text_20sp"
+                        android:textColor="@android:color/white"
+                        android:text="Place Order"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,6 +1,9 @@
 package com.quikliq.quikliquser.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +11,22 @@ import android.view.animation.OvershootInterpolator
 import android.view.animation.ScaleAnimation
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.JsonObject
 import com.quikliq.quikliquser.R
+import com.quikliq.quikliquser.activities.CartActivity
 import com.quikliq.quikliquser.dataProcessing.OrderProcessing
 import com.quikliq.quikliquser.models.CartProductModel
+import com.quikliq.quikliquser.utilities.Prefs
 import com.quikliq.quikliquser.utilities.Utility
+import org.json.JSONException
+import org.json.JSONObject
+import retrofit.RequestsCall
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CartListAdapter(
     private val context: Context,
@@ -21,16 +35,17 @@ class CartListAdapter(
     RecyclerView.Adapter<CartListAdapter.ViewHolder>() {
     private var utility: Utility? = null
     private var counter = 0
-    private var totalAmt: Int? = 0
-    private var order = java.util.ArrayList<OrderProcessing>()
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.layout_cart_item, parent, false)
         return ViewHolder(v)
     }
 
+    fun updateData(newcartList: ArrayList<CartProductModel>) {
+        this.cartproductList = newcartList
+    }
+
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         utility = Utility()
         val productModel = cartproductList[position]
@@ -56,23 +71,7 @@ class CartListAdapter(
             scale.duration = 300
             scale.interpolator = OvershootInterpolator()
             holder.tv_quantity.startAnimation(scale)
-//            ProductsActivity.menuData!![productModel.id!!] =
-//                OrderProcessing(productModel.id!!, "" + counter, productModel.product_name, productModel.price)
-//            order.clear()
-//            totalAmt = 0
-//
-//            for (key in ProductsActivity.menuData!!.keys) {
-//                println("value:$key")
-//                System.out.println("value:" + ProductsActivity.menuData!![key])
-//                order.add(ProductsActivity.menuData!![key]!!)
-//
-//            }
-//            for (i in 0 until order.size) {
-//                totalAmt = totalAmt!! + (order[i].ItemCount.toInt() * order[i].Price.toInt())
-//                Log.e("amount", "===$totalAmt")
-//            }
-//
-//            ProductsActivity.updateItemPrice!!.show(ProductsActivity.menuData!!.size, totalAmt.toString())
+            CartActivity.updateQuantityInterface!!.update(productModel.id!!,  productModel.productprice!!, "" + counter)
         }
 
         holder.tv_minus.setOnClickListener {
@@ -93,40 +92,10 @@ class CartListAdapter(
                 scale.duration = 300
                 scale.interpolator = OvershootInterpolator()
                 holder.tv_quantity.startAnimation(scale)
-//                ProductsActivity.menuData!![productModel.id!!] =
-//                    OrderProcessing(productModel.id!!, "" + counter, productModel.product_name, productModel.price)
+                CartActivity.updateQuantityInterface!!.update(productModel.id!!,  productModel.productprice!!, "" + counter)
             } else {
-//                holder.tv_quantity.visibility = View.INVISIBLE
-//                holder.tv_minus.visibility = View.INVISIBLE
-//                holder.tv_plus.visibility = View.INVISIBLE
-//                holder.iv_add_to_cart.visibility = View.VISIBLE
-//                ProductsActivity.menuData!!.remove(productModel.id!!)
+                CartActivity.removeItemInterface!!.remove(productModel.id!!)
             }
-//            order.clear()
-//            totalAmt = 0
-//
-//            for (key in ProductsActivity.menuData!!.keys) {
-//                println("value:$key")
-//                System.out.println("value:" + ProductsActivity.menuData!![key])
-//                order.add(ProductsActivity.menuData!![key]!!)
-//
-//            }
-//            for (i in 0 until order.size) {
-//                totalAmt = totalAmt!! + (order[i].ItemCount.toInt() * order[i].Price.toInt())
-//                Log.e("amount", "===$totalAmt")
-//            }
-//
-//            ProductsActivity.updateItemPrice!!.show(ProductsActivity.menuData!!.size, totalAmt.toString())
-//            if (ProductsActivity.menuData!!.isNotEmpty()) {
-//                ProductsActivity.showcart!!.show(true)
-//            } else {
-//                ProductsActivity.showcart!!.show(false)
-//            }
-
-        }
-
-        holder.removeIV.setOnClickListener {
-
         }
     }
 
@@ -141,10 +110,8 @@ class CartListAdapter(
         val item_price: TextView = itemView.findViewById(R.id.item_price) as TextView
         val totalitem_price: TextView = itemView.findViewById(R.id.totalitem_price) as TextView
         val tv_plus: ImageView = itemView.findViewById(R.id.tv_plus) as ImageView
-        val removeIV: ImageView = itemView.findViewById(R.id.removeIV) as ImageView
         val tv_minus: ImageView = itemView.findViewById(R.id.tv_minus) as ImageView
         val tv_quantity: TextView = itemView.findViewById(R.id.tv_quantity) as TextView
     }
-
 
 }

@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:id="@+id/parentRL"
-        android:background="@drawable/textview_selecter"
+        android:background="@drawable/my_background_selector"
         android:layout_marginBottom="@dimen/margin_5dp"
         android:paddingLeft="@dimen/dim_10dp"
         android:paddingRight="@dimen/dim_10dp"

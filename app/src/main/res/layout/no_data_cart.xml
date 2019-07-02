@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:id="@+id/no_dataRL"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
+
+    <RelativeLayout
+            android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+        <ImageView
+                android:id="@+id/sadIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_frown"/>
+
+        <TextView
+                android:id="@+id/titleTV"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sadIV"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:padding="@dimen/margin_5dp"
+                android:text="No Products"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"/>
+
+        <TextView
+                android:id="@+id/msgTV"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleTV"
+                android:layout_centerHorizontal="true"
+                android:text="Please Add product"/>
+
+
+    </RelativeLayout>
+</RelativeLayout>

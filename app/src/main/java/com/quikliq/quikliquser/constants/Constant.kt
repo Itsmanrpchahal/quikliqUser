@@ -5,7 +5,7 @@ import java.util.ArrayList
 
 
 object Constant {
-    val BASE_URL = "http://freechatup.website/weed/api/index.php/"    //production
+    val BASE_URL = "https://professionaler.com/weed/api/index.php/"    //production
     val GPS_REQUEST = 101
 
     //*******production********//
@@ -82,5 +82,8 @@ object Constant {
     val HAS_BADGE = "has_badge"
     val SEARCH_FILTER_TYPE_NAME = "search_filter_type_name"
 
-
+    var LOCATION:String? = null
+    var lat:Double?=0.00
+    var lng:Double?=0.00
+    var provider_id:String?=null
 }

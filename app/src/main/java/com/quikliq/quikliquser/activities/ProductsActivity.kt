@@ -261,8 +261,7 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
                                             clearCartDialog()
                                         }
                                     } else {
-                                        utility!!.relative_snackbar(
-                                            parent_products!!,
+                                       utility!!.relative_snackbar(findViewById(android.R.id.content),
                                             jsonObject.optString("message"),
                                             getString(R.string.close_up)
                                         )
@@ -359,6 +358,15 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
                 getString(R.string.no_internet_connectivity),
                 getString(R.string.close_up)
             )
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(menuData!!.isEmpty()){
+            cartRL!!.visibility = View.GONE
+        }else{
+            cartRL!!.visibility = View.VISIBLE
         }
     }
 }
