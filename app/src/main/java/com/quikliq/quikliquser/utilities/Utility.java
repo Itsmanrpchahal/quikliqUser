@@ -84,7 +84,7 @@ public class Utility {
         snackbar.show();
     }
 
-    public void linear_snackbar(LinearLayout linear, String title, String button_text) {
+    public void linear_snackbar(View linear, String title, String button_text) {
         Snackbar snackbar = Snackbar
                 .make(linear, title, Snackbar.LENGTH_SHORT).setAction(button_text, new View.OnClickListener() {
                     @Override

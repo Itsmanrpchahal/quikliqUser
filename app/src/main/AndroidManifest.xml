@@ -28,14 +28,16 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-
+        <activity android:name=".activities.OrderHistory">
+        </activity>
 
         <meta-data
                 android:name="com.google.android.maps.v2.API_KEY"
                 android:value="AIzaSyC-rG_lJg84_f9hf6gNTMuGUs6GULWS6To"/>
 
-        <activity android:name=".activities.ConfirmOrderActivity"
-        android:screenOrientation="portrait">
+        <activity
+                android:name=".activities.ConfirmOrderActivity"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".activities.CartActivity"

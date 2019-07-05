@@ -98,4 +98,8 @@ interface ApiHelper {
     @POST(".")
     fun PlaceOrder(@Field("method") PlaceOrder: String ,@Field("userid") userid: String, @Field("providerid") providerid: String,@Field("latitude") latitude: String, @Field("longitude") longitude: String, @Field("address") address: String, @Field("note") note: String, @Field("paymentstatus") paymentstatus: String): Call<JsonObject>
 
+    @FormUrlEncoded
+    @POST(".")
+    fun OrderHistory(@Field("method") OrderHistory: String ,@Field("userid") userid: String): Call<JsonObject>
+
 }

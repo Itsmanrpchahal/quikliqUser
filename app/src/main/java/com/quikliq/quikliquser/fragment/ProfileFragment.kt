@@ -75,7 +75,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when (p0!!.id) {
             R.id.edit_BT -> startActivity(Intent(activity, EditProfileActivity::class.java))
-//            R.id.order_history_TV -> startActivity(Intent(activity,OrderHistoryActivity::class.java))
+            R.id.order_history_TV -> startActivity(Intent(activity,OrderHistory::class.java))
 //            R.id.your_review_Tv -> startActivity(Intent(activity,PaymentsActivity::class.java))
             R.id.change_password_TV -> startActivity(Intent(activity, ChangePasswordActivity::class.java))
             R.id.contact_us_TV -> startActivity(Intent(activity, ContactUsActivity::class.java))

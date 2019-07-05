@@ -155,4 +155,11 @@ class RequestsCall {
         val api = apiCall.apiCall().create(ApiHelper::class.java)
         return api.PlaceOrder("PlaceOrder",userid,providerid,latitude,longitude,address,note,paymentstatus)
     }
+
+
+    fun OrderHistory(userID: String): Call<JsonObject> {
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        return api.OrderHistory("OrderHistory",userID)
+    }
 }

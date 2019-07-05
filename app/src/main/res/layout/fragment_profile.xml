@@ -98,7 +98,7 @@
                             android:drawableLeft="@mipmap/order_history"
                             android:drawablePadding="20dp"
                             android:padding="5dp"
-                            android:text="Documents"
+                            android:text="Order History"
                             android:textSize="18sp"/>
 
                     <View

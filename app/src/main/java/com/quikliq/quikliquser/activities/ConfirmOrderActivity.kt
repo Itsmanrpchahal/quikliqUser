@@ -22,6 +22,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.JsonObject
@@ -91,7 +92,7 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
                 noteET!!.requestFocus()
                 noteET!!.error = getString(R.string.txt_Error_required)
             }
-         
+
             else -> orderAPiCall()
         }
     }
@@ -155,13 +156,18 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(p0: GoogleMap?) {
-        myMarker = p0!!.addMarker(
+        p0!!.uiSettings.isScrollGesturesEnabled = false
+        p0.uiSettings.isZoomControlsEnabled = false
+        p0.setMapStyle(
+            MapStyleOptions.loadRawResourceStyle(
+                this, R.raw.style_json))
+        myMarker = p0.addMarker(
             MarkerOptions()
                 .position(
                     LatLng(lat!!,
                     lng!!)
                 )
                 .title("Order Place"))
-        p0.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat!!, lng!!), 14f))
+        p0.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat!!, lng!!), 15f))
     }
 }

@@ -47,7 +47,7 @@
                         android:textSize="@dimen/text_13sp"
                         android:ellipsize="end"
                         android:drawableLeft="@drawable/ic_adress"
-                        android:drawablePadding="@dimen/margin_5dp"
+                        android:drawablePadding="@dimen/height_2dp"
                         android:layout_below="@+id/adressTV"
                         android:layout_height="wrap_content"/>
             </RelativeLayout>
@@ -60,6 +60,8 @@
                     android:layout_marginTop="@dimen/margin_5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_15dp"
+                    android:layout_marginRight="@dimen/margin_15dp"
                     android:padding="@dimen/dimen_8dp"
                     android:paddingLeft="5dp"
                     android:maxLines="2"
@@ -73,13 +75,15 @@
                     android:layout_below="@+id/addressET"
                     android:id="@+id/noteET"
                     android:layout_marginTop="@dimen/margin_5dp"
+                    android:layout_marginLeft="@dimen/margin_15dp"
+                    android:layout_marginRight="@dimen/margin_15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dimen_8dp"
                     android:paddingLeft="5dp"
                     android:hint="Special Note"
-                    android:maxLines="2"
-                    android:inputType="text"
+                    android:maxLines="3"
+                    android:inputType="text|textMultiLine"
                     android:imeOptions="actionDone"/>
 
 

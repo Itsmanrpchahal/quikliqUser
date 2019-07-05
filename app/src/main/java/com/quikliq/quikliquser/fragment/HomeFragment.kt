@@ -4,7 +4,6 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.icu.text.Transliterator
 import android.location.Address
 import android.location.Geocoder
 import android.os.Build
@@ -33,7 +32,6 @@ import com.quikliq.quikliquser.models.ProviderModel
 import com.quikliq.quikliquser.utilities.Prefs
 import com.quikliq.quikliquser.utilities.Utility
 import kotlinx.android.synthetic.main.layout_no_data.*
-import kotlinx.android.synthetic.main.toolbar_home.*
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit.RequestsCall
@@ -94,6 +92,11 @@ class HomeFragment : Fragment() {
         LOCATION = addresses!![0].getAddressLine(0)
         addressTV!!.text = addresses!![0].getAddressLine(0)
         providersApiCall()
+        clearBT!!.setOnClickListener {
+            searchET!!.setText("")
+            searchET!!.hint = "Search for providers"
+        }
+
         searchET!!.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
             }
