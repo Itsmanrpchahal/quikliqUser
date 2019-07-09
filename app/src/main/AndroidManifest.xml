@@ -28,6 +28,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+        <activity android:name=".activities.OrderSummaryActivity">
+        </activity>
         <activity android:name=".activities.OrderHistory">
         </activity>
 

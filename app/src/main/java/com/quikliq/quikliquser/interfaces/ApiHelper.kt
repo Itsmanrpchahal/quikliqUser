@@ -102,4 +102,9 @@ interface ApiHelper {
     @POST(".")
     fun OrderHistory(@Field("method") OrderHistory: String ,@Field("userid") userid: String): Call<JsonObject>
 
+    @FormUrlEncoded
+    @POST(".")
+    fun CancelOrder(@Field("method") CancelOrder: String ,@Field("userid") userid: String, @Field("orderid") orderid: String): Call<JsonObject>
+
+
 }

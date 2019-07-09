@@ -1,6 +1,6 @@
 package com.quikliq.quikliquser.adapters
 
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -10,15 +10,15 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.quikliq.quikliquser.R
 import com.quikliq.quikliquser.activities.ProductsActivity
 import com.quikliq.quikliquser.models.ProviderModel
 import com.quikliq.quikliquser.utilities.Utility
-import java.io.Serializable
 
 
 class ProvidersAdapter(
-    private val context: Context,
+    private val context: Activity,
     private var providersList: ArrayList<ProviderModel>
 ) :
     RecyclerView.Adapter<ProvidersAdapter.ViewHolder>() {
@@ -47,7 +47,20 @@ private var utility: Utility? = null
 
         holder.ratingTV.text = ""+providerModel.rating+".0"
         holder.parentRL.setOnClickListener {
-            context.startActivity(Intent(context, ProductsActivity::class.java).putExtra("provider",providersList[position]))
+            if (providerModel.Status == 1) {
+                context.startActivity(
+                    Intent(context, ProductsActivity::class.java).putExtra(
+                        "provider",
+                        providersList[position]
+                    )
+                )
+            }else{
+                val snackbar = Snackbar
+                    .make(context.findViewById(android.R.id.content), "Currently Provider is Closed", Snackbar.LENGTH_SHORT).setAction(""
+                    ) { }
+                snackbar.show()
+
+            }
         }
     }
 

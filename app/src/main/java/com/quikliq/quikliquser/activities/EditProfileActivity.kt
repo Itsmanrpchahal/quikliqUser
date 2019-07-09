@@ -88,13 +88,12 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                                 edit_first_name_ET!!.setText(jsonObject.optJSONObject("data").optString("FirstName"))
                                 edit_last_name_ET!!.setText(jsonObject.optJSONObject("data").optString("LastName"))
                                 edit_profile_email_TV!!.setText(jsonObject.optJSONObject("data").optString("Email"))
-                                if (!jsonObject.optJSONObject("data").optString("profileimage").isNullOrEmpty()) {
-//                                    utility!!.loadImageWithLoader(
-//                                        this@EditProfileActivity,
-//                                        jsonObject.optJSONObject("data").optString("profileimage"),
-//                                        business_image_IV
-//                                    )
-                                }
+                                    utility!!.loadImageWithLoader(
+                                        this@EditProfileActivity,
+                                        jsonObject.optJSONObject("data").optString("profileimage"),
+                                        business_image_IV
+                                    )
+
 
                             } else {
                                 utility!!.linear_snackbar(
@@ -386,7 +385,12 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
     }
 
     private fun updateProfileApiCall() {
-        hideKeyboard()
+        if(edit_first_name_ET.hasFocus()){
+            hideKeyboard()
+        }else if (edit_last_name_ET.hasFocus()){
+            hideKeyboard()
+        }
+
         if (utility!!.isConnectingToInternet(this@EditProfileActivity)) {
             pd!!.show()
             pd!!.setContentView(R.layout.loading)
@@ -413,7 +417,10 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                                     jsonObject.optString("message"),
                                     getString(R.string.close_up)
                                 )
-
+                                finish()
+                                overridePendingTransition(0, 0)
+                                startActivity(intent)
+                                overridePendingTransition(0, 0)
                             } else {
                                 utility!!.linear_snackbar(
                                     parent_edit_profile!!,

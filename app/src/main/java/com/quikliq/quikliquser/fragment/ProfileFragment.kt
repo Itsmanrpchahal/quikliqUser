@@ -29,7 +29,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ProfileFragment : Fragment(), View.OnClickListener {
-    private lateinit var fm: FragmentManager
     private var edit_BT: Button? = null
     private var utility: Utility? = null
     private var pd: ProgressDialog? = null
@@ -37,7 +36,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private var userName_profile_TV: TextView? = null
     private var user_image_IV: ImageView? = null
     private var order_history_TV: TextView? = null
-    private var your_review_Tv: TextView? = null
     private var change_password_TV: TextView? = null
     private var contact_us_TV: TextView? = null
     private var toolbar_title: TextView? = null
@@ -60,36 +58,29 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         change_password_TV = view.findViewById(R.id.change_password_TV)
         contact_us_TV = view.findViewById(R.id.contact_us_TV)
         toolbar_title = view.findViewById(R.id.toolbar_title)
-        your_review_Tv = view.findViewById(R.id.your_review_Tv)
-        toolbar_title!!.text = "Profile"
+        toolbar_title!!.text = "Account"
         edit_BT?.setOnClickListener(this)
         contact_us_TV?.setOnClickListener(this)
         order_history_TV?.setOnClickListener(this)
         change_password_TV?.setOnClickListener(this)
         sign_out_Tv?.setOnClickListener(this)
-        your_review_Tv?.setOnClickListener(this)
-        profileApiCall()
+
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        profileApiCall()
     }
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
             R.id.edit_BT -> startActivity(Intent(activity, EditProfileActivity::class.java))
             R.id.order_history_TV -> startActivity(Intent(activity,OrderHistory::class.java))
-//            R.id.your_review_Tv -> startActivity(Intent(activity,PaymentsActivity::class.java))
             R.id.change_password_TV -> startActivity(Intent(activity, ChangePasswordActivity::class.java))
             R.id.contact_us_TV -> startActivity(Intent(activity, ContactUsActivity::class.java))
             R.id.about_Tv -> Log.d("about", "about")
             R.id.sign_out_Tv -> logoutApiCall()
-        }
-    }
-
-    companion object {
-        var TAG = ProfileFragment::class.java.simpleName
-        @JvmStatic
-        fun newInstance(): ProfileFragment {
-            val fragment = ProfileFragment()
-            return fragment
         }
     }
 
@@ -113,12 +104,12 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                                     jsonObject.optJSONObject("data").optString("FirstName") + " " + jsonObject.optJSONObject(
                                         "data"
                                     ).optString("LastName")
-//                                if(!jsonObject.optJSONObject("data").optString("profileimage").isNullOrEmpty()){
-//                                utility!!.loadImageWithLoader(
-//                                    activity,
-//                                    jsonObject.optJSONObject("data").optString("profileimage"),
-//                                    user_image_IV
-//                                )}
+
+                                utility!!.loadImageWithLoader(
+                                    activity,
+                                    jsonObject.optJSONObject("data").optString("profileimage"),
+                                    user_image_IV
+                                )
 
 
                                 Prefs.putString(

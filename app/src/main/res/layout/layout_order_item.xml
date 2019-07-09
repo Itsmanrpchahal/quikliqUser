@@ -5,18 +5,22 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView android:layout_width="match_parent"
-                                       android:layout_height="wrap_content"
-                                       app:cardUseCompatPadding="true"
-                                       android:layout_margin="@dimen/dimen_8dp"
-                                       app:cardCornerRadius="@dimen/margin_5dp">
-        <RelativeLayout android:layout_width="match_parent"
-                        android:padding="@dimen/dim_10dp"
-                        android:layout_height="wrap_content">
-            <ImageView android:layout_width="@dimen/size_50dp"
-                       android:layout_height="@dimen/size_50dp"
-                       android:layout_marginBottom="@dimen/height_3dp"
-                       android:id="@+id/providerIV"/>
+    <androidx.cardview.widget.CardView
+            android:id="@+id/parentCart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            android:layout_margin="@dimen/dimen_8dp"
+            app:cardCornerRadius="@dimen/margin_5dp">
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/dim_10dp"
+                android:layout_height="wrap_content">
+            <ImageView
+                    android:layout_width="@dimen/size_50dp"
+                    android:layout_height="@dimen/size_50dp"
+                    android:layout_marginBottom="@dimen/height_3dp"
+                    android:id="@+id/providerIV"/>
             <TextView
                     android:id="@+id/providernameTV"
                     android:layout_width="wrap_content"
@@ -35,14 +39,15 @@
                     android:layout_marginBottom="@dimen/margin_5dp"
                     android:layout_below="@+id/providerIV"
                     android:background="@color/chip_background_selected"/>
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="ITEMS"
-                      android:id="@+id/itemsTV"
-                      android:textStyle="bold"
-                      android:textSize="@dimen/text_13sp"
-                      android:layout_marginTop="@dimen/dim_10dp"
-                      android:layout_below="@+id/view1"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ITEMS"
+                    android:id="@+id/itemsTV"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_13sp"
+                    android:layout_marginTop="@dimen/dim_10dp"
+                    android:layout_below="@+id/view1"/>
             <TextView
                     android:id="@+id/allitemsTV"
                     android:layout_width="match_parent"
@@ -96,6 +101,26 @@
                       android:textSize="@dimen/text_13sp"
                       android:layout_marginTop="@dimen/dim_10dp"
                       android:layout_below="@+id/view2"/>
+
+
+            <TextView
+                    android:id="@+id/cancelTV"
+                    android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="@dimen/text_13sp"
+                      android:textStyle="bold"
+                    android:visibility="gone"
+                      android:layout_alignParentRight="true"
+                      android:paddingLeft="@dimen/text_12sp"
+                      android:paddingRight="@dimen/dimen_12dp"
+                      android:layout_marginTop="@dimen/dimen_7dp"
+                      android:layout_marginRight="@dimen/dim_10dp"
+                      android:paddingTop="@dimen/margin_5dp"
+                      android:paddingBottom="@dimen/margin_5dp"
+                      android:layout_below="@+id/view2"
+                      android:text="Cancel"
+                      android:background="@drawable/cancel_rounded"
+                      android:textColor="@android:color/white"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

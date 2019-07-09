@@ -162,4 +162,11 @@ class RequestsCall {
         val api = apiCall.apiCall().create(ApiHelper::class.java)
         return api.OrderHistory("OrderHistory",userID)
     }
+
+    fun CancelOrder(userID: String,order_id:String): Call<JsonObject> {
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        return api.CancelOrder("CancelOrder",userID,order_id)
+    }
+
 }
