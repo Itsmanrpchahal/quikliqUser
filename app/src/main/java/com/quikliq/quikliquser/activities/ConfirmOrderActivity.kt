@@ -2,6 +2,7 @@ package com.quikliq.quikliquser.activities
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -40,21 +41,23 @@ import retrofit.RequestsCall
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
     private var myMarker: Marker? = null
     private var toolbar: Toolbar? = null
     private var pd: ProgressDialog? = null
     private var utility: Utility? = null
-    private var toolbar_title : TextView?= null
-    private var placeorderRL: RelativeLayout?= null
-    private var addressET:EditText?=null
-    private var noteET:EditText?=null
-    private var parent_confirm:RelativeLayout?= null
+    private var toolbar_title: TextView? = null
+    private var placeorderRL: RelativeLayout? = null
+    private var addressET: EditText? = null
+    private var noteET: EditText? = null
+    private var parent_confirm: RelativeLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_order)
         initViews()
     }
+
     private fun initViews() {
         toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
@@ -96,33 +99,51 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
             else -> orderAPiCall()
         }
     }
+
     private fun orderAPiCall() {
         hideKeyboard()
         if (utility!!.isConnectingToInternet(this@ConfirmOrderActivity)) {
             pd!!.show()
             pd!!.setContentView(R.layout.loading)
             val requestsCall = RequestsCall()
-            requestsCall.PlaceOrder(Prefs.getString("userid", ""), provider_id!!, lat.toString(),lng.toString(),addressET!!.text.toString()+" "+ LOCATION,noteET!!.text.toString(),"1").enqueue(object : Callback<JsonObject> {
+            requestsCall.PlaceOrder(
+                Prefs.getString("userid", ""),
+                provider_id!!,
+                lat.toString(),
+                lng.toString(),
+                addressET!!.text.toString() + " " + LOCATION,
+                noteET!!.text.toString(),
+                "1"
+            ).enqueue(object : Callback<JsonObject> {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     pd!!.dismiss()
                     if (response.isSuccessful) {
-                        Log.d("responsedata",response.body().toString())
+                        Log.d("responsedata", response.body().toString())
                         val responsedata = response.body().toString()
                         try {
                             val jsonObject = JSONObject(responsedata)
 
-                            if(jsonObject.optBoolean("status")){
-                                utility!!.relative_snackbar(parent_confirm!!, jsonObject.optString("message"), getString(R.string.close_up))
-
-                            }else{
-                                utility!!.relative_snackbar(parent_confirm!!, jsonObject.optString("message"), getString(R.string.close_up))
+                            if (jsonObject.optBoolean("status")) {
+                                utility!!.relative_snackbar(
+                                    parent_confirm!!,
+                                    jsonObject.optString("message"),
+                                    getString(R.string.close_up)
+                                )
+                                startActivity(Intent(this@ConfirmOrderActivity, OrderHistory::class.java).putExtra("order_success",true))
+                                finish()
+                            } else {
+                                utility!!.relative_snackbar(
+                                    parent_confirm!!,
+                                    jsonObject.optString("message"),
+                                    getString(R.string.close_up)
+                                )
                             }
                         } catch (e: JSONException) {
                             e.printStackTrace()
                         }
 
-                    }else{
+                    } else {
                         utility!!.relative_snackbar(
                             parent_confirm!!,
                             response.message(),
@@ -134,11 +155,19 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     pd!!.dismiss()
-                    utility!!.relative_snackbar(parent_confirm!!, getString(R.string.no_internet_connectivity), getString(R.string.close_up))
+                    utility!!.relative_snackbar(
+                        parent_confirm!!,
+                        getString(R.string.no_internet_connectivity),
+                        getString(R.string.close_up)
+                    )
                 }
             })
         } else {
-            utility!!.relative_snackbar(parent_confirm!!, getString(R.string.no_internet_connectivity), getString(R.string.close_up))
+            utility!!.relative_snackbar(
+                parent_confirm!!,
+                getString(R.string.no_internet_connectivity),
+                getString(R.string.close_up)
+            )
         }
     }
 
@@ -146,6 +175,7 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
         val imm = this@ConfirmOrderActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
@@ -160,14 +190,19 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
         p0.uiSettings.isZoomControlsEnabled = false
         p0.setMapStyle(
             MapStyleOptions.loadRawResourceStyle(
-                this, R.raw.style_json))
+                this, R.raw.style_json
+            )
+        )
         myMarker = p0.addMarker(
             MarkerOptions()
                 .position(
-                    LatLng(lat!!,
-                    lng!!)
+                    LatLng(
+                        lat!!,
+                        lng!!
+                    )
                 )
-                .title("Order Place"))
+                .title("Order Place")
+        )
         p0.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat!!, lng!!), 15f))
     }
 }

@@ -36,12 +36,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SplashActivity : AppCompatActivity() {
-    private var mLocationRequest: LocationRequest? = null
-    private val INTERVAL = (1000 * 10).toLong()
-    private val FASTEST_INTERVAL = (1000 * 5).toLong()
-    private lateinit var locationCallback: LocationCallback
-    private var update = false
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__splash)
@@ -53,6 +48,7 @@ class SplashActivity : AppCompatActivity() {
         methodRequiresPermissions()
         checkForGps()
         createLocationRequest()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         if (ContextCompat.checkSelfPermission(
                 this@SplashActivity,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -61,7 +57,7 @@ class SplashActivity : AppCompatActivity() {
             startLocationUpdates()
         }
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
     }
 
     private fun startLocationUpdates() {
@@ -75,7 +71,7 @@ class SplashActivity : AppCompatActivity() {
             }
         }
 
-        fusedLocationClient.requestLocationUpdates(
+        fusedLocationClient!!.requestLocationUpdates(
             mLocationRequest,
             locationCallback,
             null
@@ -168,64 +164,74 @@ class SplashActivity : AppCompatActivity() {
         })
     }
 
-    /**
-     * creating location request
-     */
-    private fun createLocationRequest() {
-        mLocationRequest = LocationRequest()
-        mLocationRequest?.interval = INTERVAL
-        mLocationRequest?.fastestInterval = FASTEST_INTERVAL
-        mLocationRequest?.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        locationCallback = object : LocationCallback() {
-            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-            override fun onLocationResult(locationResult: LocationResult?) {
-                locationResult ?: return
-                for (location in locationResult.locations) {
-                    lat = location.latitude
-                    lng = location.longitude
-                    if (!update)
-                        apiLocation(location)
+    companion object {
+        var mLocationRequest: LocationRequest? = null
+        var INTERVAL = (1000 * 10).toLong()
+        var FASTEST_INTERVAL = (1000 * 5).toLong()
+        var fusedLocationClient: FusedLocationProviderClient? = null
+        var locationCallback: LocationCallback? = null
+        var update = false
+        /**
+         * creating location request
+         */
+        fun createLocationRequest() {
+            mLocationRequest = LocationRequest()
+            mLocationRequest?.interval = INTERVAL
+            mLocationRequest?.fastestInterval = FASTEST_INTERVAL
+            mLocationRequest?.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+
+            locationCallback = object : LocationCallback() {
+                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                override fun onLocationResult(locationResult: LocationResult?) {
+                    locationResult ?: return
+                    for (location in locationResult.locations) {
+                        Log.d("runing location", " lat : $lat lng : $lng")
+                        lat = location.latitude
+                        lng = location.longitude
+                        if (!update)
+                            apiLocation(location)
+                    }
                 }
             }
+
         }
+        fun apiLocation(location: Location) {
+            val requestsCall = RequestsCall()
+            requestsCall.UpdateLatLong(Prefs.getString("userid", ""), location.latitude, location.longitude)
+                .enqueue(object :
+                    Callback<JsonObject> {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
 
-    }
+                        if (response.isSuccessful) {
+                            Log.d("responsedata", response.body().toString())
+                            val responsedata = response.body().toString()
+                            try {
+                                val jsonObject = JSONObject(responsedata)
 
-
-    fun apiLocation(location: Location) {
-        val requestsCall = RequestsCall()
-        requestsCall.UpdateLatLong(Prefs.getString("userid", ""), location.latitude, location.longitude)
-            .enqueue(object :
-                Callback<JsonObject> {
-                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-
-                    if (response.isSuccessful) {
-                        Log.d("responsedata", response.body().toString())
-                        val responsedata = response.body().toString()
-                        try {
-                            val jsonObject = JSONObject(responsedata)
-
-                            if (jsonObject.optBoolean("status")) {
-                                update = true
-                            } else {
+                                if (jsonObject.optBoolean("status")) {
+                                    update = true
+                                } else {
+                                }
+                            } catch (e: JSONException) {
+                                e.printStackTrace()
                             }
-                        } catch (e: JSONException) {
-                            e.printStackTrace()
-                        }
 
-                    } else {
+                        } else {
+
+                        }
 
                     }
 
-                }
+                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
 
-                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-
-                }
-            })
+                    }
+                })
+        }
     }
+
+
 
 }

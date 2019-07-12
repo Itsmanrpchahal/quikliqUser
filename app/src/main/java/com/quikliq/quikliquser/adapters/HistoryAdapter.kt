@@ -59,7 +59,7 @@ class HistoryAdapter(
             historymodel.order_status!! == "5" -> holder.statusTV.text = "Canceled by User"
         }
         holder.totalpriceTV.text = "$"+historymodel.totalprice
-        holder.allitemsTV.text = historymodel.items!!.joinToString(limit = 5, truncated = "....")
+        holder.allitemsTV.text = historymodel.items!!.joinToString(limit = 20, truncated = "....")
         holder.ordertimeTV.text = historymodel.datetime
         holder.parentCart.setOnClickListener {
             context.startActivity(Intent(context, OrderSummaryActivity::class.java).putExtra("order",historyModelArraylist[position]))

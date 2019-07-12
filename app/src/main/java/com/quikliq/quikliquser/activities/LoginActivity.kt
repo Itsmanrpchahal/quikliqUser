@@ -13,6 +13,7 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.JsonObject
 import com.quikliq.quikliquser.R
 import com.quikliq.quikliquser.utilities.Prefs
@@ -41,6 +42,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         forgotPasswordLayout.setOnClickListener(this)
         signUp_RL.setOnClickListener(this)
         nextScreen.setOnClickListener(this)
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this) { instanceIdResult ->
+            val newToken = instanceIdResult.token
+            Prefs.putString(Constant.FCM_TOKEN, newToken)
+        }
     }
 
     override fun onClick(p0: View?) {

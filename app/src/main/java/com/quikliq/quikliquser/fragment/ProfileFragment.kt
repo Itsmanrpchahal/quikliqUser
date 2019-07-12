@@ -64,19 +64,26 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         order_history_TV?.setOnClickListener(this)
         change_password_TV?.setOnClickListener(this)
         sign_out_Tv?.setOnClickListener(this)
-
+        profileApiCall()
         return view
     }
 
     override fun onResume() {
         super.onResume()
-        profileApiCall()
+        userName_profile_TV!!.text = Prefs.getString("FirstName", "") + " " + Prefs.getString("LastName", "")
+        utility!!.loadImageWithLoader(
+            activity,
+            Prefs.getString(
+                "profileimage", ""
+            ),
+            user_image_IV
+        )
     }
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
             R.id.edit_BT -> startActivity(Intent(activity, EditProfileActivity::class.java))
-            R.id.order_history_TV -> startActivity(Intent(activity,OrderHistory::class.java))
+            R.id.order_history_TV -> startActivity(Intent(activity, OrderHistory::class.java))
             R.id.change_password_TV -> startActivity(Intent(activity, ChangePasswordActivity::class.java))
             R.id.contact_us_TV -> startActivity(Intent(activity, ContactUsActivity::class.java))
             R.id.about_Tv -> Log.d("about", "about")

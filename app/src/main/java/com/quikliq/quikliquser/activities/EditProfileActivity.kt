@@ -12,6 +12,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -85,6 +86,14 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                         try {
                             val jsonObject = JSONObject(responsedata)
                             if (jsonObject.optBoolean("status")) {
+                                Prefs.putString(
+                                    "profileimage",
+                                    jsonObject.optJSONObject("data").optString("profileimage")
+                                )
+                                Prefs.putString("FirstName", jsonObject.optJSONObject("data").optString("FirstName"))
+                                Prefs.putString("LastName", jsonObject.optJSONObject("data").optString("LastName"))
+                                Prefs.putString("Mobile", jsonObject.optJSONObject("data").optString("Mobile"))
+                                Prefs.putString("Email", jsonObject.optJSONObject("data").optString("Email"))
                                 edit_first_name_ET!!.setText(jsonObject.optJSONObject("data").optString("FirstName"))
                                 edit_last_name_ET!!.setText(jsonObject.optJSONObject("data").optString("LastName"))
                                 edit_profile_email_TV!!.setText(jsonObject.optJSONObject("data").optString("Email"))
@@ -138,13 +147,13 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
         when (p0!!.id) {
             R.id.edit_profile_image_IV->{
                 if ((ContextCompat.checkSelfPermission(
-                        this@EditProfileActivity!!,
+                        this@EditProfileActivity,
                         Manifest.permission.CAMERA
                     ) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(
-                        this@EditProfileActivity!!,
+                        this@EditProfileActivity,
                         Manifest.permission.READ_EXTERNAL_STORAGE
                     ) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(
-                        this@EditProfileActivity!!,
+                        this@EditProfileActivity,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE
                     ) != PackageManager.PERMISSION_GRANTED)
                 ) {
@@ -215,8 +224,8 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                 .setOnImageReceivedListener { imageUri ->
                     outputUri = imageUri
                     try {
-//                        val captureBmp = MediaStore.Images.Media.getBitmap(this@EditProfileActivity!!.contentResolver, imageUri)
-//                        business_image_IV!!.setImageBitmap(captureBmp)
+                        val captureBmp = MediaStore.Images.Media.getBitmap(this@EditProfileActivity.contentResolver, imageUri)
+                        business_image_IV!!.setImageBitmap(captureBmp)
                         profilePicChoosed = true
                     } catch (e: IOException) {
                         e.printStackTrace()
@@ -234,8 +243,8 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                 .setOnImageReceivedListener { imageUri ->
                     outputUri = imageUri
                     try {
-//                        val captureBmp = MediaStore.Images.Media.getBitmap(this@EditProfileActivity!!.contentResolver, imageUri)
-//                        business_image_IV!!.setImageBitmap(captureBmp)
+                        val captureBmp = MediaStore.Images.Media.getBitmap(this@EditProfileActivity.contentResolver, imageUri)
+                        business_image_IV!!.setImageBitmap(captureBmp)
                         profilePicChoosed = true
                     } catch (e: IOException) {
                         e.printStackTrace()
@@ -277,7 +286,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
      * this will be called when permission is denied once or more time. Handle it your way
      */
     private fun rationaleCallback(req: QuickPermissionsRequest) {
-        AlertDialog.Builder(this@EditProfileActivity!!)
+        AlertDialog.Builder(this@EditProfileActivity)
             .setTitle("Permissions Denied")
             .setMessage("This is the custom rationale dialog. Please allow us to proceed " + "asking for permissions again, or cancel to end the permission flow.")
             .setPositiveButton("Go Ahead") { _, _ -> req.proceed() }
@@ -291,7 +300,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
     denied. Handle it your way.
      */
     private fun permissionsPermanentlyDenied(req: QuickPermissionsRequest) {
-        AlertDialog.Builder(this@EditProfileActivity!!)
+        AlertDialog.Builder(this@EditProfileActivity)
             .setTitle("Permissions Denied")
             .setMessage(
                 "This is the custom permissions permanently denied dialog. " +
@@ -334,6 +343,14 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                         try {
                             val jsonObject = JSONObject(responsedata)
                             if (jsonObject.optBoolean("status")) {
+                                Prefs.putString(
+                                    "profileimage",
+                                    jsonObject.optJSONObject("data").optString("profileimage")
+                                )
+                                Prefs.putString("FirstName", jsonObject.optJSONObject("data").optString("FirstName"))
+                                Prefs.putString("LastName", jsonObject.optJSONObject("data").optString("LastName"))
+                                Prefs.putString("Mobile", jsonObject.optJSONObject("data").optString("Mobile"))
+                                Prefs.putString("Email", jsonObject.optJSONObject("data").optString("Email"))
 
                                 utility!!.linear_snackbar(
                                     parent_edit_profile!!,
@@ -380,8 +397,8 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
     }
 
     private fun hideKeyboard() {
-        val imm = this@EditProfileActivity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(this@EditProfileActivity!!.currentFocus!!.windowToken, 0)
+        val imm = this@EditProfileActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(this@EditProfileActivity.currentFocus!!.windowToken, 0)
     }
 
     private fun updateProfileApiCall() {
@@ -396,7 +413,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
             pd!!.setContentView(R.layout.loading)
             val requestsCall = RequestsCall()
             requestsCall.UpdateProfile(
-                this@EditProfileActivity!!,
+                this@EditProfileActivity,
                 Prefs.getString("userid", ""),
                 edit_first_name_ET!!.text.toString(),
                 edit_last_name_ET!!.text.toString(),
@@ -411,6 +428,15 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                         val responsedata = response.body().toString()
                         try {
                             val jsonObject = JSONObject(responsedata)
+                            Prefs.putString(
+                                "profileimage",
+                                jsonObject.optJSONObject("data").optString("profileimage")
+                            )
+                            Prefs.putString("FirstName", jsonObject.optJSONObject("data").optString("FirstName"))
+                            Prefs.putString("LastName", jsonObject.optJSONObject("data").optString("LastName"))
+                            Prefs.putString("Mobile", jsonObject.optJSONObject("data").optString("Mobile"))
+                            Prefs.putString("Email", jsonObject.optJSONObject("data").optString("Email"))
+
                             if (jsonObject.optBoolean("status")) {
                                 utility!!.linear_snackbar(
                                     parent_edit_profile!!,

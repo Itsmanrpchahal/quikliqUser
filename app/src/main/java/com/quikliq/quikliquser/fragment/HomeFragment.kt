@@ -8,6 +8,7 @@ import android.location.Address
 import android.location.Geocoder
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -24,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.JsonObject
 import com.quikliq.quikliquser.R
 import com.quikliq.quikliquser.activities.CartActivity
+import com.quikliq.quikliquser.activities.SplashActivity.Companion.createLocationRequest
 import com.quikliq.quikliquser.adapters.ProvidersAdapter
 import com.quikliq.quikliquser.constants.Constant.LOCATION
 import com.quikliq.quikliquser.constants.Constant.lat
@@ -38,6 +40,8 @@ import retrofit.RequestsCall
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeFragment : Fragment() {
@@ -56,7 +60,7 @@ class HomeFragment : Fragment() {
     private var searchET: EditText? = null
     private var clearBT: Button? = null
     private var searchedArraylist: ArrayList<ProviderModel>? = null
-
+    private var timer: Timer? = null
 
 
     override fun onCreateView(
@@ -89,8 +93,46 @@ class HomeFragment : Fragment() {
             1
         )
         clearBT = view.findViewById(R.id.clearBT)
-        LOCATION = addresses!![0].getAddressLine(0)
-        addressTV!!.text = addresses!![0].getAddressLine(0)
+        if(addresses != null && addresses!!.isNotEmpty()) {
+            LOCATION = addresses!![0].getAddressLine(0)
+            addressTV!!.text = addresses!![0].getAddressLine(0)
+        }
+        val handler = Handler()
+        timer = Timer()
+        val doTask: TimerTask = object : TimerTask() {
+            override fun run() {
+                handler.post {
+                    try {
+                        //Log.d("refresh", "done")
+                        activity!!.runOnUiThread {
+                            if(LOCATION == null){
+                                if(lat == 0.00 && lng == 0.00){
+                                    createLocationRequest()
+                                }
+
+                                geocoder = Geocoder(activity)
+                                addresses = geocoder!!.getFromLocation(
+                                    lat!!,
+                                    lng!!,
+                                    1
+                                )
+                                if(addresses != null && addresses!!.isNotEmpty()) {
+                                    LOCATION = addresses!![0].getAddressLine(0)
+                                    addressTV!!.text = addresses!![0].getAddressLine(0)
+                                    timer!!.cancel()
+
+                                }
+
+                            }
+                        }
+                    } catch (e: Exception) {
+                        // TODO Auto-generated catch block
+                    }
+                }
+            }
+        }
+        timer!!.schedule(doTask, 0, 500)
+
         providersApiCall()
         clearBT!!.setOnClickListener {
             searchET!!.setText("")
@@ -138,6 +180,7 @@ class HomeFragment : Fragment() {
 
             }
     }
+
     fun searchByName(s: String) {
         searchedArraylist = ArrayList()
         if (providersList != null && providersList!!.size > 0)

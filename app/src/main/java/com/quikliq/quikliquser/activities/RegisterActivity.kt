@@ -28,18 +28,18 @@ import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private var utility: Utility? = null
-    private var pd: ProgressDialog? = null
+    private var progressDialog: ProgressDialog? = null
     private var otp: String? = null
     private var phone_number: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__register)
         utility = Utility()
-        pd = ProgressDialog(this@RegisterActivity)
-        pd!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        pd!!.window!!.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-        pd!!.isIndeterminate = true
-        pd!!.setCancelable(false)
+        progressDialog = ProgressDialog(this@RegisterActivity)
+        progressDialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressDialog!!.window!!.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        progressDialog!!.isIndeterminate = true
+        progressDialog!!.setCancelable(false)
         otp = intent.getStringExtra("otp")
         phone_number = intent.getStringExtra("mobile")
         signUp_TV.setOnClickListener(this)
@@ -96,8 +96,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     ) {
         hideKeyboard()
         if (utility!!.isConnectingToInternet(this@RegisterActivity)) {
-            pd!!.show()
-            pd!!.setContentView(R.layout.loading)
+            progressDialog!!.show()
+            progressDialog!!.setContentView(R.layout.loading)
             val requestsCall = RequestsCall()
             requestsCall.signup(firstName, lastName, registerEmail, password_ET).enqueue(object : Callback<JsonObject> {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -109,6 +109,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                             if (jsonObject.optBoolean("status")) {
                                 saveAdditonalDetailApiCall(firstName, lastName, registerEmail, password_ET)
                             } else {
+                                progressDialog!!.dismiss()
                                 utility!!.relative_snackbar(
                                     parent_signup!!,
                                     jsonObject.optString("message"),
@@ -121,7 +122,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                         }
 
                     } else {
-                        pd!!.dismiss()
+                        progressDialog!!.dismiss()
                         utility!!.relative_snackbar(
                             parent_signup!!,
                             response.message(),
@@ -132,7 +133,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 }
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    pd!!.dismiss()
+                    progressDialog!!.dismiss()
                     utility!!.relative_snackbar(
                         parent_signup!!,
                         getString(R.string.no_internet_connectivity),
@@ -175,7 +176,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             ).enqueue(object : Callback<JsonObject> {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                    pd!!.dismiss()
+                    progressDialog!!.dismiss()
                     if (response.isSuccessful) {
                         val responsedata = response.body().toString()
                         Log.d("response", response.body().toString())
@@ -199,6 +200,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                                 )
                                 finish()
                             } else {
+                                if(progressDialog!!.isShowing){
+                                    progressDialog!!.dismiss()
+                                }
                                 utility!!.relative_snackbar(
                                     parent_signup!!,
                                     jsonObject.optString("message"),
@@ -211,6 +215,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                         }
 
                     } else {
+                        if(progressDialog!!.isShowing){
+                            progressDialog!!.dismiss()
+                        }
                         utility!!.relative_snackbar(
                             parent_signup!!,
                             response.message(),
@@ -221,7 +228,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                 }
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    pd!!.dismiss()
+                    progressDialog!!.dismiss()
                     utility!!.relative_snackbar(
                         parent_signup!!,
                         getString(R.string.no_internet_connectivity),

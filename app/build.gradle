@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'io.fabric'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
@@ -35,7 +37,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'com.android.support:design:27.1.1'
-    implementation 'com.google.firebase:firebase-messaging:18.0.0'
+    implementation 'com.google.firebase:firebase-messaging:19.0.0'
     implementation 'com.google.firebase:firebase-core:16.0.9'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.github.yalantis:ucrop:2.2.2'
@@ -43,6 +45,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.8.0'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation 'com.google.firebase:firebase-core:17.0.0'
+
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.14.1'
     implementation 'com.kaopiz:kprogresshud:1.2.0'

@@ -3,22 +3,22 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
             android:id="@+id/parentCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
-            android:layout_margin="@dimen/dimen_8dp"
+            android:layout_margin="@dimen/margin_5dp"
             app:cardCornerRadius="@dimen/margin_5dp">
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:padding="@dimen/dim_10dp"
+                android:padding="@dimen/dimen_8dp"
                 android:layout_height="wrap_content">
             <ImageView
-                    android:layout_width="@dimen/size_50dp"
-                    android:layout_height="@dimen/size_50dp"
+                    android:layout_width="@dimen/height_40dp"
+                    android:layout_height="@dimen/height_40dp"
                     android:layout_marginBottom="@dimen/height_3dp"
                     android:id="@+id/providerIV"/>
             <TextView
@@ -28,15 +28,15 @@
                     android:singleLine="true"
                     android:ellipsize="end"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/text_16sp"
+                    android:textSize="@dimen/text_14sp"
                     android:layout_toRightOf="@+id/providerIV"
                     android:layout_marginLeft="@dimen/margin_15dp"/>
             <View
                     android:id="@+id/view1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_0.5dp"
-                    android:layout_marginTop="@dimen/margin_5dp"
-                    android:layout_marginBottom="@dimen/margin_5dp"
+                    android:layout_marginTop="@dimen/height_3dp"
+                    android:layout_marginBottom="@dimen/height_3dp"
                     android:layout_below="@+id/providerIV"
                     android:background="@color/chip_background_selected"/>
             <TextView
@@ -45,8 +45,8 @@
                     android:text="ITEMS"
                     android:id="@+id/itemsTV"
                     android:textStyle="bold"
-                    android:textSize="@dimen/text_13sp"
-                    android:layout_marginTop="@dimen/dim_10dp"
+                    android:textSize="@dimen/text_12sp"
+                    android:layout_marginTop="@dimen/dimen_8dp"
                     android:layout_below="@+id/view1"/>
             <TextView
                     android:id="@+id/allitemsTV"
@@ -60,8 +60,8 @@
                       android:text="ORDERED ON"
                       android:id="@+id/orderedonTV"
                       android:textStyle="bold"
-                      android:textSize="@dimen/text_13sp"
-                      android:layout_marginTop="@dimen/dim_10dp"
+                      android:textSize="@dimen/text_12sp"
+                      android:layout_marginTop="@dimen/dimen_8dp"
                       android:layout_below="@+id/allitemsTV"/>
             <TextView
                     android:id="@+id/ordertimeTV"
@@ -75,8 +75,8 @@
                       android:text="TOTAL AMOUNT"
                       android:id="@+id/totalTV"
                       android:textStyle="bold"
-                      android:textSize="@dimen/text_13sp"
-                      android:layout_marginTop="@dimen/dim_10dp"
+                      android:textSize="@dimen/text_12sp"
+                      android:layout_marginTop="@dimen/dimen_8dp"
                       android:layout_below="@+id/ordertimeTV"/>
             <TextView
                     android:id="@+id/totalpriceTV"
@@ -89,8 +89,8 @@
                     android:id="@+id/view2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_0.5dp"
-                    android:layout_marginTop="@dimen/margin_5dp"
-                    android:layout_marginBottom="@dimen/margin_5dp"
+                    android:layout_marginTop="@dimen/height_3dp"
+                    android:layout_marginBottom="@dimen/height_3dp"
                     android:layout_below="@+id/totalpriceTV"
                     android:background="@color/chip_background_selected"/>
             <TextView android:layout_width="wrap_content"
@@ -98,8 +98,8 @@
                       android:text="Delievered"
                       android:id="@+id/statusTV"
                       android:textStyle="bold"
-                      android:textSize="@dimen/text_13sp"
-                      android:layout_marginTop="@dimen/dim_10dp"
+                      android:textSize="@dimen/text_12sp"
+                      android:layout_marginTop="@dimen/dimen_8dp"
                       android:layout_below="@+id/view2"/>
 
 
@@ -107,7 +107,7 @@
                     android:id="@+id/cancelTV"
                     android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:textSize="@dimen/text_13sp"
+                      android:textSize="@dimen/text_12sp"
                       android:textStyle="bold"
                     android:visibility="gone"
                       android:layout_alignParentRight="true"

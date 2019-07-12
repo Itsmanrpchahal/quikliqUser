@@ -1,6 +1,7 @@
 package com.quikliq.quikliquser.activities
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -38,6 +39,7 @@ class OrderHistory : AppCompatActivity(), CancelOrder {
     private var quantity: ArrayList<String>? = null
     private var items: ArrayList<String>? = null
     private var historyAdapter:HistoryAdapter? = null
+    private var order_success: Boolean?= false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +57,9 @@ class OrderHistory : AppCompatActivity(), CancelOrder {
         pd!!.window!!.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         pd!!.isIndeterminate = true
         pd!!.setCancelable(false)
+        if(intent.hasExtra("order_success")){
+            order_success = true
+        }
         orderHistoryApiCall()
     }
 
@@ -62,13 +67,35 @@ class OrderHistory : AppCompatActivity(), CancelOrder {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                finish()
+                if(order_success!!){
+                    startActivity(
+                        Intent(
+                            this@OrderHistory,
+                            HomeActivity::class.java
+                        ).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    )
+                    finish()
+                }else{
+                    finish()
+                }
             }
         }
         return true
     }
 
-
+    override fun onBackPressed() {
+        if(order_success!!){
+            startActivity(
+                Intent(
+                    this@OrderHistory,
+                    HomeActivity::class.java
+                ).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            )
+            finish()
+        }else{
+            super.onBackPressed()
+        }
+    }
 
     private fun orderHistoryApiCall() {
         if (utility!!.isConnectingToInternet(this@OrderHistory)) {
@@ -169,7 +196,7 @@ class OrderHistory : AppCompatActivity(), CancelOrder {
         }
     }
 
-    private fun orderHistoryApiCall(order_id:String) {
+    private fun cancelOrderApiCall(order_id:String) {
         if (utility!!.isConnectingToInternet(this@OrderHistory)) {
             pd!!.show()
             pd!!.setContentView(R.layout.loading)
@@ -232,6 +259,6 @@ class OrderHistory : AppCompatActivity(), CancelOrder {
     }
 
     override fun cancel(order_id: String) {
-        orderHistoryApiCall(order_id)
+        cancelOrderApiCall(order_id)
     }
 }

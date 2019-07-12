@@ -31,8 +31,8 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_13sp"
                     android:singleLine="true"
+                    android:text="Location detecting..."
                     android:ellipsize="end"
-                    android:textColorHint="@android:color/black"
                     android:textColor="@android:color/black"
             />
             <View android:layout_width="match_parent"
