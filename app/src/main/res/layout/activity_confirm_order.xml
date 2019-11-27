@@ -76,9 +76,11 @@
                     android:id="@+id/noteET"
                     android:layout_marginTop="@dimen/margin_5dp"
                     android:layout_marginLeft="@dimen/margin_15dp"
+                    android:minLines="3"
                     android:layout_marginRight="@dimen/margin_15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="left|top"
                     android:padding="@dimen/dimen_8dp"
                     android:paddingLeft="5dp"
                     android:hint="Special Note"
@@ -86,26 +88,25 @@
                     android:inputType="text|textMultiLine"
                     android:imeOptions="actionDone"/>
 
+        </RelativeLayout>
+        <RelativeLayout
+                android:id="@+id/placeorderRL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dim_10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/green_selecter">
+            <TextView
+                    android:id="@+id/placeorderTV"
+                    android:textSize="@dimen/text_20sp"
+                    android:textColor="@android:color/white"
+                    android:text="Place Order"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-            <RelativeLayout
-                    android:id="@+id/placeorderRL"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dim_10dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/green_selecter">
-                <TextView
-                        android:id="@+id/placeorderTV"
-                        android:textSize="@dimen/text_20sp"
-                        android:textColor="@android:color/white"
-                        android:text="Place Order"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-
-            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 

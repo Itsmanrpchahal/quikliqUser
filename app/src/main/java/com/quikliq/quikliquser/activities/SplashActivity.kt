@@ -84,23 +84,12 @@ class SplashActivity : AppCompatActivity() {
      */
     @SuppressLint("MissingPermission", "HardwareIds")
     private fun methodRequiresPermissions() = runWithPermissions(
-        Manifest.permission.READ_PHONE_STATE,
-        Manifest.permission.RECORD_AUDIO,
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE,
         Manifest.permission.CAMERA,
         Manifest.permission.ACCESS_FINE_LOCATION,
         options = quickPermissionsOption
     ) {
-
-        //        telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
-//        deviceId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            telephonyManager!!.imei
-//        } else {
-//            telephonyManager!!.deviceId
-//        }
-//        Prefs.putString(Constant.DEVICE_UNIQUE_ID, deviceId)
-
         Handler().postDelayed({
             if (Prefs.getBoolean(Constant.IS_LOGGED_IN, false)) {
                 startActivity(Intent(this@SplashActivity, HomeActivity::class.java))
@@ -112,9 +101,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
 
-    /**methodRequiresPermissions
-     * this will be called when permission is denied once or more time. Handle it your way
-     */
     private fun rationaleCallback(req: QuickPermissionsRequest) {
         AlertDialog.Builder(this)
             .setTitle("Permissions Denied")
@@ -125,10 +111,7 @@ class SplashActivity : AppCompatActivity() {
             .show()
     }
 
-    /**
-     * this will be called when some/all permissions required by the method are permanently
-    denied. Handle it your way.
-     */
+
     private fun permissionsPermanentlyDenied(req: QuickPermissionsRequest) {
         AlertDialog.Builder(this)
             .setTitle("Permissions Denied")
@@ -143,9 +126,6 @@ class SplashActivity : AppCompatActivity() {
             .show()
     }
 
-    /**
-     * used for permission callbacks
-     */
     private val quickPermissionsOption = QuickPermissionsOptions(
         rationaleMessage = "Custom rational message",
         permanentlyDeniedMessage = "Custom permanently denied message",

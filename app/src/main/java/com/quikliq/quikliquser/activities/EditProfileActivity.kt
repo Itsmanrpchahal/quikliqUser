@@ -489,9 +489,17 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
+                hideKeyboard()
                 finish()
             }
         }
         return true
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        hideKeyboard()
+
+    }
+
 }
