@@ -95,7 +95,18 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
                 noteET!!.requestFocus()
                 noteET!!.error = getString(R.string.txt_Error_required)
             }
-
+            cityET.text.isEmpty() -> {
+                cityET.requestFocus()
+                cityET.error = getString(R.string.txt_Error_required)
+            }
+            stateET.text.isEmpty() -> {
+                stateET.requestFocus()
+                stateET.error = getString(R.string.txt_Error_required)
+            }
+            zipET.text.isEmpty() -> {
+                zipET.requestFocus()
+                zipET.error = getString(R.string.txt_Error_required)
+            }
             else -> orderAPiCall()
         }
     }
@@ -113,7 +124,10 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
                 lng.toString(),
                 addressET!!.text.toString() + " " + LOCATION,
                 noteET!!.text.toString(),
-                "1"
+                "1",
+                cityET.text.toString(),
+                stateET.text.toString(),
+                zipET.text.toString()
             ).enqueue(object : Callback<JsonObject> {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {

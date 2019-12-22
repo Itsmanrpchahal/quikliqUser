@@ -263,6 +263,7 @@ class HomeFragment : Fragment() {
 
 
                             } else {
+                                pd!!.dismiss()
                                 utility!!.relative_snackbar(
                                     parent_f_home!!,
                                     jsonObject.optString("message"),

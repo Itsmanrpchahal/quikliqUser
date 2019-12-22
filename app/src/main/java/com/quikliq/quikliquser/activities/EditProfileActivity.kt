@@ -14,10 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.MenuItem
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
@@ -31,6 +28,7 @@ import com.livinglifetechway.quickpermissions_kotlin.util.QuickPermissionsReques
 import com.quikliq.quikliquser.R
 import com.quikliq.quikliquser.imagePicker.PickerBuilder
 import com.quikliq.quikliquser.utilities.Prefs
+import com.quikliq.quikliquser.utilities.Utilities
 import com.quikliq.quikliquser.utilities.Utility
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -42,7 +40,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
-class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
+class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
     private var utility: Utility? = null
     private var pd: ProgressDialog? = null
     private var outputUri: Uri? = null
@@ -97,11 +95,11 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                                 edit_first_name_ET!!.setText(jsonObject.optJSONObject("data").optString("FirstName"))
                                 edit_last_name_ET!!.setText(jsonObject.optJSONObject("data").optString("LastName"))
                                 edit_profile_email_TV!!.setText(jsonObject.optJSONObject("data").optString("Email"))
-                                    utility!!.loadImageWithLoader(
-                                        this@EditProfileActivity,
-                                        jsonObject.optJSONObject("data").optString("profileimage"),
-                                        business_image_IV
-                                    )
+                                utility!!.loadImageWithLoader(
+                                    this@EditProfileActivity,
+                                    jsonObject.optJSONObject("data").optString("profileimage"),
+                                    business_image_IV
+                                )
 
 
                             } else {
@@ -115,7 +113,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                             e.printStackTrace()
                         }
 
-                    }else{
+                    } else {
                         utility!!.linear_snackbar(
                             parent_edit_profile!!,
                             response.message(),
@@ -145,7 +143,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
-            R.id.edit_profile_image_IV->{
+            R.id.edit_profile_image_IV -> {
                 if ((ContextCompat.checkSelfPermission(
                         this@EditProfileActivity,
                         Manifest.permission.CAMERA
@@ -162,7 +160,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                     pictureSelectionDialog()
                 }
             }
-            R.id.edit_profile_send_btn_IV -> if(profilePicChoosed!!){
+            R.id.edit_profile_send_btn_IV -> if (profilePicChoosed!!) {
                 when {
                     edit_first_name_ET!!.text.isEmpty() -> {
                         edit_first_name_ET!!.requestFocus()
@@ -183,7 +181,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                     else -> updateProfileApiCall()
                 }
 
-            }else{
+            } else {
                 checkValidation()
             }
         }
@@ -224,7 +222,8 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                 .setOnImageReceivedListener { imageUri ->
                     outputUri = imageUri
                     try {
-                        val captureBmp = MediaStore.Images.Media.getBitmap(this@EditProfileActivity.contentResolver, imageUri)
+                        val captureBmp =
+                            MediaStore.Images.Media.getBitmap(this@EditProfileActivity.contentResolver, imageUri)
                         business_image_IV!!.setImageBitmap(captureBmp)
                         profilePicChoosed = true
                     } catch (e: IOException) {
@@ -243,7 +242,8 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                 .setOnImageReceivedListener { imageUri ->
                     outputUri = imageUri
                     try {
-                        val captureBmp = MediaStore.Images.Media.getBitmap(this@EditProfileActivity.contentResolver, imageUri)
+                        val captureBmp =
+                            MediaStore.Images.Media.getBitmap(this@EditProfileActivity.contentResolver, imageUri)
                         business_image_IV!!.setImageBitmap(captureBmp)
                         profilePicChoosed = true
                     } catch (e: IOException) {
@@ -271,13 +271,6 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
         Manifest.permission.CAMERA,
         options = quickPermissionsOption
     ) {
-        //        telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
-//        deviceId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            telephonyManager!!.imei
-//        } else {
-//            telephonyManager!!.deviceId
-//        }
-//        Prefs.putString(Constant.DEVICE_UNIQUE_ID, deviceId)
         pictureSelectionDialog()
 
     }
@@ -322,6 +315,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
         rationaleMethod = { rationaleCallback(it) },
         permanentDeniedMethod = { permissionsPermanentlyDenied(it) }
     )
+
     private fun updateWithoutImageApiCall() {
         hideKeyboard()
         if (utility!!.isConnectingToInternet(this@EditProfileActivity)) {
@@ -368,7 +362,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                             e.printStackTrace()
                         }
 
-                    }else{
+                    } else {
                         utility!!.linear_snackbar(
                             parent_edit_profile!!,
                             response.message(),
@@ -398,13 +392,14 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
 
     private fun hideKeyboard() {
         val imm = this@EditProfileActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(this@EditProfileActivity.currentFocus!!.windowToken, 0)
+        if (imm != null)
+            imm.hideSoftInputFromWindow(this@EditProfileActivity.currentFocus!!.windowToken, 0)
     }
 
     private fun updateProfileApiCall() {
-        if(edit_first_name_ET.hasFocus()){
+        if (edit_first_name_ET.hasFocus()) {
             hideKeyboard()
-        }else if (edit_last_name_ET.hasFocus()){
+        } else if (edit_last_name_ET.hasFocus()) {
             hideKeyboard()
         }
 
@@ -458,7 +453,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                             e.printStackTrace()
                         }
 
-                    }else{
+                    } else {
                         utility!!.linear_snackbar(
                             parent_edit_profile!!,
                             response.message(),
@@ -489,7 +484,9 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                hideKeyboard()
+                if (Utilities.isSoftKeyboardOpen(parent_edit_profile)) {
+                    hideKeyboard()
+                }
                 finish()
             }
         }
@@ -498,8 +495,11 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        hideKeyboard()
+        if (Utilities.isSoftKeyboardOpen(parent_edit_profile)) {
+            hideKeyboard()
+        }
 
     }
+
 
 }

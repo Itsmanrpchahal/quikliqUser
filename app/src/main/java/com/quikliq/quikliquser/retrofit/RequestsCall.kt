@@ -35,10 +35,10 @@ class RequestsCall {
         return api.mobile("NewOtp",mobile_number)
     }
 
-    fun saveAdditionalDetail(devicetype: String, firstname: String, lastname : String, mobile : String, email : String, password : String, address : String, usertype : String, devicetoken : String): Call<JsonObject> {
+    fun saveAdditionalDetail(devicetype: String, firstname: String, lastname : String, mobile : String, email : String, password : String, address : String, usertype : String, devicetoken : String,city:String,state:String,zip:String): Call<JsonObject> {
         val apiCall = ApiCall()
         val api = apiCall.apiCall().create(ApiHelper::class.java)
-        return api.saveAdditionalDetail("SaveAdditionalDetail",devicetype, firstname, lastname, mobile, email, password, address,usertype,devicetoken)
+        return api.saveAdditionalDetail("SaveAdditionalDetail",devicetype, firstname, lastname, mobile, email, password, address,usertype,devicetoken,city,state,zip)
     }
 
     fun profile(userID: String): Call<JsonObject> {
@@ -150,10 +150,10 @@ class RequestsCall {
         return api.UpdateCartQuantity("UpdateCartQuantity",userid,productprice,productid,quantity)
     }
 
-    fun PlaceOrder(userid: String, providerid: String,latitude: String,longitude: String,address:String,note:String,paymentstatus:String): Call<JsonObject> {
+    fun PlaceOrder(userid: String, providerid: String,latitude: String,longitude: String,address:String,note:String,paymentstatus:String,city:String,state:String,zip:String): Call<JsonObject> {
         val apiCall = ApiCall()
         val api = apiCall.apiCall().create(ApiHelper::class.java)
-        return api.PlaceOrder("PlaceOrder",userid,providerid,latitude,longitude,address,note,paymentstatus)
+        return api.PlaceOrder("PlaceOrder",userid,providerid,latitude,longitude,address,note,paymentstatus,city,state,zip)
     }
 
 
@@ -169,4 +169,23 @@ class RequestsCall {
         return api.CancelOrder("CancelOrder",userID,order_id)
     }
 
+
+
+    fun UploadIdProof(
+        context: Context,
+        userid: String,
+        image: Uri?,
+        id_type: String
+    ): Call<JsonObject> {
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        val imageCompressor = ImageCompressor()
+        val path = imageCompressor.compressImage(context, image.toString())
+        val fbody = RequestBody.create(MediaType.parse("multipart/form-data"), File(path))
+        val body = MultipartBody.Part.createFormData("image",  File(path).name, fbody)
+        val method1 = RequestBody.create(MediaType.parse("text/plain"), "UploadIdProof")
+        val user_id = RequestBody.create(MediaType.parse("text/plain"), userid)
+        val idtype = RequestBody.create(MediaType.parse("text/plain"), id_type)
+        return api.UpoadIdProof(method1,user_id,body,idtype)
+    }
 }

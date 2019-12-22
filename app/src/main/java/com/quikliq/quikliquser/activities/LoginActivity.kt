@@ -102,6 +102,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                                 Prefs.putString("Address",jsonObject.optJSONObject("data").optString("Address"))
                                 Prefs.putString("UserType",jsonObject.optJSONObject("data").optString("UserType"))
                              Prefs.putString("userid",jsonObject.optJSONObject("data").optString("userid"))
+                                Prefs.putInt("IsAgeVerify",jsonObject.optJSONObject("data").optInt("IsAgeVerify"))
                                 Prefs.putBoolean(Constant.IS_LOGGED_IN, true)
                                 startActivity(
                                     Intent(

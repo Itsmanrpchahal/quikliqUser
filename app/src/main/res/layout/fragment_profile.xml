@@ -101,16 +101,35 @@
                             android:textSize="18sp"/>
 
                     <View
+                            android:id="@+id/v"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_below="@+id/order_history_TV"
                             android:background="@color/dark_gray"/>
 
                     <TextView
+                            android:id="@+id/age_verification_TV"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_below="@+id/v"
+                            android:drawableLeft="@mipmap/order_history"
+                            android:drawablePadding="20dp"
+                            android:padding="5dp"
+                            android:text="Age verification"
+                            android:textSize="18sp"/>
+                    <View
+                            android:id="@+id/v2"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/age_verification_TV"
+                            android:background="@color/dark_gray"/>
+
+                    <TextView
                             android:id="@+id/change_password_TV"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/order_history_TV"
+                            android:layout_below="@id/v2"
                             android:layout_margin="10dp"
                             android:drawableLeft="@mipmap/change_password"
                             android:drawablePadding="20dp"

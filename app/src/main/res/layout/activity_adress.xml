@@ -34,12 +34,13 @@
             <RelativeLayout
                     android:id="@+id/paymentLayout"
                     android:layout_width="wrap_content"
-                    android:layout_height="380dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_below="@+id/paymentInfoText">
                 <RelativeLayout
+                        android:id="@+id/container"
                         android:background="@drawable/content_background"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content">
@@ -59,19 +60,19 @@
                                     android:layout_margin="10dp"/>
                             <com.google.android.material.textfield.TextInputLayout
                                     android:layout_gravity="center"
-                                    android:id="@+id/input_layout_businessname"
+                                    android:id="@+id/input_layout_cityname"
                                     android:layout_width="fill_parent"
                                     android:layout_height="45dp">
                                 <EditText
                                         android:textSize="14dp"
                                         android:textColor="#ff000000"
                                         android:textColorHint="#ff696969"
-                                        android:id="@+id/bussinessName"
+                                        android:id="@+id/cityName"
                                         android:background="@android:color/transparent"
                                         android:layout_width="fill_parent"
                                         android:layout_height="fill_parent"
                                         android:layout_marginLeft="5dp"
-                                        android:hint="BUSINESS NAME"
+                                        android:hint="City"
                                         android:inputType="text"
                                         android:imeOptions="actionNext"/>
                             </com.google.android.material.textfield.TextInputLayout>
@@ -92,19 +93,19 @@
                                     android:layout_margin="10dp"/>
                             <com.google.android.material.textfield.TextInputLayout
                                     android:layout_gravity="center"
-                                    android:id="@+id/input_layout_bankname"
+                                    android:id="@+id/input_layout_statename"
                                     android:layout_width="fill_parent"
                                     android:layout_height="45dp">
                                 <EditText
                                         android:textSize="14dp"
                                         android:textColor="#ff000000"
                                         android:textColorHint="#ff696969"
-                                        android:id="@+id/bankName"
+                                        android:id="@+id/stateName"
                                         android:background="@android:color/transparent"
                                         android:layout_width="fill_parent"
                                         android:layout_height="fill_parent"
                                         android:layout_marginLeft="5dp"
-                                        android:hint="BANK NAME"
+                                        android:hint="State"
                                         android:inputType="text"
                                         android:imeOptions="actionNext"/>
                             </com.google.android.material.textfield.TextInputLayout>
@@ -125,88 +126,23 @@
                                     android:layout_margin="10dp"/>
                             <com.google.android.material.textfield.TextInputLayout
                                     android:layout_gravity="center"
-                                    android:id="@+id/input_layout_accountname"
+                                    android:id="@+id/input_layout_zipcode"
                                     android:layout_width="fill_parent"
                                     android:layout_height="45dp">
                                 <EditText
                                         android:textSize="14dp"
                                         android:textColor="#ff000000"
                                         android:textColorHint="#ff696969"
-                                        android:id="@+id/accountNumber"
+                                        android:id="@+id/zipcode"
                                         android:background="@android:color/transparent"
                                         android:layout_width="fill_parent"
                                         android:layout_height="fill_parent"
                                         android:layout_marginLeft="5dp"
-                                        android:hint="ACCOUNT NUMBER"
+                                        android:hint="Zip code"
                                         android:inputType="number"
                                         android:imeOptions="actionNext"/>
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
-                        <View
-                                android:background="#ffd3d3d3"
-                                android:layout_width="fill_parent"
-                                android:layout_height="1dp"/>
-                        <LinearLayout
-                                android:orientation="horizontal"
-                                android:layout_width="fill_parent"
-                                android:layout_height="70dp">
-                            <ImageView
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/ic_user"
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
-                                    android:layout_margin="10dp"/>
-                            <com.google.android.material.textfield.TextInputLayout
-                                    android:layout_gravity="center"
-                                    android:id="@+id/input_layout_ifsc"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="45dp">
-                                <EditText
-                                        android:textSize="14dp"
-                                        android:textColor="#ff000000"
-                                        android:textColorHint="#ff696969"
-                                        android:id="@+id/ifscCode"
-                                        android:background="@android:color/transparent"
-                                        android:layout_width="fill_parent"
-                                        android:layout_height="fill_parent"
-                                        android:layout_marginLeft="5dp"
-                                        android:hint="IFSC CODE"
-                                        android:inputType="text"
-                                        android:imeOptions="actionNext"/>
-                            </com.google.android.material.textfield.TextInputLayout>
-                        </LinearLayout>
-                        <View
-                                android:background="#ffd3d3d3"
-                                android:layout_width="fill_parent"
-                                android:layout_height="1dp"/>
-                        <LinearLayout
-                                android:orientation="horizontal"
-                                android:layout_width="fill_parent"
-                                android:layout_height="70dp">
-                            <ImageView
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/ic_address"
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
-                                    android:layout_margin="10dp"/>
-                            <EditText
-                                    android:textSize="14dp"
-                                    android:textColor="#ff000000"
-                                    android:textColorHint="#ff696969"
-                                    android:gravity="center_vertical"
-                                    android:id="@+id/address_TV"
-                                    android:background="@null"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="fill_parent"
-                                    android:layout_marginLeft="5dp"
-                                    android:layout_marginRight="70dp"
-                                    android:hint="ADDRESS"
-                                    android:singleLine="true"/>
-                        </LinearLayout>
-                        <View
-                                android:background="#ffd3d3d3"
-                                android:layout_width="fill_parent"
-                                android:layout_height="1dp"/>
                     </LinearLayout>
                 </RelativeLayout>
                 <ImageView
@@ -215,8 +151,9 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginRight="10dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentBottom="true"/>
+                        android:layout_marginTop="-30dp"
+                        android:layout_below="@+id/container"
+                        android:layout_alignParentRight="true"/>
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>

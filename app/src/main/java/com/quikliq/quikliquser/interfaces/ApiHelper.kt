@@ -23,7 +23,7 @@ interface ApiHelper {
 
     @FormUrlEncoded
     @POST(".")
-    fun saveAdditionalDetail(@Field("method") SaveAdditionalDetail: String ,@Field("devicetype") devicetype: String, @Field("firstname") firstname: String, @Field("lastname") lastname: String, @Field("mobile") mobile: String, @Field("email") email: String, @Field("password") password: String, @Field("address") address: String, @Field("usertype") usertype: String, @Field("devicetoken") devicetoken: String): Call<JsonObject>
+    fun saveAdditionalDetail(@Field("method") SaveAdditionalDetail: String ,@Field("devicetype") devicetype: String, @Field("firstname") firstname: String, @Field("lastname") lastname: String, @Field("mobile") mobile: String, @Field("email") email: String, @Field("password") password: String, @Field("address") address: String, @Field("usertype") usertype: String, @Field("devicetoken") devicetoken: String, @Field("city") city: String, @Field("state") state: String, @Field("zip") zip: String): Call<JsonObject>
 
     @FormUrlEncoded
     @POST(".")
@@ -96,7 +96,7 @@ interface ApiHelper {
 
     @FormUrlEncoded
     @POST(".")
-    fun PlaceOrder(@Field("method") PlaceOrder: String ,@Field("userid") userid: String, @Field("providerid") providerid: String,@Field("latitude") latitude: String, @Field("longitude") longitude: String, @Field("address") address: String, @Field("note") note: String, @Field("paymentstatus") paymentstatus: String): Call<JsonObject>
+    fun PlaceOrder(@Field("method") PlaceOrder: String ,@Field("userid") userid: String, @Field("providerid") providerid: String,@Field("latitude") latitude: String, @Field("longitude") longitude: String, @Field("address") address: String, @Field("note") note: String, @Field("paymentstatus") paymentstatus: String,@Field("city") city: String,@Field("state") state: String,@Field("zip") zip: String): Call<JsonObject>
 
     @FormUrlEncoded
     @POST(".")
@@ -105,6 +105,12 @@ interface ApiHelper {
     @FormUrlEncoded
     @POST(".")
     fun CancelOrder(@Field("method") CancelOrder: String ,@Field("userid") userid: String, @Field("orderid") orderid: String): Call<JsonObject>
+
+
+    @Multipart
+    @POST(".")
+    fun UpoadIdProof(@Part("method") UploadIdProof: RequestBody ,@Part("userid") userid: RequestBody , @Part image: MultipartBody.Part,@Part("id_type") id_type: RequestBody): Call<JsonObject>
+
 
 
 }

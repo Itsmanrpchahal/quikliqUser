@@ -12,136 +12,138 @@
              android:id="@+id/toolbar"/>
     <ScrollView android:layout_width="match_parent"
                 android:layout_height="match_parent">
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="vertical"
-                  android:layout_height="match_parent">
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/edit_profile_image_CL"
-                android:layout_width="120dp"
-                android:layout_height="110dp"
-                android:layout_gravity="center"
-                android:elevation="5dp"
-                android:layout_marginTop="30dp">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/edit_profile_image_CL"
+                    android:layout_width="120dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center"
+                    android:elevation="5dp"
+                    android:layout_marginTop="30dp">
 
 
-            <com.quikliq.quikliquser.utilities.RoundRectCornerImageView
-                    android:id="@+id/business_image_IV"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="h,1:0"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                <com.quikliq.quikliquser.utilities.RoundRectCornerImageView
+                        android:id="@+id/business_image_IV"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="h,1:0"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
 
-            <ImageView
-                    android:id="@+id/edit_profile_image_IV"
+                <ImageView
+                        android:id="@+id/edit_profile_image_IV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:srcCompat="@drawable/edit_camera"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:background="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/edit_camera"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="225dp"
-                android:layout_below="@+id/edit_profile_image_CL">
+                    android:layout_height="225dp"
+                    android:layout_below="@+id/edit_profile_image_CL">
 
 
-            <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    app:cardBackgroundColor="@color/gray"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="5dp">
-
-                <RelativeLayout
+                <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        app:cardBackgroundColor="@color/gray"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="5dp">
 
-
-                    <EditText
-                            android:id="@+id/edit_first_name_ET"
+                    <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_marginLeft="5dp"
-                            android:background="@color/trans"
-                            android:drawableLeft="@mipmap/user"
-                            android:drawablePadding="20dp"
-                            android:hint="First Name"
-                            android:inputType="textEmailAddress"
-                            android:paddingLeft="20dp"/>
+                            android:layout_height="match_parent">
 
 
-                    <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_below="@+id/edit_first_name_ET"
-                            android:background="@color/dark_gray"/>
+                        <EditText
+                                android:id="@+id/edit_first_name_ET"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:layout_marginLeft="5dp"
+                                android:background="@color/trans"
+                                android:drawableLeft="@mipmap/user"
+                                android:drawablePadding="20dp"
+                                android:hint="First Name"
+                                android:inputType="textEmailAddress"
+                                android:paddingLeft="20dp"/>
 
 
-                    <EditText
-                            android:id="@+id/edit_last_name_ET"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_below="@+id/edit_first_name_ET"
-                            android:layout_marginLeft="5dp"
-                            android:background="@color/trans"
-                            android:drawableLeft="@mipmap/user"
-                            android:drawablePadding="20dp"
-                            android:hint="Last Name"
-                            android:inputType="textEmailAddress"
-                            android:paddingLeft="20dp"/>
+                        <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/edit_first_name_ET"
+                                android:background="@color/dark_gray"/>
 
 
-                    <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_below="@+id/edit_last_name_ET"
-                            android:background="@color/dark_gray"/>
+                        <EditText
+                                android:id="@+id/edit_last_name_ET"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:layout_below="@+id/edit_first_name_ET"
+                                android:layout_marginLeft="5dp"
+                                android:background="@color/trans"
+                                android:drawableLeft="@mipmap/user"
+                                android:drawablePadding="20dp"
+                                android:hint="Last Name"
+                                android:inputType="textEmailAddress"
+                                android:paddingLeft="20dp"/>
 
 
-                    <EditText
-                            android:id="@+id/edit_profile_email_TV"
-                            android:layout_width="match_parent"
-                            android:layout_height="65dp"
-                            android:layout_below="@+id/edit_last_name_ET"
-                            android:background="@color/trans"
-                            android:drawableLeft="@mipmap/mail"
-                            android:drawablePadding="20dp"
-                            android:gravity="center_vertical"
-                            android:enabled="false"
-                            android:clickable="false"
-                            android:hint="Email"
-                            android:inputType="textEmailAddress"
-                            android:paddingLeft="20dp"
-                            android:textSize="20sp"
-                            tools:ignore="LabelFor"/>
+                        <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/edit_last_name_ET"
+                                android:background="@color/dark_gray"/>
 
 
-                </RelativeLayout>
+                        <EditText
+                                android:id="@+id/edit_profile_email_TV"
+                                android:layout_width="match_parent"
+                                android:layout_height="65dp"
+                                android:layout_below="@+id/edit_last_name_ET"
+                                android:background="@color/trans"
+                                android:drawableLeft="@mipmap/mail"
+                                android:drawablePadding="20dp"
+                                android:gravity="center_vertical"
+                                android:enabled="false"
+                                android:clickable="false"
+                                android:hint="Email"
+                                android:inputType="textEmailAddress"
+                                android:paddingLeft="20dp"
+                                android:textSize="20sp"
+                                tools:ignore="LabelFor"/>
 
-            </androidx.cardview.widget.CardView>
 
-            <ImageView
-                    android:id="@+id/edit_profile_send_btn_IV"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="45dp"
-                    android:elevation="@dimen/dim_10dp"
-                    android:src="@drawable/send_btn"/>
+                    </RelativeLayout>
 
-        </RelativeLayout>
-    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                        android:id="@+id/edit_profile_send_btn_IV"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="45dp"
+                        android:elevation="@dimen/dim_10dp"
+                        android:src="@drawable/send_btn"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
 
     </ScrollView>
 </LinearLayout>

@@ -107,7 +107,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                         try {
                             val jsonObject = JSONObject(responsedata)
                             if (jsonObject.optBoolean("status")) {
-                                saveAdditonalDetailApiCall(firstName, lastName, registerEmail, password_ET)
+                                startActivity( Intent(this@RegisterActivity,AdressActivity::class.java).putExtra("FirstName",firstName).putExtra("LastName",lastName).putExtra("Email",registerEmail).putExtra("password_ET",password_ET).putExtra("address",address.text.toString()).putExtra("phone_number",phone_number))
                             } else {
                                 progressDialog!!.dismiss()
                                 utility!!.relative_snackbar(
@@ -155,93 +155,4 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
     }
 
-    private fun saveAdditonalDetailApiCall(
-        firstName: String,
-        lastName: String,
-        registerEmail: String,
-        password: String
-    ) {
-        if (utility!!.isConnectingToInternet(this@RegisterActivity)) {
-            val requestsCall = RequestsCall()
-            requestsCall.saveAdditionalDetail(
-                "1",
-                firstName,
-                lastName,
-                phone_number!!,
-                registerEmail,
-                password,
-                address.text.toString(),
-                "2",
-                 Prefs.getString(Constant.FCM_TOKEN, "")
-            ).enqueue(object : Callback<JsonObject> {
-                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                    progressDialog!!.dismiss()
-                    if (response.isSuccessful) {
-                        val responsedata = response.body().toString()
-                        Log.d("response", response.body().toString())
-                        try {
-                            val jsonObject = JSONObject(responsedata)
-                            if (jsonObject.optBoolean("status")) {
-                                Prefs.putString("userid", jsonObject.optJSONObject("data").optString("userid"))
-                                Prefs.putString("FirstName", jsonObject.optJSONObject("data").optString("FirstName"))
-                                Prefs.putString("LastName", jsonObject.optJSONObject("data").optString("LastName"))
-                                Prefs.putString("Mobile", jsonObject.optJSONObject("data").optString("Mobile"))
-                                Prefs.putString("Email", jsonObject.optJSONObject("data").optString("Email"))
-                                Prefs.putString("Address", jsonObject.optJSONObject("data").optString("Address"))
-                                Prefs.putString("UserType", jsonObject.optJSONObject("data").optString("UserType"))
-                                Prefs.putString(
-                                    "profileimage",
-                                    jsonObject.optJSONObject("data").optString("profileimage")
-                                )
-                                Prefs.putBoolean(Constant.IS_LOGGED_IN, true)
-                                startActivity(
-                                    Intent(this@RegisterActivity, HomeActivity::class.java)
-                                )
-                                finish()
-                            } else {
-                                if(progressDialog!!.isShowing){
-                                    progressDialog!!.dismiss()
-                                }
-                                utility!!.relative_snackbar(
-                                    parent_signup!!,
-                                    jsonObject.optString("message"),
-                                    getString(R.string.close_up)
-                                )
-                            }
-
-                        } catch (e: JSONException) {
-                            e.printStackTrace()
-                        }
-
-                    } else {
-                        if(progressDialog!!.isShowing){
-                            progressDialog!!.dismiss()
-                        }
-                        utility!!.relative_snackbar(
-                            parent_signup!!,
-                            response.message(),
-                            getString(R.string.close_up)
-                        )
-                    }
-
-                }
-
-                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    progressDialog!!.dismiss()
-                    utility!!.relative_snackbar(
-                        parent_signup!!,
-                        getString(R.string.no_internet_connectivity),
-                        getString(R.string.close_up)
-                    )
-                }
-            })
-        } else {
-            utility!!.relative_snackbar(
-                parent_signup!!,
-                getString(R.string.no_internet_connectivity),
-                getString(R.string.close_up)
-            )
-        }
-    }
 }
