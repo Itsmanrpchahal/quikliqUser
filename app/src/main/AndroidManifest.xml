@@ -87,23 +87,23 @@
         <activity
                 android:name=".activities.LoginActivity"
                 android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustPan|stateHidden"/>
+                android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
                 android:name=".activities.ForgotPasswordActivity"
                 android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustPan|stateHidden"/>
+                android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
                 android:name=".activities.MobileNumberActivity"
                 android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustPan|stateHidden"/>
+                android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
                 android:name=".activities.OtpActivity"
                 android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustPan|stateHidden"/>
+                android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
                 android:name=".activities.RegisterActivity"
                 android:screenOrientation="portrait"
-                android:windowSoftInputMode="adjustPan|stateHidden"/>
+                android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
                 android:name=".activities.AdressActivity"
                 android:screenOrientation="portrait"

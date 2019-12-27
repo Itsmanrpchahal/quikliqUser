@@ -79,6 +79,8 @@ class AdressActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun saveAdditonalDetailApiCall() {
         if (utility!!.isConnectingToInternet(this@AdressActivity)) {
+            progressDialog!!.show()
+            progressDialog!!.setContentView(R.layout.loading)
             val requestsCall = RequestsCall()
             requestsCall.saveAdditionalDetail(
                 "1",
