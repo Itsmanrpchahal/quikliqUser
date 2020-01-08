@@ -42,12 +42,7 @@ public class IntentServiceTokenController {
         mOutputListViewController = outputListController;
         mProgressDialogController = progressDialogController;
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveCard();
-            }
-        });
+        button.setOnClickListener(view -> saveCard());
         registerBroadcastReceiver();
     }
 

@@ -3,10 +3,8 @@ package com.quikliq.quikliquser.payment;
 import android.content.Context;
 import android.widget.Button;
 import android.widget.ListView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.quikliq.quikliquser.controller.AsyncTaskTokenController;
 import com.quikliq.quikliquser.controller.ErrorDialogHandler;
 import com.quikliq.quikliquser.controller.IntentServiceTokenController;

@@ -38,12 +38,7 @@ public class AsyncTaskTokenController {
         mProgressDialogController = progressDialogController;
         mOutputListController = outputListController;
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveCard();
-            }
-        });
+        button.setOnClickListener(view -> saveCard());
     }
 
     public void detach() {
