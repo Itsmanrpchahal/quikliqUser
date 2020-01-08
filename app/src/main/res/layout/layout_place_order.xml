@@ -47,7 +47,7 @@
                 android:layout_below="@+id/itemsTV"
                 android:textSize="@dimen/text_12sp"
                 android:textColor="@android:color/black"
-                android:text="Cash On Delivery"
+                android:text="Card Payment"
                 android:paddingLeft="@dimen/dim_10dp"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"

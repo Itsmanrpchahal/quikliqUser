@@ -1,5 +1,6 @@
 package com.quikliq.quikliquser.activities
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -13,6 +14,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -41,6 +43,7 @@ import retrofit.RequestsCall
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.ref.WeakReference
 
 class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
     private var myMarker: Marker? = null
@@ -107,7 +110,9 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
                 zipET.requestFocus()
                 zipET.error = getString(R.string.txt_Error_required)
             }
-            else -> orderAPiCall()
+            else -> startActivity(Intent(this,CheckoutActivityKotlin::class.java))
+
+                //orderAPiCall()
         }
     }
 
@@ -144,7 +149,12 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
                                     jsonObject.optString("message"),
                                     getString(R.string.close_up)
                                 )
-                                startActivity(Intent(this@ConfirmOrderActivity, OrderHistory::class.java).putExtra("order_success",true))
+                                startActivity(
+                                    Intent(
+                                        this@ConfirmOrderActivity,
+                                        OrderHistory::class.java
+                                    ).putExtra("order_success", true)
+                                )
                                 finish()
                             } else {
                                 utility!!.relative_snackbar(
@@ -186,7 +196,8 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun hideKeyboard() {
-        val imm = this@ConfirmOrderActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm =
+            this@ConfirmOrderActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
     }
 
@@ -219,4 +230,5 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
         )
         p0.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat!!, lng!!), 15f))
     }
+
 }
