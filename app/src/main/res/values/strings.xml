@@ -12,7 +12,7 @@
     <string name="no_internet_connectivity">No! Internet Connectivity</string>
     <string name="close_up">OK</string>
     <string name="ok">OK</string>
-    <string name="progressMessage">Creating Token&#8230;</string>
+    <string name="progressMessage">Making Payment Please Don\'t Cancel or Close This Window&#8230;</string>
     <string name="validationErrors">Validation Errors</string>
     <string name="endingIn">Card ending in </string>
 

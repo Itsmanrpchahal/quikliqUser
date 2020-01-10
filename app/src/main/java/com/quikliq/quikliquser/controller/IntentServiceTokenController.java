@@ -63,7 +63,7 @@ public class IntentServiceTokenController {
         mTokenBroadcastReceiver = new TokenBroadcastReceiver();
         LocalBroadcastManager.getInstance(mActivity).registerReceiver(
                 mTokenBroadcastReceiver,
-                new IntentFilter(TokenIntentService.TOKEN_ACTION));
+                new IntentFilter(TokenIntentService.Companion.getTOKEN_ACTION()));
     }
 
     private void saveCard() {
@@ -72,7 +72,7 @@ public class IntentServiceTokenController {
             mErrorDialogHandler.showError("Invalid Card Data");
             return;
         }
-        Intent tokenServiceIntent = TokenIntentService.createTokenIntent(
+        Intent tokenServiceIntent = TokenIntentService.Companion.createTokenIntent(
                 mActivity,
                 cardToSave.getNumber(),
                 cardToSave.getExpMonth(),
@@ -95,17 +95,17 @@ public class IntentServiceTokenController {
                 return;
             }
 
-            if (intent.hasExtra(TokenIntentService.STRIPE_ERROR_MESSAGE)) {
+            if (intent.hasExtra(TokenIntentService.Companion.getSTRIPE_ERROR_MESSAGE())) {
                 mErrorDialogHandler.showError(
-                        intent.getStringExtra(TokenIntentService.STRIPE_ERROR_MESSAGE));
+                        intent.getStringExtra(TokenIntentService.Companion.getSTRIPE_ERROR_MESSAGE()));
                 return;
             }
 
-            if (intent.hasExtra(TokenIntentService.STRIPE_CARD_TOKEN_ID) &&
-                    intent.hasExtra(TokenIntentService.STRIPE_CARD_LAST_FOUR)) {
+            if (intent.hasExtra(TokenIntentService.Companion.getSTRIPE_CARD_TOKEN_ID()) &&
+                    intent.hasExtra(TokenIntentService.Companion.getSTRIPE_CARD_LAST_FOUR())) {
                 mOutputListViewController.addToList(
-                        intent.getStringExtra(TokenIntentService.STRIPE_CARD_LAST_FOUR),
-                        intent.getStringExtra(TokenIntentService.STRIPE_CARD_TOKEN_ID));
+                        intent.getStringExtra(TokenIntentService.Companion.getSTRIPE_CARD_LAST_FOUR()),
+                        intent.getStringExtra(TokenIntentService.Companion.getSTRIPE_CARD_TOKEN_ID()));
             }
         }
     }

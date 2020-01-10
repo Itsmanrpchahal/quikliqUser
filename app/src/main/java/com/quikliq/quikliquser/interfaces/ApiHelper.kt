@@ -111,6 +111,9 @@ interface ApiHelper {
     @POST(".")
     fun UpoadIdProof(@Part("method") UploadIdProof: RequestBody ,@Part("userid") userid: RequestBody , @Part image: MultipartBody.Part,@Part("id_type") id_type: RequestBody): Call<JsonObject>
 
+    @FormUrlEncoded
+    @POST(".")
+    fun makepayment(@Field("method") CancelOrder: String ,@Field("userid") userid: String, @Field("token") token: String, @Field("orderid") orderid: String): Call<JsonObject>
 
 
 }

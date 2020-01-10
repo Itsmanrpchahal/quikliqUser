@@ -188,4 +188,10 @@ class RequestsCall {
         val idtype = RequestBody.create(MediaType.parse("text/plain"), id_type)
         return api.UpoadIdProof(method1,user_id,body,idtype)
     }
+
+    fun makepayment(userID: String,token:String,orederID:String): Call<JsonObject> {
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        return api.makepayment("MakePayment",userID,token,orederID)
+    }
 }

@@ -20,7 +20,7 @@
             tools:ignore="MissingConstraints" />
 
     <Button
-            android:text="Pay"
+            android:text="Double Press To Make Secure Payment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/payButton"
@@ -33,6 +33,7 @@
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/payButton"
             tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

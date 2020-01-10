@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       >
+        android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-            android:layout_height="wrap_content"
+    <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+    <TextView
+            android:id="@+id/orderIdTV"
             android:layout_width="match_parent"
-          >
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_15dp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_16sp"
+            android:textStyle="bold"
+            tools:text="Order Id : 156" />
+    <TextView
+            android:id="@+id/priceTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_15dp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_16sp"
+            android:textStyle="bold"
+            tools:text="Total Price : 156" />
 
-        <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-               />
+    <include layout="@layout/content_checkout" />
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <include layout="@layout/content_checkout"/>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

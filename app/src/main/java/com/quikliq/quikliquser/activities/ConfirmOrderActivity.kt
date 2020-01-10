@@ -1,6 +1,5 @@
 package com.quikliq.quikliquser.activities
 
-import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -14,7 +13,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -36,6 +34,7 @@ import com.quikliq.quikliquser.constants.Constant.lng
 import com.quikliq.quikliquser.constants.Constant.provider_id
 import com.quikliq.quikliquser.utilities.Prefs
 import com.quikliq.quikliquser.utilities.Utility
+import com.stripe.android.PaymentConfiguration
 import kotlinx.android.synthetic.main.activity_confirm_order.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -54,6 +53,7 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
     private var placeorderRL: RelativeLayout? = null
     private var addressET: EditText? = null
     private var noteET: EditText? = null
+    private val PUBLISHABLE_KEY = "pk_test_RePoI6EpSx8ay058x8ALbVzJ00eBmrbR2w"
     private var parent_confirm: RelativeLayout? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +86,7 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
         placeorderRL!!.setOnClickListener {
             checkValidation()
         }
+        PaymentConfiguration.init(PUBLISHABLE_KEY)
     }
 
     private fun checkValidation() {
@@ -110,9 +111,7 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
                 zipET.requestFocus()
                 zipET.error = getString(R.string.txt_Error_required)
             }
-            else -> startActivity(Intent(this,CheckoutActivityKotlin::class.java))
-
-                //orderAPiCall()
+            else -> orderAPiCall()
         }
     }
 
@@ -149,11 +148,13 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
                                     jsonObject.optString("message"),
                                     getString(R.string.close_up)
                                 )
+                                val data_array = jsonObject.optJSONArray("data")
+                                val obj = data_array[0] as JSONObject
                                 startActivity(
                                     Intent(
                                         this@ConfirmOrderActivity,
-                                        OrderHistory::class.java
-                                    ).putExtra("order_success", true)
+                                        CheckoutActivityKotlin::class.java
+                                    ).putExtra("orderid", obj.optString("orderid")).putExtra("userid",obj.optString("userid")).putExtra("providerid",obj.optString("providerid")).putExtra("total_price",obj.optString("total_price"))
                                 )
                                 finish()
                             } else {
