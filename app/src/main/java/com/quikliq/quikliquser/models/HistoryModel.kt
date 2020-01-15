@@ -16,4 +16,6 @@ class HistoryModel : Serializable {
     var price: ArrayList<String>? = null
     var quantity: ArrayList<String>? = null
     var items: ArrayList<String>? = null
+    var driverid: String? = null
+    var driver_name: String? = null
 }

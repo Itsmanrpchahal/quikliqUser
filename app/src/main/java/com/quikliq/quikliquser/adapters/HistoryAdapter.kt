@@ -61,6 +61,13 @@ class HistoryAdapter(
         holder.totalpriceTV.text = "$"+historymodel.totalprice
         holder.allitemsTV.text = historymodel.items!!.joinToString(limit = 20, truncated = "....")
         holder.ordertimeTV.text = historymodel.datetime
+        if(historymodel.driver_name != "null"){
+            holder.driverTV.visibility = View.VISIBLE
+            holder.driverTV.setText("Driver Name : "+historymodel.driver_name)
+        }else{
+            holder.driverTV.visibility = View.GONE
+
+        }
         holder.parentCart.setOnClickListener {
             context.startActivity(Intent(context, OrderSummaryActivity::class.java).putExtra("order",historyModelArraylist[position]))
         }
@@ -99,6 +106,7 @@ class HistoryAdapter(
         val statusTV: TextView = itemView.findViewById(R.id.statusTV) as TextView
         val parentCart: CardView = itemView.findViewById(R.id.parentCart)
         val cancelTV : TextView = itemView.findViewById(R.id.cancelTV)
+        val driverTV : TextView = itemView.findViewById(R.id.driverTV)
     }
 
 

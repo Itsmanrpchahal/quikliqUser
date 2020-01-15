@@ -122,6 +122,8 @@ class OrderHistory : AppCompatActivity(), CancelOrder {
                                     historyModel.image = jsonObject1.optString("image")
                                     historyModel.order_status = jsonObject1.optString("status")
                                     historyModel.datetime = jsonObject1.optString("datetime")
+                                    historyModel.driver_name = jsonObject1.optString("driver_name")
+                                    historyModel.driverid = jsonObject1.optString("driverid")
 
                                     products = ArrayList()
                                     for (j in 0 until jsonObject.optJSONArray("data").optJSONObject(i).optJSONArray("products").length()){

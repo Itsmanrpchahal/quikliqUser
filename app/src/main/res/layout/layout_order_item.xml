@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
             android:id="@+id/parentCart"
@@ -85,13 +86,24 @@
                     android:layout_below="@+id/totalTV"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_12sp"/>
+
+            <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="TOTAL AMOUNT"
+                    android:id="@+id/driverTV"
+                    android:visibility="gone"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_12sp"
+                    android:layout_marginTop="@dimen/dimen_8dp"
+                    android:layout_below="@+id/totalpriceTV"/>
+
             <View
                     android:id="@+id/view2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_0.5dp"
                     android:layout_marginTop="@dimen/height_3dp"
                     android:layout_marginBottom="@dimen/height_3dp"
-                    android:layout_below="@+id/totalpriceTV"
+                    android:layout_below="@+id/driverTV"
                     android:background="@color/chip_background_selected"/>
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
