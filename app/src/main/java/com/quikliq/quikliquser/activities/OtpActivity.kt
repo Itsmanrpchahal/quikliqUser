@@ -20,7 +20,7 @@ class OtpActivity : AppCompatActivity(), View.OnClickListener {
         utility = Utility()
         utility!!.relative_snackbar(
             parent_otp!!,
-            "Your OTP is" + intent.getStringExtra("otp"),
+            "OTP sent to " + intent.getStringExtra("mobile"),
             getString(R.string.close_up)
         )
         otp = intent.getStringExtra("otp")

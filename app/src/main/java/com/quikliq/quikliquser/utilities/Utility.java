@@ -75,7 +75,7 @@ public class Utility {
 
     public void relative_snackbar(View relativeLayout, String title, String button_text) {
         Snackbar snackbar = Snackbar
-                .make(relativeLayout, title, Snackbar.LENGTH_SHORT).setAction(button_text, new View.OnClickListener() {
+                .make(relativeLayout, title, Snackbar.LENGTH_LONG).setAction(button_text, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 

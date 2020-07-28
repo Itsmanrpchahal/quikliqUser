@@ -1,4 +1,4 @@
-package com.quikliq.quikliquser.fragment
+package com.quikliq.quikliquser. fragment
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -22,6 +22,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import com.google.gson.JsonObject
 import com.quikliq.quikliquser.R
 import com.quikliq.quikliquser.activities.CartActivity
@@ -61,6 +62,8 @@ class HomeFragment : Fragment() {
     private var clearBT: Button? = null
     private var searchedArraylist: ArrayList<ProviderModel>? = null
     private var timer: Timer? = null
+    private var verficationlayout: RelativeLayout? = null
+    private var verification_tv1: TextView? = null
 
 
     override fun onCreateView(
@@ -82,6 +85,8 @@ class HomeFragment : Fragment() {
         parent_f_home = view.findViewById(R.id.parent_f_home)
         cartIV = view.findViewById(R.id.cartIV)
         searchET = view.findViewById(R.id.searchET)
+        verficationlayout = view.findViewById(R.id.verficationlayout)
+        verification_tv1 = view.findViewById(R.id.verification_tv1)
         cartIV!!.visibility = View.VISIBLE
         cartIV!!.setOnClickListener {
             startActivity(Intent(activity, CartActivity::class.java))
@@ -93,7 +98,7 @@ class HomeFragment : Fragment() {
             1
         )
         clearBT = view.findViewById(R.id.clearBT)
-        if(addresses != null && addresses!!.isNotEmpty()) {
+        if (addresses != null && addresses!!.isNotEmpty()) {
             LOCATION = addresses!![0].getAddressLine(0)
             addressTV!!.text = addresses!![0].getAddressLine(0)
         }
@@ -105,8 +110,8 @@ class HomeFragment : Fragment() {
                     try {
                         //Log.d("refresh", "done")
                         activity!!.runOnUiThread {
-                            if(LOCATION == null){
-                                if(lat == 0.00 && lng == 0.00){
+                            if (LOCATION == null) {
+                                if (lat == 0.00 && lng == 0.00) {
                                     createLocationRequest()
                                 }
 
@@ -116,7 +121,7 @@ class HomeFragment : Fragment() {
                                     lng!!,
                                     1
                                 )
-                                if(addresses != null && addresses!!.isNotEmpty()) {
+                                if (addresses != null && addresses!!.isNotEmpty()) {
                                     LOCATION = addresses!![0].getAddressLine(0)
                                     addressTV!!.text = addresses!![0].getAddressLine(0)
                                     timer!!.cancel()
@@ -133,7 +138,8 @@ class HomeFragment : Fragment() {
         }
         timer!!.schedule(doTask, 0, 500)
 
-        providersApiCall()
+        verificationStatus()
+
         clearBT!!.setOnClickListener {
             searchET!!.setText("")
             searchET!!.hint = "Search for providers"
@@ -217,82 +223,146 @@ class HomeFragment : Fragment() {
         msgTV!!.visibility = View.GONE
     }
 
+
+    private fun verificationStatus() {
+        if (utility!!.isConnectingToInternet(activity)) {
+            pd!!.show()
+            pd!!.setContentView(R.layout.loading)
+            val requestsCall = RequestsCall()
+            requestsCall.VerficationStatus(Prefs.getString("userid", ""))
+                .enqueue(object : Callback<JsonObject> {
+
+                    override fun onResponse(
+                        call: Call<JsonObject>,
+                        response: Response<JsonObject>
+                    ) {
+                        pd!!.dismiss()
+                        Log.d("verification", response.body().toString())
+                        val responsedata = response.body().toString()
+                        val jsonObject = JSONObject(responsedata)
+                        val status = jsonObject.getBoolean("status")
+                        if (status == true) {
+                            val data = jsonObject.getJSONObject("data")
+                            val isuploaded = data.getInt("isuploaded")
+                            val isverified = data.getString("isverified")
+                            if (isuploaded==1)
+                            {
+
+                                if (isverified.equals("0"))
+                                {
+                                    verification_tv1?.setText("Your age proof is under verification. We will update you on register mobile number")
+                                    verficationlayout?.visibility = View.VISIBLE
+
+                                }else if (isverified.equals("2"))
+                                {
+                                    verification_tv1?.setText("You age verification is failed.")
+                                    verficationlayout?.visibility = View.VISIBLE
+                                }else{
+                                    verficationlayout?.visibility = View.INVISIBLE
+                                    providersApiCall()
+                                }
+                            }else{
+                               verficationlayout?.visibility = View.VISIBLE
+                                verification_tv1?.setText(R.string.verficationins)
+                            }
+                        }
+
+                        //Toast.makeText(context,""+data,Toast.LENGTH_SHORT).show()
+
+                    }
+
+                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                        pd!!.dismiss()
+                        Log.d("verfication", t.message)
+
+                    }
+                })
+        }
+    }
+
     private fun providersApiCall() {
         if (utility!!.isConnectingToInternet(activity)) {
             pd!!.show()
             pd!!.setContentView(R.layout.loading)
             val requestsCall = RequestsCall()
-            requestsCall.GetAllProviders(Prefs.getString("userid", "")).enqueue(object : Callback<JsonObject> {
-                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                    pd!!.dismiss()
-                    if (response.isSuccessful) {
-                        Log.d("responsedata", response.body().toString())
-                        val responsedata = response.body().toString()
-                        try {
-                            val jsonObject = JSONObject(responsedata)
+            requestsCall.GetAllProviders(Prefs.getString("userid", ""))
+                .enqueue(object : Callback<JsonObject> {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    override fun onResponse(
+                        call: Call<JsonObject>,
+                        response: Response<JsonObject>
+                    ) {
+                        pd!!.dismiss()
+                        if (response.isSuccessful) {
+                            Log.d("responsedata", response.body().toString())
+                            val responsedata = response.body().toString()
+                            try {
+                                val jsonObject = JSONObject(responsedata)
 
-                            if (jsonObject.optBoolean("status")) {
-                                providersList = ArrayList()
-                                val data_arry = jsonObject.optJSONArray("data")
-                                for (i in 0 until data_arry.length()) {
-                                    val jsonObject1 = data_arry.optJSONObject(i)
-                                    val providerModel = ProviderModel()
-                                    providerModel.provider_id = jsonObject1.optString("provider_id")
-                                    providerModel.name = jsonObject1.optString("name")
-                                    providerModel.rating = jsonObject1.optInt("rating")
-                                    providerModel.picture = jsonObject1.optString("picture")
-                                    providerModel.opentime = jsonObject1.optString("opentime")
-                                    providerModel.closetime = jsonObject1.optString("closetime")
-                                    providerModel.adress = jsonObject1.optString("adress")
-                                    providerModel.distance = jsonObject1.optString("distance")
-                                    providerModel.Status = jsonObject1.optInt("Status")
-                                    providerModel.lat = jsonObject1.optDouble("lat")
-                                    providerModel.lng = jsonObject1.optDouble("lng")
-                                    providersList!!.add(providerModel)
-                                }
-                                if (providersList!!.isNotEmpty()) {
-                                    providersAdapter = ProvidersAdapter(activity!!, providersList!!)
-                                    val mLayoutManager = LinearLayoutManager(activity!!.applicationContext)
-                                    providersRV!!.layoutManager = mLayoutManager
-                                    providersRV!!.adapter = providersAdapter
+                                if (jsonObject.optBoolean("status")) {
+                                    providersList = ArrayList()
+                                    val data_arry = jsonObject.optJSONArray("data")
+                                    for (i in 0 until data_arry.length()) {
+                                        val jsonObject1 = data_arry.optJSONObject(i)
+                                        val providerModel = ProviderModel()
+                                        providerModel.provider_id =
+                                            jsonObject1.optString("provider_id")
+                                        providerModel.name = jsonObject1.optString("name")
+                                        providerModel.rating = jsonObject1.optInt("rating")
+                                        providerModel.picture = jsonObject1.optString("picture")
+                                        providerModel.opentime = jsonObject1.optString("opentime")
+                                        providerModel.closetime = jsonObject1.optString("closetime")
+                                        providerModel.adress = jsonObject1.optString("adress")
+                                        providerModel.distance = jsonObject1.optString("distance")
+                                        providerModel.Status = jsonObject1.optInt("Status")
+                                        providerModel.lat = jsonObject1.optDouble("lat")
+                                        providerModel.lng = jsonObject1.optDouble("lng")
+                                        providersList!!.add(providerModel)
+                                    }
+                                    if (providersList!!.isNotEmpty()) {
+                                        providersAdapter =
+                                            ProvidersAdapter(activity!!, providersList!!)
+                                        val mLayoutManager =
+                                            LinearLayoutManager(activity!!.applicationContext)
+                                        providersRV!!.layoutManager = mLayoutManager
+                                        providersRV!!.adapter = providersAdapter
+                                    } else {
+                                        no_dataRL!!.visibility = View.VISIBLE
+
+                                    }
+
+
                                 } else {
-                                    no_dataRL!!.visibility = View.VISIBLE
-
+                                    pd!!.dismiss()
+                                    utility!!.relative_snackbar(
+                                        parent_f_home!!,
+                                        jsonObject.optString("message"),
+                                        getString(R.string.close_up)
+                                    )
                                 }
-
-
-                            } else {
-                                pd!!.dismiss()
-                                utility!!.relative_snackbar(
-                                    parent_f_home!!,
-                                    jsonObject.optString("message"),
-                                    getString(R.string.close_up)
-                                )
+                            } catch (e: JSONException) {
+                                e.printStackTrace()
                             }
-                        } catch (e: JSONException) {
-                            e.printStackTrace()
+
+                        } else {
+                            utility!!.relative_snackbar(
+                                parent_f_home!!,
+                                response.message(),
+                                getString(R.string.close_up)
+                            )
                         }
 
-                    } else {
+                    }
+
+                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                        pd!!.dismiss()
                         utility!!.relative_snackbar(
                             parent_f_home!!,
-                            response.message(),
+                            getString(R.string.no_internet_connectivity),
                             getString(R.string.close_up)
                         )
                     }
-
-                }
-
-                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    pd!!.dismiss()
-                    utility!!.relative_snackbar(
-                        parent_f_home!!,
-                        getString(R.string.no_internet_connectivity),
-                        getString(R.string.close_up)
-                    )
-                }
-            })
+                })
         } else {
             utility!!.relative_snackbar(
                 parent_f_home!!,

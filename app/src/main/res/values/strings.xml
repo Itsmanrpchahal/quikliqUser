@@ -12,10 +12,12 @@
     <string name="no_internet_connectivity">No! Internet Connectivity</string>
     <string name="close_up">OK</string>
     <string name="ok">OK</string>
+    <string name="default_notification_channel_id">firebase_default_channel</string>
     <string name="progressMessage">Making Payment Please Don\'t Cancel or Close This Window&#8230;</string>
     <string name="validationErrors">Validation Errors</string>
     <string name="endingIn">Card ending in </string>
 
     <string name="pass_same"><![CDATA[New password & confirm password not same]]></string>
     <string name="error_password">password should be greater than 6 characters</string>
+    <string name="verficationins">Oops!!! Please update your age proof to unlock your account \n \n<b>Insturctions:-</b> \n \n \u25CF Go to account tab \n \n \u25CF Select age verification and upload you age proof image.</string>
 </resources>

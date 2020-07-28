@@ -61,6 +61,10 @@ interface ApiHelper {
 
     @FormUrlEncoded
     @POST(".")
+    fun VerficationStatus(@Field("method")method:String,@Field("userid")keys:String):Call<JsonObject>
+
+    @FormUrlEncoded
+    @POST(".")
     fun GetProviderProduct(@Field("method") GetProviderProduct: String ,@Field("userid") userid: String, @Field("providerid") providerid: String): Call<JsonObject>
 
 
@@ -109,7 +113,8 @@ interface ApiHelper {
 
     @Multipart
     @POST(".")
-    fun UpoadIdProof(@Part("method") UploadIdProof: RequestBody ,@Part("userid") userid: RequestBody , @Part image: MultipartBody.Part,@Part("id_type") id_type: RequestBody): Call<JsonObject>
+   // fun UpoadIdProof(@Part("method") UploadIdProof: RequestBody ,@Part("userid") userid: RequestBody , @Part image: MultipartBody.Part,@Part("id_type") id_type: RequestBody): Call<JsonObject>
+    fun UpoadIdProof(@Part("method") UploadIdProof: RequestBody ,@Part("userid") userid: RequestBody , @Part image: MultipartBody.Part,@Part("proof_type") id_type: RequestBody): Call<JsonObject>
 
     @FormUrlEncoded
     @POST(".")

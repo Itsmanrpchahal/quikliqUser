@@ -63,7 +63,7 @@ class MobileNumberActivity : AppCompatActivity(),View.OnClickListener {
             pd!!.show()
             pd!!.setContentView(R.layout.loading)
             val requestsCall = RequestsCall()
-            requestsCall.mobile(mobile_number).enqueue(object : Callback<JsonObject> {
+            requestsCall.mobile("NewOtp",mobile_number).enqueue(object : Callback<JsonObject> {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     pd!!.dismiss()

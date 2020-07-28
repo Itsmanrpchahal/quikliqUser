@@ -16,6 +16,10 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.quikliq.quikliquser.R;
+import com.quikliq.quikliquser.activities.AboutActivity;
+import com.quikliq.quikliquser.activities.CartActivity;
+import com.quikliq.quikliquser.activities.ChangePasswordActivity;
+import com.quikliq.quikliquser.fragment.ProfileFragment;
 import com.quikliq.quikliquser.utilities.Prefs;
 import com.quikliq.quikliquser.activities.HomeActivity;
 import com.quikliq.quikliquser.constants.Constant;
@@ -31,7 +35,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     String CHANNEL_ID = "com.quikliq.quikliquser";
     NotificationChannel mChannel;
     private NotificationManager mManager;
-    private String title, msg, actionCode;
+    private String title, msg, actionCode,click;
     private int badge = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -44,17 +48,30 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             title = object.optString("title","");
             actionCode = object.optString("action_code", "");
             msg = object.optString("body", "");
+            click = object.optString("click","");
             if (!(title.equals("") && msg.equals("") && actionCode.equals(""))) {
-                createNotification(actionCode, msg, title);
+                createNotification(actionCode, msg, title,click);
             }
+
+            Log.d("notification",title);
         }
 
     }
 
-    public void createNotification(String action_code, String msg, String title) {
+    public void createNotification(String action_code, String msg, String title,String click) {
         Intent intent = null;
-        intent = new Intent(this, HomeActivity.class);
-        intent.putExtra(Constant.INSTANCE.getACTION_CODE(), action_code);
+        Log.d("notify1",click);
+        if (click.equals("home"))
+        {
+            Log.d("check","HERE");
+            intent = new Intent(this, ChangePasswordActivity.class);
+            intent.putExtra(Constant.INSTANCE.getACTION_CODE(), action_code);
+        }else {
+            Log.d("check","NO");
+            intent = new Intent(this, HomeActivity.class);
+            intent.putExtra(Constant.INSTANCE.getACTION_CODE(), action_code);
+        }
+
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel androidChannel = new NotificationChannel(CHANNEL_ID,
@@ -75,6 +92,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setAutoCancel(true)
                     .setContentIntent(contentIntent);
             getManager().notify(101, nb.build());
+            Log.d("notify",title);
 
         } else {
             try {
@@ -93,6 +111,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                                 + getApplicationContext().getPackageName() + "/" + R.raw.tone));*/
                 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.notify((int) System.currentTimeMillis() /* ID of notification */, notificationBuilder.build());
+
+
             } catch (SecurityException se) {
                 se.printStackTrace();
             }
@@ -106,6 +126,4 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
         return mManager;
     }
-
-
 }

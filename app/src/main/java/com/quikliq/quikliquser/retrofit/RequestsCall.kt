@@ -29,10 +29,10 @@ class RequestsCall {
         return api.signup("Signup",first_name, last_name, email, password)
     }
 
-    fun mobile(mobile_number: String): Call<JsonObject> {
+    fun mobile(NewOtp: String,mobile_number: String): Call<JsonObject> {
         val apiCall = ApiCall()
         val api = apiCall.apiCall().create(ApiHelper::class.java)
-        return api.mobile("NewOtp",mobile_number)
+        return api.mobile(NewOtp,mobile_number)
     }
 
     fun saveAdditionalDetail(devicetype: String, firstname: String, lastname : String, mobile : String, email : String, password : String, address : String, usertype : String, devicetoken : String,city:String,state:String,zip:String): Call<JsonObject> {
@@ -100,6 +100,12 @@ class RequestsCall {
         val apiCall = ApiCall()
         val api = apiCall.apiCall().create(ApiHelper::class.java)
         return api.GetAllProviders("ListProvider",userid)
+    }
+
+    fun VerficationStatus(userid: String):Call<JsonObject>{
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        return api.VerficationStatus("AgeVerification",userid)
     }
 
     fun GetProviderProduct(userid: String, providerid: String): Call<JsonObject> {

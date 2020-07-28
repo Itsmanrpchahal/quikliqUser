@@ -16,8 +16,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.InstanceIdResult
 import com.google.gson.JsonObject
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import com.livinglifetechway.quickpermissions_kotlin.util.QuickPermissionsOptions
@@ -45,6 +48,7 @@ class SplashActivity : AppCompatActivity() {
             Prefs.putString(Constant.FCM_TOKEN, newToken)
         }
 
+        facebooktoken()
         methodRequiresPermissions()
         checkForGps()
         createLocationRequest()
@@ -202,7 +206,6 @@ class SplashActivity : AppCompatActivity() {
                         } else {
 
                         }
-
                     }
 
                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {
@@ -213,5 +216,18 @@ class SplashActivity : AppCompatActivity() {
     }
 
 
-
+    private fun facebooktoken() {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(object : OnCompleteListener<InstanceIdResult?> {
+                override fun onComplete(task: Task<InstanceIdResult?>) {
+                    if (!task.isSuccessful()) {
+                        Log.w("tokenfa", "getInstanceId failed", task.getException())
+                        return
+                    }
+                    // Get new Instance ID token
+                    val token: String? = task.getResult()?.getToken()
+                    Log.d("tokentest",token);
+                }
+            })
+    }
 }

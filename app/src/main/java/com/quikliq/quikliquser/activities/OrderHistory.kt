@@ -9,7 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.view.WindowManager
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,12 +43,18 @@ class OrderHistory : AppCompatActivity(), CancelOrder {
     private var items: ArrayList<String>? = null
     private var historyAdapter:HistoryAdapter? = null
     private var order_success: Boolean?= false
+    private var no_dataRL: RelativeLayout?= null
+    private var titleTV: TextView?= null
+    private var msgTV :TextView?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_history2)
         cancelOrder = this
         toolbar = findViewById(R.id.toolbar)
+        no_dataRL = findViewById(R.id.no_dataRL)
+        titleTV = findViewById(R.id.titleTV)
+        msgTV = findViewById(R.id.msgTV)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
@@ -153,13 +162,25 @@ class OrderHistory : AppCompatActivity(), CancelOrder {
                                 }
 
                                 if(historyModelArraylist!!.isNotEmpty()){
+                                    no_dataRL!!.visibility = View.GONE
+                                    titleTV!!.text = "Relax"
+                                    msgTV!!.text = "No Orders found"
                                     historyAdapter = HistoryAdapter(this@OrderHistory, historyModelArraylist!!)
                                     val mLayoutManager = LinearLayoutManager(this@OrderHistory.applicationContext)
                                     historyRV!!.layoutManager = mLayoutManager
                                     historyRV!!.adapter = historyAdapter
+                                }else{
+                                    no_dataRL!!.visibility = View.VISIBLE
+                                    titleTV!!.text = "Relax"
+                                    msgTV!!.text = "No Orders found"
                                 }
 
                             } else {
+
+                                no_dataRL!!.visibility = View.VISIBLE
+                                titleTV!!.text = "Relax"
+                                msgTV!!.text = "No Orders found"
+
                                 utility!!.linear_snackbar(
                                     parent_order_history!!,
                                     jsonObject.optString("message"),

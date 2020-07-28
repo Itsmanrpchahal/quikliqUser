@@ -1,14 +1,21 @@
 package com.quikliq.quikliquser.activities
 
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.quikliq.quikliquser.R
+import android.util.Log
 import android.view.MenuItem
 import androidx.annotation.NonNull
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.quikliq.quikliquser.fragment.*
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.InstanceIdResult
+import com.quikliq.quikliquser.R
+import com.quikliq.quikliquser.fragment.HomeFragment
+import com.quikliq.quikliquser.fragment.ProfileFragment
 
 
 class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -24,6 +31,23 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         fm = supportFragmentManager
         val ft = fm.beginTransaction()
         ft.add(R.id.homeFrag, HomeFragment()).commit()
+
+        facebooktoken();
+    }
+
+    private fun facebooktoken() {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(object : OnCompleteListener<InstanceIdResult?> {
+                override fun onComplete(task: Task<InstanceIdResult?>) {
+                    if (!task.isSuccessful()) {
+                        Log.w("tokenfa", "getInstanceId failed", task.getException())
+                        return
+                    }
+                    // Get new Instance ID token
+                    val token: String? = task.getResult()?.getToken()
+                    Log.d("tokentest",token);
+                }
+            })
     }
 
 

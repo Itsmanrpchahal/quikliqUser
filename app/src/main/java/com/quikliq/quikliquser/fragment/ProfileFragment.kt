@@ -378,7 +378,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             requestsCall.UploadIdProof(
                 this.activity!!,
                 Prefs.getString("userid", ""),
-                outputUri, "driver"
+                outputUri, "age_proof"
             ).enqueue(object : Callback<JsonObject> {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
