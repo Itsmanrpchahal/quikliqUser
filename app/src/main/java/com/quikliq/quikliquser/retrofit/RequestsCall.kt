@@ -10,9 +10,7 @@ import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Field
 import java.io.File
-import java.util.ArrayList
 
 class RequestsCall {
 
@@ -29,10 +27,17 @@ class RequestsCall {
         return api.signup("Signup",first_name, last_name, email, password)
     }
 
-    fun mobile(NewOtp: String,mobile_number: String): Call<JsonObject> {
+    fun mobile(NewOtp: String, mobile_number: String, countryCode: String?): Call<JsonObject> {
         val apiCall = ApiCall()
         val api = apiCall.apiCall().create(ApiHelper::class.java)
-        return api.mobile(NewOtp,mobile_number)
+        return api.mobile(NewOtp,mobile_number,countryCode)
+    }
+
+    fun forgetPassword(ResetPassword :String,mobile:String,c_code:String,usertype:String):Call<JsonObject>
+    {
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        return api.forgetPassword(ResetPassword,mobile,c_code,usertype)
     }
 
     fun saveAdditionalDetail(devicetype: String, firstname: String, lastname : String, mobile : String, email : String, password : String, address : String, usertype : String, devicetoken : String,city:String,state:String,zip:String): Call<JsonObject> {

@@ -4,10 +4,14 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.ProgressDialog
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +21,7 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
@@ -46,12 +51,17 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
     private var outputUri: Uri? = null
     private var profilePicChoosed: Boolean? = false
     private var toolbar: Toolbar? = null
+    private var nointernet: RelativeLayout? = null
+    private var screendata: RelativeLayout? = null
+    var notC = "0"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
         toolbar = findViewById(R.id.toolbar)
+        nointernet = findViewById(R.id.nointernet)
+        screendata = findViewById(R.id.screendata)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeButtonEnabled(true)
@@ -63,10 +73,42 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
         pd!!.window!!.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         pd!!.isIndeterminate = true
         pd!!.setCancelable(false)
-        profileApiCall()
+
         edit_profile_image_IV!!.setOnClickListener(this)
         edit_profile_send_btn_IV!!.setOnClickListener(this)
     }
+
+
+    //Check Internet Connection
+    private var broadcastReceiver : BroadcastReceiver = object : BroadcastReceiver()
+    {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            val notConnected = p1!!.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY,false)
+
+            if (notConnected)
+            {
+                nointernet?.visibility = View.VISIBLE
+                screendata?.visibility = View.GONE
+                notC = "1"
+            }else{
+                nointernet?.visibility = View.GONE
+                screendata?.visibility = View.VISIBLE
+                profileApiCall()
+                notC = "0"
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        registerReceiver(broadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(broadcastReceiver)
+    }
+
 
 
     private fun profileApiCall() {
@@ -497,6 +539,11 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
         super.onBackPressed()
         if (Utilities.isSoftKeyboardOpen(parent_edit_profile)) {
             hideKeyboard()
+        }
+
+        if(notC.equals("1"))
+        {
+            finishAffinity()
         }
 
     }

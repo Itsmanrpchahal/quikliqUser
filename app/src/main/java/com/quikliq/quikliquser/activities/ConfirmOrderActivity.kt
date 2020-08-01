@@ -1,10 +1,13 @@
 package com.quikliq.quikliquser.activities
 
 import android.app.ProgressDialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -55,10 +58,52 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
     private var noteET: EditText? = null
     private val PUBLISHABLE_KEY = "pk_test_RePoI6EpSx8ay058x8ALbVzJ00eBmrbR2w"
     private var parent_confirm: RelativeLayout? = null
+
+    private var nointernet: RelativeLayout? = null
+    private var screendata: RelativeLayout? = null
+    var notC = "0"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_confirm_order)
         initViews()
+    }
+
+    //Check Internet Connection
+    private var broadcastReceiver : BroadcastReceiver = object : BroadcastReceiver()
+    {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            val notConnected = p1!!.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY,false)
+
+            if (notConnected)
+            {
+                nointernet?.visibility = View.VISIBLE
+                screendata?.visibility = View.GONE
+                notC = "1"
+            }else{
+                nointernet?.visibility = View.GONE
+                screendata?.visibility = View.VISIBLE
+                notC = "0"
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        registerReceiver(broadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(broadcastReceiver)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if(notC.equals("1"))
+        {
+            finishAffinity()
+        }
     }
 
     private fun initViews() {
@@ -69,6 +114,8 @@ class ConfirmOrderActivity : AppCompatActivity(), OnMapReadyCallback {
         supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         toolbar_title = findViewById(R.id.toolbar_title)
+        nointernet = findViewById(R.id.nointernet)
+        screendata = findViewById(R.id.screendata)
         placeorderRL = findViewById(R.id.placeorderRL)
         locationTV!!.text = LOCATION
         toolbar_title!!.text = "Place Order"

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.quikliq.quikliquser.R
 import com.quikliq.quikliquser.activities.OrderHistory
 import com.quikliq.quikliquser.activities.OrderSummaryActivity
+import com.quikliq.quikliquser.constants.Constant
 import com.quikliq.quikliquser.models.HistoryModel
 import com.quikliq.quikliquser.utilities.Utility
 
@@ -42,7 +43,7 @@ class HistoryAdapter(
         val historymodel = historyModelArraylist[position]
         utility!!.loadImageWithLoader(
             context,
-            "https://professionaler.com/weed/api/" + historymodel.image,
+            Constant.BASE_URL + historymodel.image,
             holder.providerIV
         )
         holder.providernameTV.text = historymodel.providername

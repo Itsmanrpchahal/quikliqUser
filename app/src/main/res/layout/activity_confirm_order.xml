@@ -6,43 +6,49 @@
                 android:background="@color/light_grey_bg"
                 android:layout_height="match_parent">
 
-    <include
+    <include layout="@layout/nointernet"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/screendata">
+        <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar"/>
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_below="@+id/toolbar"
-                  android:orientation="vertical"
-                  android:weightSum="2">
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:orientation="vertical"
+            android:weightSum="2">
 
-        <fragment
+            <fragment
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1.2"
                 android:id="@+id/map"
                 android:layout_below="@+id/toolbar"
                 android:name="com.google.android.gms.maps.SupportMapFragment"/>
-        <ScrollView android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight=".8">
-            <RelativeLayout
+            <ScrollView android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".8">
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:background="@color/white"
                     android:layout_height="match_parent"
-            >
-                <RelativeLayout android:layout_width="match_parent"
-                                android:padding="@dimen/dim_10dp"
-                                android:id="@+id/locRL"
-                                android:background="@color/light_grey_bg"
-                                android:layout_height="wrap_content">
-                    <TextView
+                    >
+                    <RelativeLayout android:layout_width="match_parent"
+                        android:padding="@dimen/dim_10dp"
+                        android:id="@+id/locRL"
+                        android:background="@color/light_grey_bg"
+                        android:layout_height="wrap_content">
+                        <TextView
                             android:id="@+id/adressTV"
                             android:layout_width="wrap_content"
                             android:textColor="@color/chip_background_selected"
                             android:text="DELIVERING TO"
                             android:textSize="@dimen/text_11sp"
                             android:layout_height="wrap_content"/>
-                    <TextView
+                        <TextView
                             android:id="@+id/locationTV"
                             android:layout_width="wrap_content"
                             android:singleLine="true"
@@ -52,8 +58,8 @@
                             android:drawablePadding="@dimen/height_2dp"
                             android:layout_below="@+id/adressTV"
                             android:layout_height="wrap_content"/>
-                </RelativeLayout>
-                <EditText
+                    </RelativeLayout>
+                    <EditText
                         android:textSize="14dp"
                         android:textColor="#ff000000"
                         android:textColorHint="#ff696969"
@@ -70,7 +76,7 @@
                         android:hint="House No, Building Number, Landmark"
                         android:inputType="text"
                         android:imeOptions="actionNext"/>
-                <EditText
+                    <EditText
                         android:textSize="14dp"
                         android:textColor="#ff000000"
                         android:textColorHint="#ff696969"
@@ -87,7 +93,7 @@
                         android:hint="City"
                         android:inputType="text"
                         android:imeOptions="actionNext"/>
-                <EditText
+                    <EditText
                         android:textSize="14dp"
                         android:textColor="#ff000000"
                         android:textColorHint="#ff696969"
@@ -104,7 +110,7 @@
                         android:hint="State"
                         android:inputType="text"
                         android:imeOptions="actionNext"/>
-                <EditText
+                    <EditText
                         android:textSize="14dp"
                         android:textColor="#ff000000"
                         android:textColorHint="#ff696969"
@@ -121,7 +127,7 @@
                         android:hint="Zip"
                         android:inputType="number"
                         android:imeOptions="actionNext"/>
-                <EditText
+                    <EditText
                         android:textSize="14dp"
                         android:textColor="#ff000000"
                         android:textColorHint="#ff696969"
@@ -141,10 +147,10 @@
                         android:inputType="text|textMultiLine"
                         android:imeOptions="actionDone"/>
 
-            </RelativeLayout>
-        </ScrollView>
+                </RelativeLayout>
+            </ScrollView>
 
-        <RelativeLayout
+            <RelativeLayout
                 android:id="@+id/placeorderRL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -152,7 +158,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/green_selecter">
-            <TextView
+                <TextView
                     android:id="@+id/placeorderTV"
                     android:textSize="@dimen/text_20sp"
                     android:textColor="@android:color/white"
@@ -162,8 +168,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-        </RelativeLayout>
-    </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
 
+
+    </RelativeLayout>
 
 </RelativeLayout>

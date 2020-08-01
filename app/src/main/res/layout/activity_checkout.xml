@@ -5,11 +5,19 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <include
+
+    <include layout="@layout/nointernet"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/screendata">
+
+        <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
 
-    <TextView
+        <TextView
             android:id="@+id/orderIdTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,7 +26,7 @@
             android:textSize="@dimen/text_16sp"
             android:textStyle="bold"
             tools:text="Order Id : 156" />
-    <TextView
+        <TextView
             android:id="@+id/priceTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,6 +36,8 @@
             android:textStyle="bold"
             tools:text="Total Price : 156" />
 
-    <include layout="@layout/content_checkout" />
+        <include layout="@layout/content_checkout" />
+    </RelativeLayout>
+
 
 </LinearLayout>

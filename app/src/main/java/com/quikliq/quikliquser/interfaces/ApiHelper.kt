@@ -19,7 +19,14 @@ interface ApiHelper {
 
     @FormUrlEncoded
     @POST(".")
-    fun mobile(@Field("method") NewOtp: String ,@Field("mobile") mobile: String): Call<JsonObject>
+    fun mobile(
+        @Field("method") NewOtp: String, @Field("mobile") mobile: String,@Field("c_code") countryCode: String?
+    ): Call<JsonObject>
+
+    @FormUrlEncoded
+    @POST(".")
+    fun forgetPassword(@Field("method") ForgetPassword: String,@Field("mobile")mobile: String,@Field("c_code") c_code:String,@Field("usertype") usertype:String)
+    :Call<JsonObject>
 
     @FormUrlEncoded
     @POST(".")

@@ -1,9 +1,13 @@
 package com.quikliq.quikliquser.activities
 
 import android.app.ProgressDialog
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -53,6 +57,9 @@ class CartActivity : AppCompatActivity(), RemoveItemInterface, UpdateQuantityInt
     private var orderRL: RelativeLayout? = null
     private var totalpriceTV: TextView? = null
     private var ammountRL: RelativeLayout? = null
+    private var nointernet: RelativeLayout? = null
+    private var screendata: RelativeLayout? = null
+    var notC = "0"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +72,8 @@ class CartActivity : AppCompatActivity(), RemoveItemInterface, UpdateQuantityInt
         msgTV!!.text = "Please Add Products TO Order"
         totalpriceTV = findViewById(R.id.totalpriceTV)
         parent_cart = findViewById(R.id.parent_cart)
+        nointernet = findViewById(R.id.nointernet)
+        screendata = findViewById(R.id.screendata)
         orderRL = findViewById(R.id.orderRL)
         toolbar_title = findViewById(R.id.toolbar_title)
         toolbar_title!!.text = "Cart"
@@ -82,10 +91,49 @@ class CartActivity : AppCompatActivity(), RemoveItemInterface, UpdateQuantityInt
         cartRV = findViewById(R.id.cartRV)
         locationTV = findViewById(R.id.locationTV)
         locationTV!!.text = Constant.LOCATION
-        CartApiCall()
+
         removeItemInterface = this
         updateQuantityInterface = this
         orderRL!!.setOnClickListener(this)
+    }
+
+    //Check Internet Connection
+    private var broadcastReceiver : BroadcastReceiver = object : BroadcastReceiver()
+    {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            val notConnected = p1!!.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY,false)
+
+            if (notConnected)
+            {
+                nointernet?.visibility = View.VISIBLE
+                screendata?.visibility = View.GONE
+                notC = "1"
+            }else{
+                nointernet?.visibility = View.GONE
+                screendata?.visibility = View.VISIBLE
+                notC = "0"
+                CartApiCall()
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if(notC.equals("1"))
+        {
+            finishAffinity()
+        }
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        registerReceiver(broadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(broadcastReceiver)
     }
 
     override fun onClick(p0: View?) {

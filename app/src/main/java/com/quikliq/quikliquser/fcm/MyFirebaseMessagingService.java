@@ -19,6 +19,7 @@ import com.quikliq.quikliquser.R;
 import com.quikliq.quikliquser.activities.AboutActivity;
 import com.quikliq.quikliquser.activities.CartActivity;
 import com.quikliq.quikliquser.activities.ChangePasswordActivity;
+import com.quikliq.quikliquser.activities.OrderHistory;
 import com.quikliq.quikliquser.fragment.ProfileFragment;
 import com.quikliq.quikliquser.utilities.Prefs;
 import com.quikliq.quikliquser.activities.HomeActivity;
@@ -49,9 +50,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             actionCode = object.optString("action_code", "");
             msg = object.optString("body", "");
             click = object.optString("click","");
-            if (!(title.equals("") && msg.equals("") && actionCode.equals(""))) {
+//            if (!title.equals("") && !msg.equals("") && click.equals("")) {
                 createNotification(actionCode, msg, title,click);
-            }
+//            }
 
             Log.d("notification",title);
         }
@@ -61,14 +62,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void createNotification(String action_code, String msg, String title,String click) {
         Intent intent = null;
         Log.d("notify1",click);
-        if (click.equals("home"))
+        if (click.equals("order_history"))
         {
             Log.d("check","HERE");
-            intent = new Intent(this, ChangePasswordActivity.class);
-            intent.putExtra(Constant.INSTANCE.getACTION_CODE(), action_code);
-        }else {
-            Log.d("check","NO");
-            intent = new Intent(this, HomeActivity.class);
+            intent = new Intent(this, OrderHistory.class);
             intent.putExtra(Constant.INSTANCE.getACTION_CODE(), action_code);
         }
 
@@ -101,6 +98,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         .setLargeIcon(BitmapFactory.decodeResource(this.getResources(),
                                 R.mipmap.ic_launcher_round))
                         .setContentTitle(title)
+                        .setContentText(msg)
                         .setTicker(title)
                         .setContentText(msg)
                         .setShowWhen(true)

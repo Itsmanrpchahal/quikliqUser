@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/verficationlayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="visible"
+    android:layout_centerInParent="true">
+
+
+        <ImageView
+            android:id="@+id/verfication_sadIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_frown"
+            android:layout_centerHorizontal="true">
+
+        </ImageView>
+
+    <TextView
+        android:id="@+id/verification_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_below="@id/verfication_sadIv"
+        android:padding="@dimen/margin_5dp"></TextView>
+</RelativeLayout>

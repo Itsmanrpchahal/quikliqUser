@@ -7,107 +7,115 @@
                 android:layout_height="match_parent">
 
 
-    <include layout="@layout/toolbar"
-             android:id="@+id/toolbar"/>
-    <androidx.core.widget.NestedScrollView
+    <include layout="@layout/nointernet"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/screendata">
+
+
+        <include layout="@layout/toolbar"
+            android:id="@+id/toolbar"/>
+        <androidx.core.widget.NestedScrollView
             android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:orientation="vertical"
-                      android:layout_height="wrap_content">
-            <ImageView android:layout_width="match_parent"
-                       android:layout_height="@dimen/height_200sp"
-                       android:scaleType="fitXY"
-                       android:id="@+id/providerIV"
-            />
+            <LinearLayout android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <ImageView android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_200sp"
+                    android:scaleType="fitXY"
+                    android:id="@+id/providerIV"
+                    />
 
-            <TextView android:layout_width="wrap_content"
-                      android:layout_marginLeft="@dimen/margin_15dp"
-                      android:layout_marginTop="@dimen/dim_10dp"
-                      android:id="@+id/providerNameTV"
-                      android:textSize="@dimen/text_16sp"
-                      android:textStyle="bold"
-                      android:textColor="@android:color/black"
-                      android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_15dp"
+                    android:layout_marginTop="@dimen/dim_10dp"
+                    android:id="@+id/providerNameTV"
+                    android:textSize="@dimen/text_16sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:layout_height="wrap_content"/>
 
-            <TextView android:textSize="@dimen/text_12sp"
-                      android:textColor="@color/black"
-                      android:id="@+id/status_tv"
-                      android:layout_width="wrap_content"
-                      android:layout_marginLeft="@dimen/margin_15dp"
-                      android:layout_height="wrap_content"
-                      android:layout_marginTop="@dimen/height_2dp"
-                      android:text="Open"/>
+                <TextView android:textSize="@dimen/text_12sp"
+                    android:textColor="@color/black"
+                    android:id="@+id/status_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/height_2dp"
+                    android:text="Open"/>
 
-            <TextView android:textSize="@dimen/text_12sp"
-                      android:textColor="@color/black"
-                      android:id="@+id/distance_TV"
-                      android:layout_marginLeft="@dimen/margin_15dp"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_marginTop="@dimen/height_2dp"
-                      android:text="200 meters away"/>
+                <TextView android:textSize="@dimen/text_12sp"
+                    android:textColor="@color/black"
+                    android:id="@+id/distance_TV"
+                    android:layout_marginLeft="@dimen/margin_15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/height_2dp"
+                    android:text="200 meters away"/>
 
-            <TextView android:textSize="@dimen/text_12sp"
-                      android:textColor="@color/black"
-                      android:id="@+id/time_TV"
-                      android:layout_width="wrap_content"
-                      android:layout_marginLeft="@dimen/margin_15dp"
-                      android:layout_height="wrap_content"
-                      android:layout_marginTop="@dimen/height_2dp"
-                      android:text="40-50 MIN"/>
+                <TextView android:textSize="@dimen/text_12sp"
+                    android:textColor="@color/black"
+                    android:id="@+id/time_TV"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/height_2dp"
+                    android:text="40-50 MIN"/>
 
-            <View android:layout_width="match_parent"
-                  android:layout_height="@dimen/height_0.5dp"
-                  android:background="@color/material_grey_600"
-                  android:layout_marginLeft="@dimen/margin_15dp"
-                  android:layout_marginRight="@dimen/margin_15dp"
-                  android:layout_marginTop="@dimen/margin_5dp"
-                  android:layout_marginBottom="@dimen/margin_5dp"/>
-            <TextView android:layout_width="wrap_content"
-                      android:layout_marginLeft="@dimen/margin_15dp"
-                      android:textSize="@dimen/text_16sp"
-                      android:textStyle="bold"
-                      android:text="PRODUCTS"
-                      android:textColor="@android:color/black"
-                      android:layout_height="wrap_content"/>
-            <View android:layout_width="match_parent"
-                  android:layout_height="@dimen/height_0.5dp"
-                  android:background="@color/material_grey_600"
-                  android:layout_marginLeft="@dimen/margin_15dp"
-                  android:layout_marginRight="@dimen/margin_15dp"
-                  android:layout_marginTop="@dimen/margin_5dp"
-                  android:layout_marginBottom="@dimen/margin_5dp"/>
+                <View android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_0.5dp"
+                    android:background="@color/material_grey_600"
+                    android:layout_marginLeft="@dimen/margin_15dp"
+                    android:layout_marginRight="@dimen/margin_15dp"
+                    android:layout_marginTop="@dimen/margin_5dp"
+                    android:layout_marginBottom="@dimen/margin_5dp"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_15dp"
+                    android:textSize="@dimen/text_16sp"
+                    android:textStyle="bold"
+                    android:text="PRODUCTS"
+                    android:textColor="@android:color/black"
+                    android:layout_height="wrap_content"/>
+                <View android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_0.5dp"
+                    android:background="@color/material_grey_600"
+                    android:layout_marginLeft="@dimen/margin_15dp"
+                    android:layout_marginRight="@dimen/margin_15dp"
+                    android:layout_marginTop="@dimen/margin_5dp"
+                    android:layout_marginBottom="@dimen/margin_5dp"/>
 
-            <androidx.recyclerview.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/providersRV"
                     android:layout_below="@+id/searchLL"
                     android:layout_width="match_parent"
                     android:paddingBottom="60dp"
                     android:layout_height="match_parent">
 
-            </androidx.recyclerview.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
 
 
 
-            <include layout="@layout/layout_no_data"
-                     android:layout_width="wrap_content"
-                     android:layout_gravity="center"
-                     android:layout_height="wrap_content"/>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+                <include layout="@layout/layout_no_data"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-    <RelativeLayout android:layout_width="match_parent"
-                    android:id="@+id/cartRL"
-                    android:layout_alignParentBottom="true"
-                    android:visibility="gone"
-                    android:background="@drawable/green_selecter"
-                    android:padding="@dimen/dim_10dp"
-                    android:layout_height="@dimen/size_50dp">
+        <RelativeLayout android:layout_width="match_parent"
+            android:id="@+id/cartRL"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"
+            android:background="@drawable/green_selecter"
+            android:padding="@dimen/dim_10dp"
+            android:layout_height="@dimen/size_50dp">
 
-        <TextView
+            <TextView
                 android:id="@+id/itemsTV"
                 android:textSize="@dimen/text_10sp"
                 android:textColor="@android:color/white"
@@ -115,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-        <TextView
+            <TextView
                 android:id="@+id/priceTV"
                 android:layout_below="@+id/itemsTV"
                 android:textSize="@dimen/text_12sp"
@@ -125,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-        <TextView
+            <TextView
                 android:id="@+id/cartTV"
                 android:textSize="@dimen/text_18sp"
                 android:textColor="@android:color/white"
@@ -136,6 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>

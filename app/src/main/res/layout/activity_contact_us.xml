@@ -8,16 +8,23 @@
                 >
 
 
-    <include layout="@layout/toolbar"
-             android:id="@+id/toolbar"/>
+    <include layout="@layout/nointernet"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/screendata">
+
+        <include layout="@layout/toolbar"
+            android:id="@+id/toolbar"/>
 
 
-    <ScrollView android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/toolbar">
-        <RelativeLayout android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-            <ImageView
+        <ScrollView android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar">
+            <RelativeLayout android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
                     android:id="@+id/contact_us_IV"
                     android:layout_width="100dp"
                     android:layout_height="90dp"
@@ -26,13 +33,13 @@
                     android:layout_marginTop="30dp"
                     android:src="@drawable/contact_us"/>
 
-            <RelativeLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="300dp"
                     android:layout_below="@+id/contact_us_IV">
 
 
-                <androidx.cardview.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
                         android:layout_marginBottom="20dp"
@@ -42,11 +49,11 @@
                         app:cardCornerRadius="20dp"
                         app:cardElevation="5dp">
 
-                    <RelativeLayout
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                        <EditText
+                            <EditText
                                 android:id="@+id/email_ET"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
@@ -62,13 +69,13 @@
                                 android:inputType="textEmailAddress"
                                 android:paddingLeft="20dp"/>
 
-                        <View
+                            <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
                                 android:layout_below="@+id/email_ET"
                                 android:background="#d3d3d3"/>
 
-                        <EditText
+                            <EditText
                                 android:id="@+id/subject_ET"
                                 android:layout_below="@+id/email_ET"
                                 android:layout_width="match_parent"
@@ -83,13 +90,13 @@
                                 android:inputType="textMultiLine"
                                 android:paddingLeft="20dp"/>
 
-                        <View
+                            <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
                                 android:layout_below="@+id/subject_ET"
                                 android:background="#d3d3d3"/>
 
-                        <ImageView
+                            <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@mipmap/mail"
@@ -99,7 +106,7 @@
                                 android:layout_marginLeft="25dp"/>
 
 
-                        <EditText
+                            <EditText
                                 android:id="@+id/message_ET"
                                 android:layout_below="@+id/subject_ET"
                                 android:layout_width="match_parent"
@@ -118,11 +125,11 @@
                                 android:imeOptions="actionDone"
                                 android:paddingLeft="20dp"/>
 
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
 
 
-                <ImageView
+                    <ImageView
                         android:id="@+id/payment_info_send_btn_IV"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -132,10 +139,12 @@
                         android:elevation="10dp"
                         android:src="@drawable/send_btn"/>
 
+                </RelativeLayout>
             </RelativeLayout>
-        </RelativeLayout>
 
-    </ScrollView>
+        </ScrollView>
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

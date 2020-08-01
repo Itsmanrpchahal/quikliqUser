@@ -5,26 +5,34 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
 
+  <include layout="@layout/nointernet"></include>
 
-    <FrameLayout android:layout_width="match_parent"
-                 android:layout_above="@+id/navigation"
-                 android:layout_height="fill_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/screendata">
 
-        <FrameLayout
+        <FrameLayout android:layout_width="match_parent"
+            android:layout_above="@+id/navigation"
+            android:layout_height="fill_parent">
+
+            <FrameLayout
                 android:id="@+id/homeFrag"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/toolbar"
 
-        />
-    </FrameLayout>
+                />
+        </FrameLayout>
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             app:menu="@menu/bottom_navigation_menu_3"/>
+    </RelativeLayout>
+
 </RelativeLayout>
 

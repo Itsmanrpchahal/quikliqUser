@@ -1,28 +1,29 @@
 package com.quikliq.quikliquser. fragment
 
+import android.app.Dialog
 import android.app.ProgressDialog
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.location.Address
 import android.location.Geocoder
+import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
 import com.google.gson.JsonObject
 import com.quikliq.quikliquser.R
 import com.quikliq.quikliquser.activities.CartActivity
@@ -64,8 +65,9 @@ class HomeFragment : Fragment() {
     private var timer: Timer? = null
     private var verficationlayout: RelativeLayout? = null
     private var verification_tv1: TextView? = null
+    
 
-
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -92,11 +94,18 @@ class HomeFragment : Fragment() {
             startActivity(Intent(activity, CartActivity::class.java))
         }
         geocoder = Geocoder(activity)
-        addresses = geocoder!!.getFromLocation(
-            lat!!,
-            lng!!,
-            1
-        )
+        if (utility!!.isConnectingToInternet(activity))
+        {
+            addresses = geocoder!!.getFromLocation(
+                lat!!,
+                lng!!,
+                1
+            )
+        }else {
+
+        }
+
+
         clearBT = view.findViewById(R.id.clearBT)
         if (addresses != null && addresses!!.isNotEmpty()) {
             LOCATION = addresses!![0].getAddressLine(0)
@@ -138,7 +147,7 @@ class HomeFragment : Fragment() {
         }
         timer!!.schedule(doTask, 0, 500)
 
-        verificationStatus()
+
 
         clearBT!!.setOnClickListener {
             searchET!!.setText("")
@@ -169,6 +178,29 @@ class HomeFragment : Fragment() {
             }
         })
         return view
+    }
+
+    //Check Internet Connection
+    private var broadcastReceiver : BroadcastReceiver = object : BroadcastReceiver()
+    {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            val notConnected = p1!!.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY,false)
+
+            if (!notConnected)
+            {
+                verificationStatus()
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        context?.registerReceiver(broadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+    }
+
+    override fun onStop() {
+        super.onStop()
+        context?.unregisterReceiver(broadcastReceiver)
     }
 
     fun setDefaultData() {

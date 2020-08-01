@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.quikliq.quikliquser.R
 import com.quikliq.quikliquser.activities.ProductsActivity
 import com.quikliq.quikliquser.activities.ProductsActivity.Companion.menuData
+import com.quikliq.quikliquser.constants.Constant
 import com.quikliq.quikliquser.dataProcessing.OrderProcessing
 import com.quikliq.quikliquser.interfaces.ShowCart
 import com.quikliq.quikliquser.models.ProductsModel
@@ -46,7 +47,7 @@ class ProductsAdapter(
         holder.item_price.text = "$" + productModel.price
         utility!!.loadImageWithLoader(
             context,
-            "https://professionaler.com/weed/api/" + productModel.image,
+            Constant.BASE_URL + productModel.image,
             holder.productImage
         )
 

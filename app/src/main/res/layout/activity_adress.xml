@@ -5,21 +5,29 @@
                 android:layout_width="fill_parent"
                 android:id="@+id/parent_payment"
                 android:layout_height="fill_parent">
-    <ScrollView
+
+    <include layout="@layout/nointernet"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/screendata">
+
+        <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:fillViewport="true">
-        <RelativeLayout
+            <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
-            <ImageView
+                <ImageView
                     android:id="@+id/logo"
                     android:background="@drawable/img_marijuana"
                     android:layout_width="150dp"
                     android:layout_height="120dp"
                     android:layout_marginTop="20dp"
                     android:layout_centerHorizontal="true"/>
-            <TextView
+                <TextView
                     android:textSize="20dp"
                     android:textStyle="bold"
                     android:textColor="#ffffffff"
@@ -31,7 +39,7 @@
                     android:layout_marginTop="15dp"
                     android:text="PAYMENT INFORMATION"
                     android:layout_below="@+id/logo"/>
-            <RelativeLayout
+                <RelativeLayout
                     android:id="@+id/paymentLayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -39,31 +47,31 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_below="@+id/paymentInfoText">
-                <RelativeLayout
+                    <RelativeLayout
                         android:id="@+id/container"
                         android:background="@drawable/content_background"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content">
-                    <LinearLayout
+                        <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content">
-                        <LinearLayout
+                            <LinearLayout
                                 android:orientation="horizontal"
                                 android:layout_width="fill_parent"
                                 android:layout_height="70dp">
-                            <ImageView
+                                <ImageView
                                     android:layout_gravity="center"
                                     android:background="@drawable/ic_dollar"
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
                                     android:layout_margin="10dp"/>
-                            <com.google.android.material.textfield.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_gravity="center"
                                     android:id="@+id/input_layout_cityname"
                                     android:layout_width="fill_parent"
                                     android:layout_height="45dp">
-                                <EditText
+                                    <EditText
                                         android:textSize="14dp"
                                         android:textColor="#ff000000"
                                         android:textColorHint="#ff696969"
@@ -75,28 +83,28 @@
                                         android:hint="City"
                                         android:inputType="text"
                                         android:imeOptions="actionNext"/>
-                            </com.google.android.material.textfield.TextInputLayout>
-                        </LinearLayout>
-                        <View
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+                            <View
                                 android:background="#ffd3d3d3"
                                 android:layout_width="fill_parent"
                                 android:layout_height="1dp"/>
-                        <LinearLayout
+                            <LinearLayout
                                 android:orientation="horizontal"
                                 android:layout_width="fill_parent"
                                 android:layout_height="70dp">
-                            <ImageView
+                                <ImageView
                                     android:layout_gravity="center"
                                     android:background="@drawable/ic_dollar"
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
                                     android:layout_margin="10dp"/>
-                            <com.google.android.material.textfield.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_gravity="center"
                                     android:id="@+id/input_layout_statename"
                                     android:layout_width="fill_parent"
                                     android:layout_height="45dp">
-                                <EditText
+                                    <EditText
                                         android:textSize="14dp"
                                         android:textColor="#ff000000"
                                         android:textColorHint="#ff696969"
@@ -108,28 +116,28 @@
                                         android:hint="State"
                                         android:inputType="text"
                                         android:imeOptions="actionNext"/>
-                            </com.google.android.material.textfield.TextInputLayout>
-                        </LinearLayout>
-                        <View
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+                            <View
                                 android:background="#ffd3d3d3"
                                 android:layout_width="fill_parent"
                                 android:layout_height="1dp"/>
-                        <LinearLayout
+                            <LinearLayout
                                 android:orientation="horizontal"
                                 android:layout_width="fill_parent"
                                 android:layout_height="70dp">
-                            <ImageView
+                                <ImageView
                                     android:layout_gravity="center"
                                     android:background="@drawable/ic_user"
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
                                     android:layout_margin="10dp"/>
-                            <com.google.android.material.textfield.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:layout_gravity="center"
                                     android:id="@+id/input_layout_zipcode"
                                     android:layout_width="fill_parent"
                                     android:layout_height="45dp">
-                                <EditText
+                                    <EditText
                                         android:textSize="14dp"
                                         android:textColor="#ff000000"
                                         android:textColorHint="#ff696969"
@@ -141,11 +149,11 @@
                                         android:hint="Zip code"
                                         android:inputType="number"
                                         android:imeOptions="actionNext"/>
-                            </com.google.android.material.textfield.TextInputLayout>
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
-                </RelativeLayout>
-                <ImageView
+                    </RelativeLayout>
+                    <ImageView
                         android:id="@+id/nextScreen"
                         android:background="@drawable/send_btn"
                         android:layout_width="60dp"
@@ -154,7 +162,9 @@
                         android:layout_marginTop="-30dp"
                         android:layout_below="@+id/container"
                         android:layout_alignParentRight="true"/>
+                </RelativeLayout>
             </RelativeLayout>
-        </RelativeLayout>
-    </ScrollView>
+        </ScrollView>
+    </RelativeLayout>
+
 </RelativeLayout>

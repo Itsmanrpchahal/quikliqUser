@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "653713387512",
+    "firebase_url": "https://quikliquser-19ba8.firebaseio.com",
+    "project_id": "quikliquser-19ba8",
+    "storage_bucket": "quikliquser-19ba8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653713387512:android:57c19c0790dfad5c1eb00d",
+        "android_client_info": {
+          "package_name": "com.quikliq.quikliquser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653713387512-cnqo7d0qldk51gepi0so9dok3qgigfle.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.quikliq.quikliquser",
+            "certificate_hash": "f0c45ab08921ab910c45848534546770b55e5658"
+          }
+        },
+        {
+          "client_id": "653713387512-lli80ruc182v1omb5i8b1st0j4ntdatf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ5kKyiwV4WsrBafpG0fIME7vX8X2ZL78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "653713387512-lli80ruc182v1omb5i8b1st0j4ntdatf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
