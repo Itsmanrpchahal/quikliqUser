@@ -8,9 +8,10 @@
 
     <include layout="@layout/nointernet"></include>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:id="@+id/screendata">
 
         <include
@@ -37,7 +38,7 @@
             tools:text="Total Price : 156" />
 
         <include layout="@layout/content_checkout" />
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -16,4 +16,5 @@ class ProductsModel : Serializable {
     var category_name: String? = null
     var business_name: String? = null
     var business_address: String? = null
+    var cart_quantity : String? = null
 }

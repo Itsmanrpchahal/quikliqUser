@@ -197,7 +197,7 @@ class SplashActivity : AppCompatActivity() {
 
                                 if (jsonObject.optBoolean("status")) {
                                     update = true
-                                } else {
+                                 } else {
                                 }
                             } catch (e: JSONException) {
                                 e.printStackTrace()

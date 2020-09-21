@@ -81,7 +81,7 @@ class ForgotPasswordActivity : AppCompatActivity(), CountryCodePicker.OnCountryC
             pd!!.show()
             pd!!.setContentView(R.layout.loading)
             val requestsCall = RequestsCall()
-            requestsCall.forgetPassword("ResetPassword",toString,countryCode,"2").enqueue(object : retrofit2.Callback<JsonObject>
+            requestsCall.ForgetPassword("ForgetPassword",toString,countryCode,"2").enqueue(object : retrofit2.Callback<JsonObject>
             {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     pd!!.dismiss()
@@ -96,7 +96,6 @@ class ForgotPasswordActivity : AppCompatActivity(), CountryCodePicker.OnCountryC
                             Toast.makeText(this@ForgotPasswordActivity,jsonObject.optString("message"),Toast.LENGTH_LONG).show()
                         }else{
                             Toast.makeText(this@ForgotPasswordActivity,jsonObject.optString("message"),Toast.LENGTH_LONG).show() }
-
                     }else{
                         utility!!.relative_snackbar(
                             parent_mobile!!,

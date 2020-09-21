@@ -135,30 +135,75 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
             pd!!.show()
             pd!!.setContentView(R.layout.loading)
             val requestsCall = RequestsCall()
-            requestsCall.login(username, password, "1",  Prefs.getString(Constant.FCM_TOKEN, ""),"2").enqueue(object : Callback<JsonObject> {
+            requestsCall.login(
+                username,
+                password,
+                "1",
+                Prefs.getString(Constant.FCM_TOKEN, ""),
+                "2"
+            ).enqueue(object : Callback<JsonObject> {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     pd!!.dismiss()
                     if (response.isSuccessful) {
-                        Log.d("responsedata",response.body().toString())
+                        Log.d("responsedata", response.body().toString())
                         val responsedata = response.body().toString()
                         try {
                             val jsonObject = JSONObject(responsedata)
 
-                            if(jsonObject.optBoolean("status")){
-                                Prefs.putString("profileimage",jsonObject.optJSONObject("data").optString("profileimage"))
-                                Prefs.putString("FirstName",jsonObject.optJSONObject("data").optString("FirstName"))
-                                Prefs.putString("LastName",jsonObject.optJSONObject("data").optString("LastName"))
-                                Prefs.putString("Mobile",jsonObject.optJSONObject("data").optString("Mobile"))
-                                Prefs.putString("Email", jsonObject.optJSONObject("data").optString("Email"))
-                                Prefs.putString("BusinesNname",jsonObject.optJSONObject("data").optString("BusinesNname"))
-                                Prefs.putString("BankName", jsonObject.optJSONObject("data").optString("BankName"))
-                                Prefs.putString("AccountNumber",jsonObject.optJSONObject("data").optString("AccountNumber"))
-                                Prefs.putString("IFSC",jsonObject.optJSONObject("data").optString("IFSC"))
-                                Prefs.putString("Address",jsonObject.optJSONObject("data").optString("Address"))
-                                Prefs.putString("UserType",jsonObject.optJSONObject("data").optString("UserType"))
-                             Prefs.putString("userid",jsonObject.optJSONObject("data").optString("userid"))
-                                Prefs.putInt("IsAgeVerify",jsonObject.optJSONObject("data").optInt("IsAgeVerify"))
+                            if (jsonObject.optBoolean("status")) {
+                                Prefs.putString(
+                                    "profileimage",
+                                    jsonObject.optJSONObject("data").optString("profileimage")
+                                )
+                                Prefs.putString(
+                                    "FirstName",
+                                    jsonObject.optJSONObject("data").optString("FirstName")
+                                )
+                                Prefs.putString(
+                                    "LastName",
+                                    jsonObject.optJSONObject("data").optString("LastName")
+                                )
+                                Prefs.putString(
+                                    "Mobile",
+                                    jsonObject.optJSONObject("data").optString("Mobile")
+                                )
+                                Prefs.putString(
+                                    "Email",
+                                    jsonObject.optJSONObject("data").optString("Email")
+                                )
+                                Prefs.putString(
+                                    "BusinesNname",
+                                    jsonObject.optJSONObject("data").optString("BusinesNname")
+                                )
+                                Prefs.putString(
+                                    "BankName",
+                                    jsonObject.optJSONObject("data").optString("BankName")
+                                )
+                                Prefs.putString(
+                                    "AccountNumber",
+                                    jsonObject.optJSONObject("data").optString("AccountNumber")
+                                )
+                                Prefs.putString(
+                                    "IFSC",
+                                    jsonObject.optJSONObject("data").optString("IFSC")
+                                )
+                                Prefs.putString(
+                                    "Address",
+                                    jsonObject.optJSONObject("data").optString("Address")
+                                )
+                                Prefs.putString(
+                                    "UserType",
+                                    jsonObject.optJSONObject("data").optString("UserType")
+                                )
+                                Prefs.putString(
+                                    "userid",
+                                    jsonObject.optJSONObject("data").optString("userid")
+                                )
+                                Prefs.putInt(
+                                    "IsAgeVerify",
+                                    jsonObject.optJSONObject("data").optInt("IsAgeVerify")
+                                )
                                 Prefs.putBoolean(Constant.IS_LOGGED_IN, true)
                                 startActivity(
                                     Intent(
@@ -167,14 +212,20 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
                                     ).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                                 )
                                 finish()
-                            }else{
-                                utility!!.relative_snackbar(parent_login!!, jsonObject.optString("message"), getString(R.string.close_up))
+                            } else {
+                                pd?.dismiss()
+                                utility!!.relative_snackbar(
+                                    parent_login!!,
+                                    jsonObject.optString("message"),
+                                    getString(R.string.close_up)
+                                )
                             }
                         } catch (e: JSONException) {
                             e.printStackTrace()
                         }
 
-                    }else{
+                    } else {
+                        pd?.dismiss()
                         utility!!.relative_snackbar(
                             parent_login!!,
                             response.message(),
@@ -186,11 +237,13 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     pd!!.dismiss()
-                    utility!!.relative_snackbar(parent_login!!, getString(R.string.no_internet_connectivity), getString(R.string.close_up))
+                    utility!!.relative_snackbar(
+                        parent_login!!,
+                        getString(R.string.no_internet_connectivity),
+                        getString(R.string.close_up)
+                    )
                 }
             })
-        } else {
-            utility!!.relative_snackbar(parent_login!!, getString(R.string.no_internet_connectivity), getString(R.string.close_up))
         }
     }
 

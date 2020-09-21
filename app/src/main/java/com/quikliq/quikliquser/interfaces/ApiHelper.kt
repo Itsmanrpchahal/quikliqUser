@@ -30,6 +30,11 @@ interface ApiHelper {
 
     @FormUrlEncoded
     @POST(".")
+    fun ForgetPassword(@Field("method") ForgetPassword: String,@Field("mobile")mobile: String,@Field("c_code") c_code:String,@Field("user_type") usertype:String)
+            :Call<JsonObject>
+
+    @FormUrlEncoded
+    @POST(".")
     fun saveAdditionalDetail(@Field("method") SaveAdditionalDetail: String ,@Field("devicetype") devicetype: String, @Field("firstname") firstname: String, @Field("lastname") lastname: String, @Field("mobile") mobile: String, @Field("email") email: String, @Field("password") password: String, @Field("address") address: String, @Field("usertype") usertype: String, @Field("devicetoken") devicetoken: String, @Field("city") city: String, @Field("state") state: String, @Field("zip") zip: String): Call<JsonObject>
 
     @FormUrlEncoded
@@ -121,7 +126,7 @@ interface ApiHelper {
     @Multipart
     @POST(".")
    // fun UpoadIdProof(@Part("method") UploadIdProof: RequestBody ,@Part("userid") userid: RequestBody , @Part image: MultipartBody.Part,@Part("id_type") id_type: RequestBody): Call<JsonObject>
-    fun UpoadIdProof(@Part("method") UploadIdProof: RequestBody ,@Part("userid") userid: RequestBody , @Part image: MultipartBody.Part,@Part("proof_type") id_type: RequestBody): Call<JsonObject>
+    fun UpoadIdProof(@Part("method") UploadIdProof: RequestBody, @Part("userid") userid: RequestBody, @Part image: MultipartBody.Part, @Part("proof_type") id_type: RequestBody, @Part("proof_status") proof_status: RequestBody): Call<JsonObject>
 
     @FormUrlEncoded
     @POST(".")

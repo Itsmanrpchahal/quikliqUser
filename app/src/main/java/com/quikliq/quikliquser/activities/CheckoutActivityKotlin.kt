@@ -14,6 +14,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -44,7 +45,7 @@ class CheckoutActivityKotlin : AppCompatActivity(), PaymentTokenInterface {
     private var count:Int= 0
     var pd: ProgressDialog? = null
     private var nointernet: RelativeLayout? = null
-    private var screendata: RelativeLayout? = null
+    private var screendata: LinearLayout? = null
     var notC = "0"
 
 
@@ -197,5 +198,4 @@ class CheckoutActivityKotlin : AppCompatActivity(), PaymentTokenInterface {
             )
         }
     }
-
 }

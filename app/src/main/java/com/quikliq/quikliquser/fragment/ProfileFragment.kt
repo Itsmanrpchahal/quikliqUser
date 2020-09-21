@@ -51,6 +51,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     private var toolbar_title: TextView? = null
     private var sign_out_Tv: TextView? = null
     private var outputUri: Uri? = null
+    var notC = "0"
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -83,9 +84,13 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             age_verification_TV?.setOnClickListener(this)
 
         }
+
+
+
         profileApiCall()
         return view
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -378,7 +383,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
             requestsCall.UploadIdProof(
                 this.activity!!,
                 Prefs.getString("userid", ""),
-                outputUri, "age_proof"
+                outputUri, "age_proof","age_verify"
             ).enqueue(object : Callback<JsonObject> {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -387,6 +392,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         Log.d("add_productresponsedata", response.body().toString())
                         val responsedata = response.body().toString()
                         try {
+
                             val jsonObject = JSONObject(responsedata)
 
                             if (jsonObject.optBoolean("status")) {

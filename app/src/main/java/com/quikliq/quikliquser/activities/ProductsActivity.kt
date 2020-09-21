@@ -18,6 +18,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
@@ -43,7 +44,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.HashMap
 
-class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, UpdateItemPrice {
+class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, UpdateItemPrice,AddProductInterface {
     private var utility: Utility? = null
     private var pd: ProgressDialog? = null
     private var toolbar: Toolbar? = null
@@ -66,6 +67,7 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_products)
+        addProductInterface = this
         toolbar = findViewById(R.id.toolbar)
         nointernet = findViewById(R.id.nointernet)
         screendata = findViewById(R.id.screendata)
@@ -132,7 +134,6 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
         }
     }
 
-
     override fun onStart() {
         super.onStart()
         registerReceiver(broadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
@@ -148,14 +149,8 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
         when (p0!!.id) {
             R.id.cartRL -> {
                 order.clear()
-                for (key in menuData!!.keys) {
-                    println("value:$key")
-                    System.out.println("value:" + menuData!![key])
-                    order.add(menuData!![key]!!)
-                }
-                for (i in 0 until order.size) {
-                    addCartApiCall(providerModel!!.provider_id!!, order[i].ItemID, order[i].ItemCount, order[i].Price)
-                }
+
+                startActivity(Intent(this@ProductsActivity, CartActivity::class.java))
             }
         }
     }
@@ -193,6 +188,7 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
                                         productsModel.isactive = jsonObject1.optString("isactive")
                                         productsModel.business_name = jsonObject1.optString("business_name")
                                         productsModel.business_address = jsonObject1.optString("business_address")
+                                        productsModel.cart_quantity = jsonObject1.optString("cart_quantity")
                                         productsList!!.add(productsModel)
                                     }
                                     if (productsList!!.isNotEmpty()) {
@@ -256,6 +252,7 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
         var menuData: MutableMap<String, OrderProcessing>? = HashMap<String, OrderProcessing>()
         var showcart: ShowCart? = null
         var updateItemPrice: UpdateItemPrice? = null
+        var addProductInterface : AddProductInterface? = null
     }
 
     override fun show(item: Int, price: String) {
@@ -300,7 +297,7 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
                                             "Added to Cart Successfully",
                                             getString(R.string.close_up)
                                         )
-                                        startActivity(Intent(this@ProductsActivity, CartActivity::class.java))
+
                                     }
                                 } else {
                                     pd!!.dismiss()
@@ -416,6 +413,17 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
             cartRL!!.visibility = View.GONE
         }else{
             cartRL!!.visibility = View.VISIBLE
+        }
+    }
+
+    override fun getIDS(provider_id: String?, ItemID: String?, ItemCount: String?, Price: String?) {
+        for (key in menuData!!.keys) {
+            println("value:$key")
+            System.out.println("value:" + menuData!![key])
+            order.add(menuData!![key]!!)
+        }
+        for (i in 0 until order.size) {
+            addCartApiCall(providerModel!!.provider_id!!, order[i].ItemID, order[i].ItemCount, order[i].Price)
         }
     }
 }

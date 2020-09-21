@@ -33,6 +33,12 @@ class RequestsCall {
         return api.mobile(NewOtp,mobile_number,countryCode)
     }
 
+    fun ForgetPassword(method : String,mobile: String,c_code: String,user_type:String): Call<JsonObject> {
+        val apiCall = ApiCall()
+        val api = apiCall.apiCall().create(ApiHelper::class.java)
+        return api.ForgetPassword(method,mobile,c_code,user_type)
+    }
+
     fun forgetPassword(ResetPassword :String,mobile:String,c_code:String,usertype:String):Call<JsonObject>
     {
         val apiCall = ApiCall()
@@ -186,7 +192,9 @@ class RequestsCall {
         context: Context,
         userid: String,
         image: Uri?,
-        id_type: String
+        id_type: String,
+        proof_status : String
+
     ): Call<JsonObject> {
         val apiCall = ApiCall()
         val api = apiCall.apiCall().create(ApiHelper::class.java)
@@ -197,7 +205,8 @@ class RequestsCall {
         val method1 = RequestBody.create(MediaType.parse("text/plain"), "UploadIdProof")
         val user_id = RequestBody.create(MediaType.parse("text/plain"), userid)
         val idtype = RequestBody.create(MediaType.parse("text/plain"), id_type)
-        return api.UpoadIdProof(method1,user_id,body,idtype)
+        val proofstatus = RequestBody.create(MediaType.parse("text/plain"),proof_status)
+        return api.UpoadIdProof(method1,user_id,body,idtype,proofstatus)
     }
 
     fun makepayment(userID: String,token:String,orederID:String): Call<JsonObject> {

@@ -7,6 +7,7 @@ import java.util.ArrayList
 object Constant {
 //    val BASE_URL = "https://professionaler.com/weed/api/index.php/"    //production
     val BASE_URL = "https://hotspotcover.com/weed/api/"    //production
+    val BASE_URL1 = "http://dev.casabeaumonde.com/"    //production
     val GPS_REQUEST = 101
 
     val IS_LOGGED_IN = "is_logged_in"

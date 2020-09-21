@@ -1,10 +1,13 @@
 package com.quikliq.quikliquser.activities
 
 import android.app.ProgressDialog
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +15,7 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.RelativeLayout
 import androidx.annotation.RequiresApi
 import com.google.gson.JsonObject
 import com.quikliq.quikliquser.R
@@ -31,10 +35,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private var progressDialog: ProgressDialog? = null
     private var otp: String? = null
     private var phone_number: String? = null
+    private var nointernet: RelativeLayout? = null
+    private var screendata: RelativeLayout? = null
+    var notC = "0"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__register)
         utility = Utility()
+        nointernet = findViewById(R.id.nointernet)
+        screendata = findViewById(R.id.screendata)
         progressDialog = ProgressDialog(this@RegisterActivity)
         progressDialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog!!.window!!.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
@@ -44,6 +54,35 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         phone_number = intent.getStringExtra("mobile")
         signUp_TV.setOnClickListener(this)
         nextScreen.setOnClickListener(this)
+    }
+
+    //Check Internet Connection
+    private var broadcastReceiver : BroadcastReceiver = object : BroadcastReceiver()
+    {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            val notConnected = p1!!.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY,false)
+
+            if (notConnected)
+            {
+                nointernet?.visibility = View.VISIBLE
+                screendata?.visibility = View.GONE
+                notC = "1"
+            }else{
+                nointernet?.visibility = View.GONE
+                screendata?.visibility = View.VISIBLE
+                notC = "0"
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        registerReceiver(broadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(broadcastReceiver)
     }
 
 
