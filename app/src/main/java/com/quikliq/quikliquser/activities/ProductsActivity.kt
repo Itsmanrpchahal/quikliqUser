@@ -44,7 +44,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.HashMap
 
-class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, UpdateItemPrice,AddProductInterface {
+class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, UpdateItemPrice,AddProductInterface,RemoveProductIF {
     private var utility: Utility? = null
     private var pd: ProgressDialog? = null
     private var toolbar: Toolbar? = null
@@ -77,6 +77,7 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         showcart = this
         updateItemPrice = this
+        removeProductIF = this
         utility = Utility()
         itemsTV = findViewById(R.id.itemsTV)
         priceTV = findViewById(R.id.priceTV)
@@ -231,6 +232,7 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
                     }
                 })
         } else {
+            pd!!.dismiss()
             utility!!.relative_snackbar(
                 parent_products!!,
                 getString(R.string.no_internet_connectivity),
@@ -253,6 +255,7 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
         var showcart: ShowCart? = null
         var updateItemPrice: UpdateItemPrice? = null
         var addProductInterface : AddProductInterface? = null
+        var removeProductIF : RemoveProductIF? = null
     }
 
     override fun show(item: Int, price: String) {
@@ -283,6 +286,7 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                         if (response.isSuccessful) {
+                            pd!!.dismiss()
                             Log.d("responsedata", response.body().toString())
                             val responsedata = response.body().toString()
                             try {
@@ -292,16 +296,14 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
                                     count = count + 1
                                     if (order.size == count) {
                                         pd!!.dismiss()
-                                        utility!!.relative_snackbar(
-                                            parent_products!!,
-                                            "Added to Cart Successfully",
-                                            getString(R.string.close_up)
-                                        )
-
+//                                        utility!!.relative_snackbar(
+//                                            parent_products!!,
+//                                            "Added to Cart Successfully",
+//                                            getString(R.string.close_up)
+//                                        )
                                     }
                                 } else {
                                     pd!!.dismiss()
-
                                     if (jsonObject.has("isnextapi")) {
                                         if (jsonObject.optBoolean("isnextapi")) {
                                             clearCartDialog()
@@ -368,7 +370,6 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
-
                         Log.d("responsedata", response.body().toString())
                         val responsedata = response.body().toString()
                         try {
@@ -376,6 +377,7 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
 
                             if (jsonObject.optBoolean("status")) {
                                 cartRL!!.performClick()
+                                //order.clear()
                             } else {
                                 pd!!.dismiss()
                             }
@@ -399,6 +401,7 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
                 }
             })
         } else {
+            pd!!.dismiss()
             utility!!.relative_snackbar(
                 parent_products!!,
                 getString(R.string.no_internet_connectivity),
@@ -425,5 +428,10 @@ class ProductsActivity : AppCompatActivity(), ShowCart, View.OnClickListener, Up
         for (i in 0 until order.size) {
             addCartApiCall(providerModel!!.provider_id!!, order[i].ItemID, order[i].ItemCount, order[i].Price)
         }
+    }
+
+    override fun getQuantity(quantity: String?) {
+      clearCartDialog()
+        cartRL?.visibility = View.GONE
     }
 }

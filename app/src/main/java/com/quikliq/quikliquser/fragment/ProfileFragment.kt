@@ -392,7 +392,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         Log.d("add_productresponsedata", response.body().toString())
                         val responsedata = response.body().toString()
                         try {
-
                             val jsonObject = JSONObject(responsedata)
 
                             if (jsonObject.optBoolean("status")) {
@@ -419,7 +418,6 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                             getString(R.string.close_up)
                         )
                     }
-
                 }
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {

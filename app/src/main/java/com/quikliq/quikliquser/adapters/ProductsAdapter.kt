@@ -127,7 +127,7 @@ class ProductsAdapter(
                 holder.iv_add_to_cart.visibility = View.GONE
                 //menuData!!.remove(productModel.id!!)
 
-                Toast.makeText(context,""+counter,Toast.LENGTH_LONG).show()
+               ProductsActivity.removeProductIF?.getQuantity(counter.toString())
             }
             order.clear()
             totalAmt = 0
